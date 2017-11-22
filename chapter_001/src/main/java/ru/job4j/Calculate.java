@@ -4,8 +4,8 @@ package ru.job4j;
 *@version 1.02 19.11.2017
 *@author Dmitriy Tishchenko
 */
-public class Calculate{
-public static void main(String[] args){
+public class Calculate {
+public static void main(String[] args) {
     System.out.println("Hello world.");
     }
  
