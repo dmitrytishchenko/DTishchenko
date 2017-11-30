@@ -13,27 +13,27 @@ public class CalculatorTest {
         calc.add(1D, 1D);
         double result = calc.getResult();
         double expected = 2D;
-        assertThat(result, is(expected));
+        Assert.assertThat(result, Is.is(expected));
     }
     public void whenSubtractOneMinusOneThenZero() {
         Calculator calc = new Calculator();
         calc.subtract(1D, 1D);
         double result = calc.getResult();
         double expected = 0D;
-        assertThat(result, is(expected));
+        Assert.assertThat(result, Is.is(expected));
     }
     public void whenDivOneRazdelitOneThenOne() {
         Calculator calc = new Calculator();
         calc.div(1D, 1D);
         double result = calc.getResult();
         double expected = 1D;
-        assertThat(result, is(expected));
+        Assert.assertThat(result, Is.is(expected));
     }
     public void whenMultipleOneUmnozitOneThenOne() {
         Calculator calc = new Calculator();
         calc.multiple(1D, 1D);
         double result = calc.getResult();
         double expected = 1D;
-        assertThat(result, is(expected));
+        Assert.assertThat(result, Is.is(expected));
     }
 }
