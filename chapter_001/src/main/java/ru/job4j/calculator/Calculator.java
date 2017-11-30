@@ -9,13 +9,13 @@ public class Calculator {
     public void subtract(double first, double second) {
         this.result = first - second;
     }
-        public void div(double first, double second) {
+    public void div(double first, double second) {
         this.result = first / second;
     }
-        public void multiple(double first, double second) {
+    public void multiple(double first, double second) {
         this.result = first * second;
     }
-        public double getResult() {
+    public double getResult() {
         return this.result;
     }
 }
