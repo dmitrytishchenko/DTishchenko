@@ -35,4 +35,4 @@ public class TriangleTest {
         assertThat(rsl, closeTo(10, 0.01));
     }
 }
-}
+
