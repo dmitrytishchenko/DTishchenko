@@ -14,17 +14,8 @@ public class Triangle {
         this.b = b;
         this.c = c;
     }
-    public double distance(Point a, Point b){
-        double ab = Math.sqrt(Math.pow((xb - xa), 2) + Math.pow((yb - ya), 2));
-        return ab>0 ? ab: -1.0;
-    }
-    public double distance(Point b, Point c){
-        double bc = Math.sqrt(Math.pow((xc - xb), 2) + Math.pow((yc - yb), 2));
-        return bc>0 ? bc: -1.0;
-    }
-    public double distance(Point a, Point c){
-        double ac = Math.sqrt(Math.pow((xc - xa), 2) + Math.pow((yc - ya), 2));
-        return ac>0 ? ac: -1.0;
+        public double distance(Point left, Point right) {
+        return Math.sqrt(Math.pow(right.x - left.x, 2) + Math.pow(right.y - left.y, 2));
     }
     public double period(double ab, double ac, double bc){
         double per = (ab + bc+ ac)/2;
@@ -43,6 +34,11 @@ public class Triangle {
         return rsl>0 ? rsl : -1.0;
     }
     private boolean exist(double ab, double ac, double bc){
-        return (ab = 0, bc = 0, ac = 0) ? false : true;
+        return (ab <= bc + ac);
     }
 }
+
+
+
+
+

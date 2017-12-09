@@ -1,5 +1,6 @@
 package ru.job4j.condition;
 
+        import org.junit.Ignore;
         import org.junit.Test;
         import static org.hamcrest.number.IsCloseTo.closeTo;
         import static org.junit.Assert.*;
@@ -20,7 +21,6 @@ public class TriangleTest {
         //Проверяем результат и ожидаемое значение.
         assertThat(result, closeTo(expected, 0.1));
     }
-
     @Test
     public void whenDistanceDiffPointsThen10() {
         // создаем два объекта класса Point.
