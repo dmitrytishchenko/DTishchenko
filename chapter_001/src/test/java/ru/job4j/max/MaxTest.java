@@ -10,12 +10,12 @@ public class MaxTest {
     @Test
     public void whenFirstLessSecond() {
         Max maxim = new Max();
-        int result = maxim.max(int first, int second);
-        assertThat(result, is(int second));
+        int result = maxim.max(1, 2);
+        assertThat(result, is(2));
     }
     public void whenSecondLessFirst() {
         Max maxim = new Max();
-        int result = maxim.max(int first, int second);
-        assertThat(result, is(int first));
-
+        int result = maxim.max(2, 1);
+        assertThat(result, is(2));
+    }
 }
