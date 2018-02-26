@@ -13,7 +13,7 @@ public class TestTask {
                     temp++;
                     if  (temp == sub.length()){
                         result = true;
-                        return result;
+                        break;
                     }
                 }
                 else {
