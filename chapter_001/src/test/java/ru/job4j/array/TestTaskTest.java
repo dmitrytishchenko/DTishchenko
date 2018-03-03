@@ -1,11 +1,9 @@
 package ru.job4j.array;
-
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import static org.junit.Assert.*;
-
 public class TestTaskTest {
     @Test
     public void whenOriginContainsSub(){

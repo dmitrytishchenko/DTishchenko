@@ -1,5 +1,4 @@
 package ru.job4j.array;
-
 public class FindLoop {
     public int indexOf(int[] data, int el){
         int rsl = -1;

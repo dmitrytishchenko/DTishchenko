@@ -1,7 +1,5 @@
 package ru.job4j.array;
-
-import java.util.Arrays;
-
+        import java.util.Arrays;
 public class ArrayDuplicate {
     public String[] remove(String[] array){
         int unique = array.length;
@@ -16,5 +14,4 @@ public class ArrayDuplicate {
         }
         return Arrays.copyOf(array, unique);
     }
-
 }

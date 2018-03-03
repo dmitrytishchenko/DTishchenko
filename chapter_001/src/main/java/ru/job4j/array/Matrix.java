@@ -1,5 +1,4 @@
 package ru.job4j.array;
-
 public class Matrix {
     int [][] multiple(int size){
         int [][]rst = new int[size][size];

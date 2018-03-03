@@ -1,8 +1,7 @@
 package ru.job4j.array;
-          import org.junit.Test;
-          import static org.hamcrest.core.Is.is;
-        import static org.junit.Assert.assertThat;
-
+import org.junit.Test;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 public class TurnTest {
     @Test
     public void whenTurnArrayWithEvenAmountOfElementsThenTurnedArray() {
@@ -10,9 +9,7 @@ public class TurnTest {
         int[] array = {2, 6, 1, 4};
         int[] result = tn.back(array);
         assertThat(result, is(array));
-
     }
-
     @Test
     public void whenTurnArrayWithEvenAmountOfElementsThenTurnedArrayy() {
         Turn tn = new Turn();
