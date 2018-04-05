@@ -2,8 +2,8 @@ package ru.job4j;
 
 
 import org.junit.Test;
-import ru.job4j.Tracker.Item;
-import ru.job4j.Tracker.Tracker;
+import ru.job4j.Item;
+import ru.job4j.Tracker;
 
 import java.util.Arrays;
 

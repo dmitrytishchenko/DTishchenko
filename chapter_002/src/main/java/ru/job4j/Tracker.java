@@ -1,4 +1,4 @@
-package ru.job4j.Tracker;
+package ru.job4j;
 import java.util.*;
 
 public class Tracker {
