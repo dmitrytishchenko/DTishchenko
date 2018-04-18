@@ -13,6 +13,11 @@ public class Item {
         this.create = create;
         this.comments = comments;
     }
+
+    public Item() {
+
+    }
+
     public String getName(){
         return this.name;
     }
