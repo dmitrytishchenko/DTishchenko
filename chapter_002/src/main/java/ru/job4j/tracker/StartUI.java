@@ -98,13 +98,13 @@ public class StartUI {
 
     private void showMenu(){
         System.out.println("Меню.");
-        System.out.println("0" + "Добавление новой заявки");
-        System.out.println("1" + "Показать все заявки");
-        System.out.println("2" + "Заменить заявку");
-        System.out.println("3" + "Удалить заявку");
-        System.out.println("4" + "Найти заявку по имени");
-        System.out.println("5" + "Найти заявку по id ");
-        System.out.println("6" + "Выход");
+        System.out.println("0 " + "Добавление новой заявки");
+        System.out.println("1 " + "Показать все заявки");
+        System.out.println("2 " + "Заменить заявку");
+        System.out.println("3 " + "Удалить заявку");
+        System.out.println("4 " + "Найти заявку по имени");
+        System.out.println("5 " + "Найти заявку по id ");
+        System.out.println("6 " + "Выход");
 
 //            добавить остальные пункты меню
     }
