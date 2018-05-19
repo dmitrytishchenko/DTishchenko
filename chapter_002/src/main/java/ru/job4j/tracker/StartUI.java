@@ -62,14 +62,21 @@ public class StartUI {
         System.out.println("-----------Добавление новой заявки-----------");
         String name = this.input.ask("Введите имя заявки :");
         String desc = this.input.ask("Введите имя заявки :");
-        Item item = new Item();
+        Item item = new Item("test name", "desc");
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "--------------");
     }
+
     private void findAll(){
         System.out.println("-----------Показать все заявки-------------");
         String name = this.input.ask("Показать все заявки");
-        this.tracker.findAll();
+        Item[] allItems = tracker.findAll();
+        for (int i = 0; i != allItems.length; i++){
+            if(allItems[i] != null) {
+                System.out.println(String.format("ID заявки: %s, Имя заявки: %s, Описание: %s, Kомментарий: %s",
+                        allItems[i].getId()+ allItems[i].getName() + allItems[i].getDesc() + allItems[i].getComments()));
+            }
+        }
     }
     private void replace(){
         System.out.println("------------Заменить заявку------------");
