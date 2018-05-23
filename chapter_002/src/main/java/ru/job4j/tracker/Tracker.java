@@ -15,25 +15,24 @@ public class Tracker {
     }
 
     public Item replace(String id, Item item) {
-        for (int i = 0; i < position; i++) {
-            Item temp = items[i];
-            if (id.equals(temp.getId())) {
-                items[i] = item;
+        for (int i = 0; i != this.position; i++){
+            if(items[i].getId().equals(id)){
+                item.setId(items[i].getId());
+                items[i]=item;
+                break;
             }
         }
         return item;
     }
-
     public void delete(String id) {
-        for (int i = 0;i< items.length; i++ ) {
-            Item temp = items[i];
-            if (temp != null && id.equals(temp.getId())) {
-                System.arraycopy(items,i,items,i,position);
+        for (int i = 0; i<this.position; i++){
+            if(id!=null && this.items[i].getId().equals(id)){
+                System.arraycopy(this.items, i + 1, this.items, i, this.position - 1 - i);
+                this.position--;
                 break;
             }
         }
     }
-
     public Item[] findAll() {
         Item[] items = new Item[this.position];
         for (int i = 0; i != this.position; i++) {
