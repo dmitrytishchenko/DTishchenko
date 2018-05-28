@@ -17,7 +17,7 @@ Tracker tracker = new Tracker();
     @Test
     public void whenUpdateThenTrackerHasUpdateValue(){
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item());
+        Item item = tracker.add(new Item("test name", "desc"));
 //        Создаем StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"1",item.getId(),"test name", "desc", "6"});
 //        Создаем StartUI и вызываем метод init()
