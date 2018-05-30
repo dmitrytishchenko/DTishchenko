@@ -61,13 +61,11 @@ public class StartUI {
     private void createItem(){
         System.out.println("-----------Добавление новой заявки-----------");
         String name = this.input.ask("Введите имя заявки :");
-        String desc = this.input.ask("Введите имя заявки :");
-//        Item item = new Item("test name", "desc");
+        String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "--------------");
     }
-
     private void findAll(){
         System.out.println("-----------Показать все заявки-------------");
         Item[] allItems = tracker.findAll();
@@ -80,13 +78,10 @@ public class StartUI {
     }
     private void replace() {
         System.out.println("------------Заменить заявку------------");
-//        String name = this.input.ask("Заменить заявку " + item.getId()); (насколько я понял, в данной строчке прописывается вопрос и конкретизируется какая заявка "item.getId()"
-//        this.tracker.replace(item.getId(), item);
         String id = this.input.ask("Заменить заявку ");
         String name = this.input.ask("Введите имя новой заявки");
         String desc = this.input.ask("Введите описание новой заявки");
-        String comments = this.input.ask("Введите комментарии новой заявки");
-        Item item = new Item("test name", "desc", 123l, "comments");
+        Item item = new Item(name, desc);
         this.tracker.replace(id, item);
         System.out.println(String.format("ID заявки: %s, Имя заявки: %s, Описание: %s, Kомментарий: %s",
                 item.getId(), item.getName(), item.getDesc(), item.getComments()));
@@ -98,30 +93,22 @@ public class StartUI {
     }
     private void findByName(){
         System.out.println("-------------Найти заявку по имени---------------");
-        //        Item item = new Item();
-//        String name = this.input.ask("Найти заявку по имени " + item.getName());
-//        this.tracker.findByName(item.getName());
         String key = this.input.ask("Найти заявку по имени ");
-        Item[] ByNameItems = tracker.findByName(key);
-        for(int i=0; i!= ByNameItems.length; i++){
-            if(ByNameItems[i] != null){
+        Item[] byNameItems = tracker.findByName(key);
+        for(int i = 0; i != byNameItems.length; i++){
+            if(byNameItems[i] != null){
                 System.out.println(String.format("ID заявки: %s, Имя заявки: %s, Описание: %s, Kомментарий: %s",
-                        ByNameItems[i].getId(), ByNameItems[i].getName(), ByNameItems[i].getDesc(), ByNameItems[i].getComments()));
+                        byNameItems[i].getId(), byNameItems[i].getName(), byNameItems[i].getDesc(), byNameItems[i].getComments()));
             }
         }
     }
     private void findById(){
         System.out.println("-------------Найти заявку по id-------------");
-//        Item item = new Item();
-//        String name = this.input.ask("Найти заявку по id " + item.getId());
-//        this.tracker.findById(item.getId());
         String id = this.input.ask("Найти заявку по id ");
-        Item item = new Item(id);
-        this.tracker.findById(id);
+        Item result = tracker.findById(id);
         System.out.println(String.format("ID заявки: %s, Имя заявки: %s, Описание: %s, Kомментарий: %s",
-                item.getId(), item.getName(), item.getDesc(), item.getComments()));
+                result.getId(), result.getName(), result.getDesc(), result.getComments()));
     }
-
     private void showMenu(){
         System.out.println("Меню.");
         System.out.println("0 " + "Добавление новой заявки");
