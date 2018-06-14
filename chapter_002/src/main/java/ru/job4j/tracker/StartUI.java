@@ -5,10 +5,10 @@ public class StartUI {
      */
     private static final String ADD = "0";
     private static final String SHOW = "1";
-    public static final String REPLACE = "2";
-    public static final String DELETE = "3";
-    public static final String FINDBYNAME = "4";
-    public static final String FINDBYID ="5";
+    private static final String REPLACE = "2";
+    private static final String DELETE = "3";
+    private static final String FINDBYNAME = "4";
+    private static final String FINDBYID ="5";
     /**
      * Константа для выхода из цикла.
      */

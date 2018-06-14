@@ -1,8 +1,7 @@
 package ru.job4j.tracker;
 
 public class Item {
-//    public static String setName;
-//    public static String setDesc;
+
     private String id;
     private String name;
     private String desc;
