@@ -91,12 +91,12 @@ public class StartUI {
         String id = this.input.ask("Удалить заявку");
         this.tracker.delete(id);
     }
-    private void findByName(){
+    private void findByName() {
         System.out.println("-------------Найти заявку по имени---------------");
         String key = this.input.ask("Найти заявку по имени ");
-        Item[] byNameItems = tracker.findByName(key);
-        for(int i = 0; i != byNameItems.length; i++){
-            if(byNameItems[i] != null){
+        Item[] byNameItems = tracker.findByName2(key);
+        for (int i = 0; i != byNameItems.length; i++) {
+            if (byNameItems[i] != null) {
                 System.out.println(String.format("ID заявки: %s, Имя заявки: %s, Описание: %s, Kомментарий: %s",
                         byNameItems[i].getId(), byNameItems[i].getName(), byNameItems[i].getDesc(), byNameItems[i].getComments()));
             }

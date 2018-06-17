@@ -63,7 +63,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getName(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findByName(item.getName())[0], is(item));
+        assertThat(tracker.findByName2(item.getName())[0], is(item));
     }
     @Test
     public void whenUserFindItemById(){
