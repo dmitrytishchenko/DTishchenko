@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class TriangleTest {
     @Test
-    public void whenDrawTriangle(){
+    public void whenDrawTriangle() {
         Triangle triangle = new Triangle();
         assertThat(triangle.draw(), is(new StringBuilder()
         .append("  +  ")

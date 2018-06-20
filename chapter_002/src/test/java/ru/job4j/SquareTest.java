@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 public class SquareTest {
     @Test
-    public void whenDrawSquare(){
+    public void whenDrawSquare() {
         Square square = new Square();
         assertThat(square.draw(), is(new StringBuilder()
                 .append("++++")

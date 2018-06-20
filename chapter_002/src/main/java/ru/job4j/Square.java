@@ -1,8 +1,8 @@
 package ru.job4j;
 
-public class Square implements Shape{
+public class Square implements Shape {
     @Override
-    public String draw(){
+    public String draw() {
         StringBuilder pic = new StringBuilder();
         pic.append("++++");
         pic.append("+  +");

@@ -15,7 +15,7 @@ public class TrackerTest {
     @Test
     public void add() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1","testDescription1", 123L, "first item");
+        Item item = new Item("test1", "testDescription1", 123L, "first item");
         Item result = tracker.add(item);
         assertThat(result, is(item));
     }
@@ -37,15 +37,15 @@ public class TrackerTest {
     }
 
     @Test
-    public void delete(){
+    public void delete() {
         Tracker tracker = new Tracker();
         Item item = new Item("test4", "testDescription4", 126L, "fourth item");
-        tracker.delete("12347");
-        assertThat("12347", is("12347"));
+        tracker.delete(item.getId());
+        assertThat(tracker.add(item), is(item));
     }
 
     @Test
-    public void findall(){
+    public void findall() {
         Tracker tracker = new Tracker();
         Item item = new Item("test5", "testDescription5", 127L, "fifth item");
         tracker.add(item);
@@ -54,26 +54,26 @@ public class TrackerTest {
         }
 
     @Test
-    public void findByName(){
+    public void findByName() {
         Tracker tracker = new Tracker();
         Item item = new Item("test6", "testDescription6", 128L, "sixth item");
         tracker.add(item);
-        Item [] result = tracker.findByName("test6");
+        Item[] result = tracker.findByName("test6");
         assertThat(result [0], is(item));
 
     }
     @Test
-    public void findByName2(){
+    public void findByName2() {
         Tracker tracker = new Tracker();
         Item item = new Item("test7", "testDescription7", 129L, "seventh item");
         tracker.add(item);
-        Item [] result = tracker.findByName2("test7");
+        Item[] result = tracker.findByName2("test7");
         assertThat(result, is(new Item[]{item}));
     }
     @Test
-    public void delete2(){
-        int [] temp = {1,2,3,4,5};
-        System.arraycopy(temp, 2,temp, 1, 3);
+    public void delete2() {
+        int[] temp = {1, 2, 3, 4, 5};
+        System.arraycopy(temp, 2, temp, 1, 3);
         System.out.println(Arrays.toString(temp));
     }
 }

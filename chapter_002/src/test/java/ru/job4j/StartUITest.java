@@ -15,41 +15,41 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
     @Test
-    public void whenUserAddItemеthenTrackerHasNewItemWithSameName(){
+    public void whenAddItemthenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
     @Test
-    public void whenUpdateThenTrackerHasUpdateValue(){
+    public void whenUpdateThenTrackerHasUpdateValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
 //        Создаем StubInput с последовательностью действий
-        Input input = new StubInput(new String[]{"1",item.getId(),"test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"1", item.getId(), "test name", "desc", "6"});
 //        Создаем StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
 //        проверяем, что нулевой элемент массива в трекере содержит имя, введенное при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
     @Test
-    public  void whenUserRequestAllItems(){
+    public  void whenUserRequestAllItems() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"1","test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"1", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll(), is(new Item[]{item}));
     }
     @Test
-    public void whenUserReplaceItem(){
+    public void whenUserReplaceItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2","12345", "test name", "desc","comments", "6"});
+        Input input = new StubInput(new String[]{"2", "12345", "test name", "desc", "comments", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.replace("12345", item), is(item));
     }
     @Test
-    public void whenUserDeleteItem(){
+    public void whenUserDeleteItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Item value = tracker.add(new Item());
@@ -58,7 +58,7 @@ public class StartUITest {
         assertThat(tracker.findAll()[0], is(value));
     }
     @Test
-    public void whenUserFindItemByName(){
+    public void whenUserFindItemByName() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getName(), "6"});
@@ -66,11 +66,11 @@ public class StartUITest {
         assertThat(tracker.findByName2(item.getName())[0], is(item));
     }
     @Test
-    public void whenUserFindItemById(){
+    public void whenUserFindItemById() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"5", item.getId(), "6"});
-        new StartUI(input,tracker).init();
+        new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
@@ -82,21 +82,21 @@ public class StartUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     @Before
-    public void loadOutput(){
+    public void loadOutput() {
         System.out.println("execute before method");
         System.setOut(new PrintStream(this.out));
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
-        new StartUI(input,tracker).init();
+        new StartUI(input, tracker).init();
     }
     @After
-    public void backOutput(){
+    public void backOutput() {
         System.setOut(this.stdout);
         System.out.println("execute after method");
     }
         @Test
-    public void whenUpdateThenTrackerHasUpdateValue2(){
+    public void whenUpdateThenTrackerHasUpdateValue2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
 //        Создаем StubInput с последовательностью действий
@@ -107,7 +107,7 @@ public class StartUITest {
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
     @Test
-    public  void whenUserRequestAllItems2(){
+    public  void whenUserRequestAllItems2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
 //        Input input = new StubInput(new String[]{"1","test name", "desc", "6"});
@@ -115,7 +115,7 @@ public class StartUITest {
         assertThat(tracker.findAll(), is(new Item[]{item}));
     }
     @Test
-    public void whenUserReplaceItem2(){
+    public void whenUserReplaceItem2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
 //        Input input = new StubInput(new String[]{"2","12345", "test name", "desc","comments", "6"});
@@ -124,7 +124,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenUserFindItemByName2(){
+    public void whenUserFindItemByName2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
 //        Input input = new StubInput(new String[]{"4", item.getName(), "6"});
@@ -132,7 +132,7 @@ public class StartUITest {
         assertThat(tracker.findByName(item.getName())[0], is(item));
     }
     @Test
-    public void whenUserFindItemById2(){
+    public void whenUserFindItemById2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
 //        Input input = new StubInput(new String[]{"5", item.getId(), "6"});

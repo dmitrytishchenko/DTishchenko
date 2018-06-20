@@ -15,17 +15,17 @@ public class PaintTest {
 //    буфер для результата
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 @Before
-    public void loadOutput(){
+    public void loadOutput() {
     System.out.println("execute before method");
         System.setOut(new PrintStream(this.out));
     }
     @After
-    public void backOutput(){
+    public void backOutput() {
         System.setOut(this.stdout);
         System.out.println("execute after method");
     }
     @Test
-    public void whenDrawSquare(){
+    public void whenDrawSquare() {
 //        PrintStream stdout = System.out;
 //        ByteArrayOutputStream out = new ByteArrayOutputStream();
 //        System.setOut(new PrintStream(out));
@@ -42,7 +42,7 @@ public class PaintTest {
         System.setOut(stdout);
     }
     @Test
-    public void whenDrawTriangle(){
+    public void whenDrawTriangle() {
 //        PrintStream stdout = System.out;
 //        ByteArrayOutputStream out = new ByteArrayOutputStream();
 //        System.setOut(new PrintStream(out));
