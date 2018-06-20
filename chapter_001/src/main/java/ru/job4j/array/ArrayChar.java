@@ -2,7 +2,7 @@ package ru.job4j.array;
 
 public class ArrayChar {
     private char[] data;
-    public ArrayChar(String line){
+    public ArrayChar(String line) {
         this.data = line.toCharArray();
     }
     public boolean startWith(String prefix) {

@@ -20,7 +20,7 @@ public class DummyBotTest {
         );
     }
     @Test
-    public void whenByuBot(){
+    public void whenByuBot() {
         DummyBot bot = new DummyBot();
         assertThat(
                 bot.answer("Пока."),

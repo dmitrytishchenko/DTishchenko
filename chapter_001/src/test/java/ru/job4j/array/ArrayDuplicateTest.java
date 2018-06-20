@@ -10,7 +10,7 @@ public class ArrayDuplicateTest {
         String[] expect = {"Привет", "Мир", "Супер"};
         ArrayDuplicate duplicate = new ArrayDuplicate();
         String[] result = duplicate.remove(input);
-        assertThat(result,is(expect));
+        assertThat(result, is(expect));
     }
     @Test
     public void whenRemoveTheSameElementsThenArrayWithoutDuplicate() {
@@ -18,7 +18,7 @@ public class ArrayDuplicateTest {
         String[] expect = {"Блог"};
         ArrayDuplicate duplicate = new ArrayDuplicate();
         String[] result = duplicate.remove(input);
-        assertThat(result,is(expect));
+        assertThat(result, is(expect));
     }
     @Test
     public void whenRemoveIntegerElementsThenArrayWithoutDuplicate() {
@@ -26,6 +26,6 @@ public class ArrayDuplicateTest {
         String[] expect = {"6", "7", "8", "4", "5"};
         ArrayDuplicate duplicate = new ArrayDuplicate();
         String[] result = duplicate.remove(input);
-        assertThat(result,is(expect));
+        assertThat(result, is(expect));
     }
 }

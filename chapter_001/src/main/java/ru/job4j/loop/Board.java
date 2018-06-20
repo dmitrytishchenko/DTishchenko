@@ -1,14 +1,13 @@
 package ru.job4j.loop;
 public class Board {
-    public String paint(int width, int heith){
+    public String paint(int width, int heith) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();
-        for (int i = 0; i < heith; i++){
-            for (int j = 0; j < width; j++){
-                if (( i + j ) % 2 == 0){
+        for (int i = 0; i < heith; i++) {
+            for (int j = 0; j < width; j++) {
+                if ((i + j) % 2 == 0) {
                     screen.append("X");
-                }
-                else{
+                } else {
                     screen.append(" ");
                 }
             }

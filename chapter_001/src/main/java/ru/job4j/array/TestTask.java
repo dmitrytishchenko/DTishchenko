@@ -10,15 +10,14 @@ public class TestTask {
         for (int j = 0; j < origin.length(); j++) {
             if (data[j] == value[temp]) {
                 temp++;
-                if  (temp == sub.length()){
+                if  (temp == sub.length()) {
                     result = true;
                     break;
                 }
-            }
-            else {
+            } else {
                 temp = 0;
             }
-        }return result;
+        } return result;
     }
 }
 

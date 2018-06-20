@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.*;
 public class TestTaskTest {
     @Test
-    public void whenOriginContainsSub(){
+    public void whenOriginContainsSub() {
         TestTask testfirst = new TestTask();
         String[] origin = {"Привет"};
         String[] sub = {"иве"};
@@ -14,7 +14,7 @@ public class TestTaskTest {
         assertThat(result, is(true));
     }
     @Test
-    public void whenOriginContainsSub2(){
+    public void whenOriginContainsSub2() {
         TestTask testsecond = new TestTask();
         String[] origin = {"Привет"};
         String[] sub = {"ага"};

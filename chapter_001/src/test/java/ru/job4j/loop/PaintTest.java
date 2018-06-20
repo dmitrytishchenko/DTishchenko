@@ -9,11 +9,11 @@ import static org.junit.Assert.*;
  */
 public class PaintTest {
     @Test
-    public void whenPyramid4Right(){
+    public void whenPyramid4Right() {
         Paint paint = new Paint();
         String rst = paint.rightTrl(4);
         System.out.println(rst);
-        assertThat(rst,is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+        assertThat(rst, is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("^   ")
                 .add("^^  ")
                 .add("^^^ ")
@@ -23,29 +23,29 @@ public class PaintTest {
         System.out.println(rst);
     }
     @Test
-    public void whenPyramidLeft(){
+    public void whenPyramidLeft() {
         Paint paint = new Paint();
         String rst = paint.leftTrl(4);
         System.out.println(rst);
-        assertThat(rst,is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+        assertThat(rst, is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("   ^")
                 .add("  ^^")
                 .add(" ^^^")
                 .add("^^^^")
                 .toString()
-        ));System.out.println(rst);
+        )); System.out.println(rst);
     }
     @Test
-    public void Pyramid(){
+    public void Pyramid() {
         Paint paint = new Paint();
         String rst = paint.pyramid(4);
         System.out.println(rst);
-        assertThat(rst,is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+        assertThat(rst, is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("   ^   ")
                 .add("  ^^^  ")
                 .add(" ^^^^^ ")
                 .add("^^^^^^^")
                 .toString()
-        ));System.out.println(rst);
+        )); System.out.println(rst);
     }
 }

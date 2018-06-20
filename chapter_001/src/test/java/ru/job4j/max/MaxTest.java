@@ -18,15 +18,15 @@ public class MaxTest {
         assertThat(result, is(2));
     }
     @Test
-    public void whenSecondLessThird(){
+    public void whenSecondLessThird() {
         Max maxim = new Max();
-        int result = maxim.max(2,3);
+        int result = maxim.max(2, 3);
         assertThat(result, is(3));
     }
     @Test
-    public void whenFirstLessThird(){
+    public void whenFirstLessThird() {
         Max maxim = new Max();
-        int result = maxim.max(1,3);
+        int result = maxim.max(1, 3);
         assertThat(result, is(3));
     }
 }
