@@ -39,9 +39,10 @@ public class TrackerTest {
     @Test
     public void delete() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test4", "testDescription4", 126L, "fourth item");
+        Item item = new Item();
+        tracker.add(item);
         tracker.delete(item.getId());
-        assertThat(tracker.add(item), is(item));
+        assertNull(tracker.findById(item.getId()));
     }
 
     @Test

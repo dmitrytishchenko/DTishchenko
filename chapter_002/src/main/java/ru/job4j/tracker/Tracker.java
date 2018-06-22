@@ -27,7 +27,7 @@ public class Tracker {
     public void delete(String id) {
         for (int i = 0; i < this.position; i++) {
             if (id != null && this.items[i].getId().equals(id)) {
-                System.arraycopy(this.items, i + 1, this.items, i, this.position - 1 - i);
+                System.arraycopy(this.items, i + 1, this.items, i, position);
                 this.position--;
                 break;
             }
