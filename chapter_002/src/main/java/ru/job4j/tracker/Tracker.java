@@ -8,6 +8,7 @@ public class Tracker {
     private static final Random rand = new Random();
 
     public void edit(Item fresh){
+        fresh.setId(this.generateId());
         for (int index = 0; index < items.length; index++) {
             Item item = items[index];
             if (item != null && item.getId().equals(fresh.getId()));
@@ -21,24 +22,40 @@ public class Tracker {
         return item;
     }
     public Item replace(String id, Item item) {
-        for (int i = 0; i != this.position; i++) {
-            if (items[i].getId().equals(id)) {
-                item.setId(items[i].getId());
-                items[i] = item;
-                break;
+        boolean repl = false;
+        if (!repl) {
+            for (int i = 0; i != this.position; i++) {
+                if (items[i].getId().equals(id)) {
+                    item.setId(items[i].getId());
+                    items[i] = item;
+                    break;
+                }
             }
+            System.out.println("Item is replaced");
+        }
+        else {
+            System.out.println("Item not found");
         }
         return item;
     }
+
     public void delete(String id) {
-        for (int i = 0; i < this.position; i++) {
-            if (id != null && this.items[i].getId().equals(id)) {
-                System.arraycopy(this.items, i + 1, this.items, i, position);
-                this.position--;
-                break;
+        boolean del = false;
+        if (!del) {
+            for (int i = 0; i < this.position; i++) {
+                if (id != null && this.items[i].getId().equals(id)) {
+                    System.arraycopy(this.items, i + 1, this.items, i, position);
+                    this.position--;
+                    break;
+                }
             }
+            System.out.println("Item is delete");
+        }
+        else {
+            System.out.println("Item not found");
         }
     }
+
     public Item[] findAll() {
         Item[] items = new Item[this.position];
         for (int i = 0; i != this.position; i++) {

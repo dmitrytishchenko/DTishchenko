@@ -92,9 +92,7 @@ public class MenuTracker {
         }
         public void execute(Input input, Tracker tracker){
             String id = input.ask("Please enter the task's id");
-            String name = input.ask("Please, enter the task's name");
-            String desc = input.ask("Please, enter the task's desc");
-            Item item = new Item(name, desc);
+            Item item = new Item();
             item.setId(id);
             tracker.delete(id);
         }
