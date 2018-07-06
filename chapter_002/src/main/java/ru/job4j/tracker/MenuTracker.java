@@ -9,8 +9,11 @@ class EditItem implements UserAction {
             String name = input.ask("Please, enter the task's name");
             String desc = input.ask("Please, enter the task's desc");
             Item item = new Item(name, desc);
-            item.setId(id);
-            tracker.replace(id, item);
+            if (tracker.replace(id, item)){
+                System.out.println("Item is replaced");
+            } else {
+                System.out.println("Item not found");
+            }
         }
         public String info(){
             return String.format("%s. %s", this.key(), "Edit the new Item.");
@@ -92,9 +95,11 @@ public class MenuTracker {
         }
         public void execute(Input input, Tracker tracker){
             String id = input.ask("Please enter the task's id");
-            Item item = new Item();
-            item.setId(id);
-            tracker.delete(id);
+            if (tracker.delete(id)) {
+                System.out.println("Item deleted");
+            } else {
+                System.out.println("Item not found");
+            }
         }
         public String info(){
             return String.format("%s. %s", this.key(), "Delete the Item.");

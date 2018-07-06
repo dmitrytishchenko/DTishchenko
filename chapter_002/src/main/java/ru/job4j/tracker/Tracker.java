@@ -7,15 +7,6 @@ public class Tracker {
     private int position = 0;
     private static final Random rand = new Random();
 
-    //    public void edit(Item fresh){
-//        fresh.setId(this.generateId());
-//        for (int index = 0; index < items.length; index++) {
-//            Item item = items[index];
-//            if (item != null && item.getId().equals(fresh.getId()));
-//            items[index] = fresh;
-//            break;
-//        }
-//    }
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items[this.position++] = item;
@@ -46,9 +37,6 @@ public class Tracker {
         }
         return del;
     }
-
-
-
     public Item[] findAll() {
         Item[] items = new Item[this.position];
         for (int i = 0; i != this.position; i++) {
@@ -61,12 +49,10 @@ public class Tracker {
         Item[] i = new Item[this.position];
         for (Item temp: this.items) {
             if (temp != null && key.equals(temp.getName())) {
-                i [index] = temp;
-                index++;
-                System.arraycopy(this.items, 0, i, 0, position);
+                i [index++] = temp;
             }
         }
-        return i;
+        return Arrays.copyOf(i, index);
     }
     public Item findById(String id) {
         Item result = null;

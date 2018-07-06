@@ -20,14 +20,14 @@ public class TrackerTest {
         assertThat(result, is(item));
     }
 
-//    @Test
-//    public void replace() {
-//        Tracker tracker = new Tracker();
-//        Item item = new Item("test2", "testDescription2", 124L, "second item");
-//        Item result = tracker.replace("12345", item);
-//        assertThat(result, is(item));
-//    }
-//
+    @Test
+    public void replace() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("test2", "testDescription2", 124L, "second item");
+        Boolean result = tracker.replace(item.getId(), item);
+        assertThat(result, is(true));
+    }
+
     @Test
     public void findById() {
         Tracker tracker = new Tracker();
