@@ -25,7 +25,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test2", "testDescription2", 124L, "second item");
         Boolean result = tracker.replace(item.getId(), item);
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test3", "testDescrition3", 125L, "third item");
         Item result = tracker.findById("12346");
-        assertThat(result, is(item));
+        assertThat(null, is(result));
     }
 
     @Test
