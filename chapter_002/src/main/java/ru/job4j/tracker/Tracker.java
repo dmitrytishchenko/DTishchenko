@@ -7,54 +7,47 @@ public class Tracker {
     private int position = 0;
     private static final Random rand = new Random();
 
-    public void edit(Item fresh){
-        fresh.setId(this.generateId());
-        for (int index = 0; index < items.length; index++) {
-            Item item = items[index];
-            if (item != null && item.getId().equals(fresh.getId()));
-            items[index] = fresh;
-            break;
-        }
-    }
+    //    public void edit(Item fresh){
+//        fresh.setId(this.generateId());
+//        for (int index = 0; index < items.length; index++) {
+//            Item item = items[index];
+//            if (item != null && item.getId().equals(fresh.getId()));
+//            items[index] = fresh;
+//            break;
+//        }
+//    }
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items[this.position++] = item;
         return item;
     }
-    public Item replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         boolean repl = false;
-        if (!repl) {
-            for (int i = 0; i != this.position; i++) {
-                if (items[i].getId().equals(id)) {
-                    item.setId(items[i].getId());
-                    items[i] = item;
-                    break;
-                }
+        for (int i = 0; i != this.position; i++) {
+            if (items[i].getId().equals(id)) {
+                item.setId(items[i].getId());
+                items[i] = item;
+                repl = true;
+                break;
             }
-            System.out.println("Item is replaced");
         }
-        else {
-            System.out.println("Item not found");
-        }
-        return item;
+        return repl;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         boolean del = false;
-        if (!del) {
-            for (int i = 0; i < this.position; i++) {
-                if (id != null && this.items[i].getId().equals(id)) {
-                    System.arraycopy(this.items, i + 1, this.items, i, position);
-                    this.position--;
-                    break;
-                }
+        for (int i = 0; i < this.position; i++) {
+            if (id != null && this.items[i].getId().equals(id)) {
+                System.arraycopy(this.items, i + 1, this.items, i, position);
+                this.position--;
+                del = true;
+                break;
             }
-            System.out.println("Item is delete");
         }
-        else {
-            System.out.println("Item not found");
-        }
+        return del;
     }
+
+
 
     public Item[] findAll() {
         Item[] items = new Item[this.position];

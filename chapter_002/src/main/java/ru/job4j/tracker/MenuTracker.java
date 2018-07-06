@@ -10,7 +10,7 @@ class EditItem implements UserAction {
             String desc = input.ask("Please, enter the task's desc");
             Item item = new Item(name, desc);
             item.setId(id);
-            tracker.edit(item);
+            tracker.replace(id, item);
         }
         public String info(){
             return String.format("%s. %s", this.key(), "Edit the new Item.");
@@ -106,7 +106,8 @@ public class MenuTracker {
         }
         public void execute(Input input, Tracker tracker){
             String name = input.ask("Please enter the task's name");
-            tracker.findByName("5");
+            tracker.findByName(name);
+            System.out.println("Find the item " + name);
         }
         public String info(){
             return String.format("%s. %s", this.key(), "Find Item by name.");
