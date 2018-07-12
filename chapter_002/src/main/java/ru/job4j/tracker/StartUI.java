@@ -8,8 +8,7 @@ public class StartUI {
      * Хранилище заявок
      */
     private final Tracker tracker;
-    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
-    /**
+     /**
      * Конструктор инициализирующий поля
      * @param input ввод данных.
      * @param tracker хранилище заявок.
@@ -27,9 +26,10 @@ public class StartUI {
         menu.fillactions();
         do {
             menu.show();
-            menu.select(input.ask("Select: ", ranges));
+            menu.select(input.ask("Select: ", menu.ranges()));
         } while (!"y".equals(this.input.ask("Exit? (y):")));
     }
+
     /**
      * Запуск программы.
      * @param args

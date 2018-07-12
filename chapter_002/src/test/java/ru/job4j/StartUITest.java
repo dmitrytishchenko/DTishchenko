@@ -15,21 +15,20 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
     @Test
-    public void whenAddItemthenTrackerHasNewItemWithSameName() {
+    public void whenAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        MenuTracker mn = new MenuTracker(input, tracker);
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+//        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(mn.ranges()[0], is("test name"));
     }
     @Test
     public void whenUpdateThenTrackerHasUpdateValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-//        Создаем StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"1", item.getId(), "test name", "desc", "6"});
-//        Создаем StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-//        проверяем, что нулевой элемент массива в трекере содержит имя, введенное при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
     @Test
@@ -74,11 +73,7 @@ public class StartUITest {
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
-//    Задача: 6. Доработать тесты в StartUITest проверяющие вывод данных в консоль. [#33585]
-
-    //    поле содержит дефолтный вывод в консоль
     private final PrintStream stdout = System.out;
-    //    буфер для результата
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     @Before
@@ -88,6 +83,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        MenuTracker menu = new MenuTracker(input, tracker);
         new StartUI(input, tracker).init();
     }
     @After
@@ -95,31 +91,24 @@ public class StartUITest {
         System.setOut(this.stdout);
         System.out.println("execute after method");
     }
-        @Test
+    @Test
     public void whenUpdateThenTrackerHasUpdateValue2() {
         Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        MenuTracker menu = new MenuTracker(input, tracker);
         Item item = tracker.add(new Item("test name", "desc"));
-//        Создаем StubInput с последовательностью действий
-//        Input input = new StubInput(new String[]{"1",item.getId(),"test name", "desc", "6"});
-//        Создаем StartUI и вызываем метод init()
-//        new StartUI(input, tracker).init();
-//        проверяем, что нулевой элемент массива в трекере содержит имя, введенное при эмуляции.
-        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+        assertThat(menu.ranges()[0], is("test name"));
     }
     @Test
     public  void whenUserRequestAllItems2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-//        Input input = new StubInput(new String[]{"1","test name", "desc", "6"});
-//        new StartUI(input, tracker).init();
         assertThat(tracker.findAll(), is(new Item[]{item}));
     }
     @Test
     public void whenUserReplaceItem2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-//        Input input = new StubInput(new String[]{"2","12345", "test name", "desc","comments", "6"});
-//        new StartUI(input, tracker).init();
         assertThat(tracker.replace("12345", item), is(item));
     }
 
@@ -127,16 +116,12 @@ public class StartUITest {
     public void whenUserFindItemByName2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-//        Input input = new StubInput(new String[]{"4", item.getName(), "6"});
-//        new StartUI(input, tracker).init();
         assertThat(tracker.findByName(item.getName())[0], is(item));
     }
     @Test
     public void whenUserFindItemById2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-//        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
-//        new StartUI(input,tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
 }

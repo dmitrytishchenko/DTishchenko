@@ -1,24 +1,24 @@
 package ru.job4j.tracker;
 
 class EditItem implements UserAction {
-        public int key(){
-            return 2;
-        }
-        public void execute(Input input, Tracker tracker){
-            String id = input.ask("Please enter the task's id");
-            String name = input.ask("Please, enter the task's name");
-            String desc = input.ask("Please, enter the task's desc");
-            Item item = new Item(name, desc);
-            if (tracker.replace(id, item)){
-                System.out.println("Item is replaced");
-            } else {
-                System.out.println("Item not found");
-            }
-        }
-        public String info(){
-            return String.format("%s. %s", this.key(), "Edit the new Item.");
+    public int key(){
+        return 2;
+    }
+    public void execute(Input input, Tracker tracker){
+        String id = input.ask("Please enter the task's id");
+        String name = input.ask("Please, enter the task's name");
+        String desc = input.ask("Please, enter the task's desc");
+        Item item = new Item(name, desc);
+        if (tracker.replace(id, item)){
+            System.out.println("Item is replaced");
+        } else {
+            System.out.println("Item not found");
         }
     }
+    public String info(){
+        return String.format("%s. %s", this.key(), "Edit the new Item.");
+    }
+}
 class FindItemById implements UserAction {
     public int key(){
         return 4;
@@ -41,6 +41,7 @@ public class MenuTracker {
         this.input = input;
         this.tracker = tracker;
     }
+
     public void fillactions(){
         this.actions[0] = this.new AddItem();
         this.actions[1] = new MenuTracker.ShowItems();
@@ -48,6 +49,13 @@ public class MenuTracker {
         this.actions[3] = this.new DeleteItem();
         this.actions[4] = new FindItemById();
         this.actions[5] = new MenuTracker.FindItemByName();
+    }
+    public int[] ranges(){
+        int[] ranges = new int[actions.length];
+        for(int i = 0; i < actions.length; i++){
+            ranges[i] = actions[i].key();
+        }
+        return ranges;
     }
     public void select(int key){
         this.actions[key].execute(this.input, this.tracker);
