@@ -32,19 +32,19 @@ class FindItemById implements UserAction {
     }
 }
 class Exit implements UserAction {
+    private final StartUI ui;
+    Exit(StartUI ui) {
+        this.ui = ui;
+    }
+
     public int key(){
         return 6;
     }
     public void execute(Input input, Tracker tracker){
         MenuTracker menu = new MenuTracker(input,tracker);
-        if ("y".equals(input.ask("Exit? (y):"))){
-            System.out.println("Выход из приложения произведен");
-        } else {
-            System.out.println("Приложение продолжает работать");
-           menu.fillactions();
-           menu.show();
-           menu.select(input.ask("Select: ", menu.ranges()));
-        }
+        System.out.println("Выход из программы.");
+        this.ui.stop();
+
     }
     public String info(){
         return String.format("%s. %s", this.key(), "Exit.");
@@ -61,14 +61,14 @@ public class MenuTracker {
         this.tracker = tracker;
     }
 
-    public void fillactions(){
+    public void fillactions(StartUI ui){
         this.actions[0] = this.new AddItem();
         this.actions[1] = new MenuTracker.ShowItems();
         this.actions[2] = new EditItem();
         this.actions[3] = this.new DeleteItem();
         this.actions[4] = new FindItemById();
         this.actions[5] = new MenuTracker.FindItemByName();
-        this.actions[6] = new Exit();
+        this.actions[6] = new Exit(ui);
     }
     public int[] ranges(){
         int[] ranges = new int[actions.length];
