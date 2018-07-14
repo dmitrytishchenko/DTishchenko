@@ -31,11 +31,30 @@ class FindItemById implements UserAction {
         return String.format("%s. %s", this.key(), "Find item by id.");
     }
 }
+class Exit implements UserAction {
+    public int key(){
+        return 6;
+    }
+    public void execute(Input input, Tracker tracker){
+        MenuTracker menu = new MenuTracker(input,tracker);
+        if ("y".equals(input.ask("Exit? (y):"))){
+            System.out.println("Выход из приложения произведен");
+        } else {
+            System.out.println("Приложение продолжает работать");
+           menu.fillactions();
+           menu.show();
+           menu.select(input.ask("Select: ", menu.ranges()));
+        }
+    }
+    public String info(){
+        return String.format("%s. %s", this.key(), "Exit.");
+    }
+}
 
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[6];
+    private UserAction[] actions = new UserAction[7];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -49,6 +68,7 @@ public class MenuTracker {
         this.actions[3] = this.new DeleteItem();
         this.actions[4] = new FindItemById();
         this.actions[5] = new MenuTracker.FindItemByName();
+        this.actions[6] = new Exit();
     }
     public int[] ranges(){
         int[] ranges = new int[actions.length];
