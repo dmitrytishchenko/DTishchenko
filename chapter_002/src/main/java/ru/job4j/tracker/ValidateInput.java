@@ -8,15 +8,13 @@ public class ValidateInput extends ConsoleInput {
             try {
                 value = super.ask(question, range);
                 invalid = false;
-            }catch (MenuOutException moe) {
+            } catch (MenuOutException moe) {
                 System.out.println("Please select key from menu.");
-            }
-            catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 System.out.println("Please enter validate data again.");
             }
-        } while (invalid) ;
-
-            return value;
-        }
+        } while (invalid);
+        return value;
     }
+}
 

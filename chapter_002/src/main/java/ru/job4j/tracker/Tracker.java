@@ -5,7 +5,7 @@ package ru.job4j.tracker;
 public class Tracker {
     private Item[] items = new Item[100];
     private int position = 0;
-    private static final Random rand = new Random();
+    private static final Random RANDOM = new Random();
 
     public Item add(Item item) {
         item.setId(this.generateId());
@@ -66,7 +66,7 @@ public class Tracker {
     }
 
     protected String generateId() {
-        return String.valueOf(System.currentTimeMillis() + rand.nextInt());
+        return String.valueOf(System.currentTimeMillis() + RANDOM.nextInt());
     }
 
 }

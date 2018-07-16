@@ -36,7 +36,7 @@ public class PaintTest {
         )); System.out.println(rst);
     }
     @Test
-    public void Pyramid() {
+    public void pyramid() {
         Paint paint = new Paint();
         String rst = paint.pyramid(4);
         System.out.println(rst);

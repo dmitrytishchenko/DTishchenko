@@ -31,7 +31,7 @@ public class StartUI {
         }
         while (this.work);
     }
-    public void stop(){
+    public void stop() {
         this.work = false;
     }
 

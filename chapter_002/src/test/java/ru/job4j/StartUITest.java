@@ -18,24 +18,14 @@ public class StartUITest {
     public void whenAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
-        MenuTracker mn = new MenuTracker(input, tracker);
         new StartUI(input, tracker).init();
-//        assertThat(tracker.findAll()[0].getName(), is("test name"));
-        assertThat(mn.ranges()[0], is("test name"));
-    }
-    @Test
-    public void whenUpdateThenTrackerHasUpdateValue() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"1", item.getId(), "test name", "desc", "6"});
-        new StartUI(input, tracker).init();
-        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+        assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
     @Test
     public  void whenUserRequestAllItems() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"1", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll(), is(new Item[]{item}));
     }
@@ -43,9 +33,9 @@ public class StartUITest {
     public void whenUserReplaceItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", "12345", "test name", "desc", "comments", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test name2", "desc2", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.replace("12345", item), is(item));
+        assertThat(tracker.findById(item.getId()).getName(), is("test name2"));
     }
     @Test
     public void whenUserDeleteItem() {
@@ -97,7 +87,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         MenuTracker menu = new MenuTracker(input, tracker);
         Item item = tracker.add(new Item("test name", "desc"));
-        assertThat(menu.ranges()[0], is("test name"));
+        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
     @Test
     public  void whenUserRequestAllItems2() {
@@ -109,7 +99,7 @@ public class StartUITest {
     public void whenUserReplaceItem2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        assertThat(tracker.replace("12345", item), is(item));
+        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
 
     @Test
