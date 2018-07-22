@@ -26,21 +26,16 @@ class FindItemById extends BaseAction {
         tracker.findById(id);
     }
 }
-class Exit implements UserAction {
+class Exit extends BaseAction {
     private final StartUI ui;
     Exit(StartUI ui) {
+        super(6, "Exit");
         this.ui = ui;
-    }
-    public int key() {
-        return 6;
     }
     public void execute(Input input, Tracker tracker) {
         MenuTracker menu = new MenuTracker(input, tracker);
         System.out.println("Выход из программы.");
         this.ui.stop();
-    }
-    public String info() {
-        return String.format("%s: %s", this.key(), "Exit");
     }
 }
 public class MenuTracker {
