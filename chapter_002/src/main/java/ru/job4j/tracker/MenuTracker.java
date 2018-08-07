@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 
 class EditItem extends BaseAction {
-    public EditItem(int key, String name){
+    public EditItem(int key, String name) {
         super(key, name);
     }
     public void execute(Input input, Tracker tracker) {
@@ -18,7 +18,7 @@ class EditItem extends BaseAction {
 }
 class FindItemById extends BaseAction {
 
-    public FindItemById(int key, String name){
+    public FindItemById(int key, String name) {
         super(key, name);
     }
     public void execute(Input input, Tracker tracker) {
@@ -75,7 +75,7 @@ public class MenuTracker {
         }
     }
     private class AddItem extends BaseAction {
-        public AddItem(int key, String name){
+        public AddItem(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
@@ -86,7 +86,7 @@ public class MenuTracker {
         }
     }
     private static class ShowItems extends BaseAction {
-        public ShowItems(int key, String name){
+        public ShowItems(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
@@ -97,7 +97,7 @@ public class MenuTracker {
         }
     }
     private class DeleteItem extends BaseAction {
-        public DeleteItem(int key, String name){
+        public DeleteItem(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
@@ -110,7 +110,7 @@ public class MenuTracker {
         }
     }
     private static class FindItemByName extends BaseAction {
-        public FindItemByName(int key, String name){
+        public FindItemByName(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
