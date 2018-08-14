@@ -50,6 +50,8 @@ public class Logic3T {
             for (int j = 0; j < this.table.length; j++) {
                 if (!this.table[i][j].hasMarkX() && !this.table[i][j].hasMark0()) {
                     result = true;
+                } else {
+                    break;
                 }
             }
         }
