@@ -51,9 +51,9 @@ public class Logic3T {
                 if (!this.table[i][j].hasMarkX() && !this.table[i][j].hasMark0()) {
                     result = true;
                 } else {
-                    break;
+
                 }
-            }
+            }break;
         }
         return result;
     }
