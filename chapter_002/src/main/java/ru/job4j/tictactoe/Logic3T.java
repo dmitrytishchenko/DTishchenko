@@ -28,11 +28,11 @@ public class Logic3T {
     public boolean isWinnerX() {
         boolean result = false;
         for (int i = 0; i < this.table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, i, i, i + 1, i)
-                    || this.fillBy(Figure3T::hasMarkX, i, i, i, i + 1)) {
+            if (this.fillBy(Figure3T::hasMarkX, i, 0,  + 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, 0, i, 0,  + 1)) {
                 result = true;
-            } else if (this.fillBy(Figure3T::hasMarkX, i, i, i + 1, i + 1)
-                    || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, i, this.table.length - 2, i + 1))
+            } else if (this.fillBy(Figure3T::hasMarkX, 0, 0,  + 1,  + 1)
+                    || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, this.table.length - 2,  + 1))
                     result = true;
             break;
         } return result;
