@@ -1,7 +1,5 @@
 package ru.job4j.tictactoe;
 
-import ru.job4j.chess.firuges.Figure;
-
 import java.util.function.Predicate;
 
 public class Logic3T {
@@ -24,45 +22,36 @@ public class Logic3T {
         }
         return result;
     }
-
     public boolean isWinnerX() {
         boolean result = false;
-        for (int i = 0; i < this.table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, i, 0,  + 1, 0)
-                    || this.fillBy(Figure3T::hasMarkX, 0, i, 0,  + 1)) {
+        for (int i = 0; i < this.table.length - 1; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, this.table.length - 1 - i, 0, - 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1 - i, 0,   - 1)) {
                 result = true;
-            } else if (this.fillBy(Figure3T::hasMarkX, 0, 0,  + 1,  + 1)
-                    || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, this.table.length - 2,  + 1))
-                    result = true;
-            break;
-        } return result;
+                break;
+            }
+        }
+        if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1,1)
+                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length-1, this.table.length - 2, - 1)) {
+            result = true;
+        }
+        return result;
     }
-
-
-
-
-
-//        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0)
-//                || this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)
-//                || this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
-//                || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, 0, 1)
-//                || this.fillBy(Figure3T::hasMarkX, this.table.length - 2, 0, 0, 1)
-//                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1, 1, 0)
-//                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 2, 1, 0)
-//                || this.fillBy(Figure3T::hasMarkX, 0, 2, 1, -1);
-
-
     public boolean isWinnerO() {
-        return this.fillBy(Figure3T::hasMark0, 0, 0, 1, 0)
-                || this.fillBy(Figure3T::hasMark0, 0, 0, 0, 1)
-                || this.fillBy(Figure3T::hasMark0, 0, 0, 1, 1)
-                || this.fillBy(Figure3T::hasMark0, this.table.length - 1, 0, 0, 1)
-                || this.fillBy(Figure3T::hasMark0, this.table.length - 2, 0, 0, 1)
-                || this.fillBy(Figure3T::hasMark0, 0, this.table.length - 1, 1, 0)
-                || this.fillBy(Figure3T::hasMark0, 0, this.table.length - 2, 1, 0)
-                || this.fillBy(Figure3T::hasMark0, 0, 2, 1, -1);
+        boolean result = false;
+        for (int i = 0; i < this.table.length - 1; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, this.table.length - 1 - i, 0, - 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1 - i, 0,   - 1)) {
+                result = true;
+                break;
+            }
+        }
+        if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1,1)
+                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length-1, this.table.length - 2, - 1)) {
+            result = true;
+        }
+        return result;
     }
-
     public boolean hasGap() {
         boolean result = false;
         for (int i = 0; i < this.table.length; i++) {
@@ -75,7 +64,6 @@ public class Logic3T {
             if (result) {
                 break;
             }
-
         } return result;
     }
 }
