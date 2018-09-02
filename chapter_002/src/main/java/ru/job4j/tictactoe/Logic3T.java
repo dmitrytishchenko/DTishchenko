@@ -24,33 +24,29 @@ public class Logic3T {
     }
     public boolean isWinnerX() {
         boolean result = false;
-        for (int i = 0; i < this.table.length - 1; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, this.table.length - 1 - i, 0, - 1, 0)
-                    || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1 - i, 0,   - 1)) {
+        for (int i = 0; i < this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, 0, i,  1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1)) {
                 result = true;
                 break;
             }
         }
-        if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1,1)
-                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length-1, this.table.length - 2, - 1)) {
-            result = true;
-        }
-        return result;
+        return result
+                || this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1, 1, - 1);
     }
     public boolean isWinnerO() {
         boolean result = false;
-        for (int i = 0; i < this.table.length - 1; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, this.table.length - 1 - i, 0, - 1, 0)
-                    || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1 - i, 0,   - 1)) {
+        for (int i = 0; i < this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, i, 0, 0,   1)) {
                 result = true;
                 break;
             }
         }
-        if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1,1)
-                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length-1, this.table.length - 2, - 1)) {
-            result = true;
-        }
-        return result;
+        return result
+                || this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1, 1, - 1);
     }
     public boolean hasGap() {
         boolean result = false;
