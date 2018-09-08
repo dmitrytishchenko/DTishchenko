@@ -1,6 +1,8 @@
 package ru.job4j;
 
 import org.junit.Test;
+import ru.job4j.Figure.Square;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

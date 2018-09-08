@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.Figure;
 
 public class Paint {
     public void draw(Shape shape) {
