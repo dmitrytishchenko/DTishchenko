@@ -15,16 +15,18 @@ public class BishopBlack implements Figure {
     }
     @Override
     public Cell[] way(Cell sourse, Cell dest) throws ImposibleMoveException {
-        if (dest.x - sourse.x != dest.y - sourse.y){
-            throw new ImposibleMoveException("BishopBlack can't move like that");
-        }
+//        if (Math.abs(dest.x - sourse.x) != Math.abs(dest.y - sourse.y)){
+//            throw new ImposibleMoveException("BishopBlack can't move like that");
+//        }
         Cell[] steps = new Cell[0];
-        for (int i = 0; i < steps.length ; i++) {
+        for (int i = 1; i < steps.length ; i++) {
             if(dest.x == sourse.x + i && dest.y == sourse.y + i
                     || dest.x == sourse.x - i && dest.y == sourse.y + i
                     || dest.x == sourse.x - i && dest.y == sourse.y - i
                     || dest.x == sourse.x + i && dest.y == sourse.y - i){
                 steps = new Cell[]{dest};
+            } else {
+                throw new ImposibleMoveException("BishopBlack can't move like that");
             }
         }
         return steps;

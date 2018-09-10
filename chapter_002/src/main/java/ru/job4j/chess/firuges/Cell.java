@@ -13,7 +13,7 @@ public enum Cell {
     public final int x;
     public final int y;
 
-    private Cell(int x, int y) {
+    Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
