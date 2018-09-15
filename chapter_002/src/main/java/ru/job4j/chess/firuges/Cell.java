@@ -17,4 +17,9 @@ public enum Cell {
         this.x = x;
         this.y = y;
     }
+    public static Cell find(int x, int y){
+//        реализовать метод
+        Cell cell = new Cell(x, y);
+        return cell;
+    }
 }
