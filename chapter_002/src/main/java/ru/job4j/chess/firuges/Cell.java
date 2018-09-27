@@ -18,8 +18,12 @@ public enum Cell {
         this.y = y;
     }
     public static Cell find(int x, int y){
-//        реализовать метод
-        Cell cell = new Cell(x, y);
-        return cell;
+        Cell result = null;
+        for(Cell cell: Cell.values());
+        if(cell.x == x && cell.y = y){
+            result = cell;
+            break;
+        }
+        return result;
     }
 }

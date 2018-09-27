@@ -20,8 +20,8 @@ public class BishopBlack implements Figure {
             throw new ImposibleMoveException("BishopBlack can't move like that");
         }
         Cell[] steps = new Cell[Math.abs(sourse.x - dest.x)];
-        int deltaX = 1;
-        int deltaY = 1;
+        int deltaX = Integer.compare(dest.x, sourse.x);
+        int deltaY = Integer.compare(dest.y, sourse.y);
         for (int i = 0; i < steps.length ; i++) {
             steps[i] = Cell.find(sourse.x + deltaX, sourse.y + deltaY);
         }
