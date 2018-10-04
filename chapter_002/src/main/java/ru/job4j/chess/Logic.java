@@ -12,24 +12,27 @@ public class Logic {
     public void add(Figure figure) {
         this.figures[this.index++] = figure;
     }
-
-    public boolean move(Cell source, Cell dest){
-        boolean rst = false;
+    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, ImposibleMoveException, OccupiedWayException {
+        boolean result = false;
         int index = this.findBy(source);
-        try {
-            if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
-            }
-        } catch (ImposibleMoveException e){
-            System.out.println("The figure can not move.");
+        if (index != -1) {
+            throw new FigureNotFoundException("Figure not found in cell.");
         }
-        return rst;
+        Cell[] steps = this.figures[index].way(source, dest);
+        for (Cell cell : steps) {
+            if (findBy(cell) != -1) {
+                throw new OccupiedWayException("The cell is occupied.");
+            }
+        }
+        if (steps.length > 0) {
+            this.figures[index] = this.figures[index].copy(dest);
+            result = true;
+        } else {
+            throw new ImposibleMoveException("The figure can not move.");
+        }
+        return result;
     }
+
 
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
@@ -48,5 +51,4 @@ public class Logic {
         }
         return rst;
     }
-
 }
