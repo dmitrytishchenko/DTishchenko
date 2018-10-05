@@ -1,7 +1,7 @@
 package ru.job4j;
 
 import org.junit.Test;
-import ru.job4j.Figure.Triangle;
+import ru.job4j.figure.Triangle;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;

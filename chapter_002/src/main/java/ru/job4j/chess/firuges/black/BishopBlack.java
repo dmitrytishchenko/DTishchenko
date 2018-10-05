@@ -11,25 +11,26 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell position(){
+    public Cell position() {
         return this.position;
     }
     @Override
     public Cell[] way(Cell sourse, Cell dest) throws ImposibleMoveException {
-        if (Math.abs(dest.x - sourse.x) != Math.abs(dest.y - sourse.y)){
+        if (Math.abs(dest.x - sourse.x) != Math.abs(dest.y - sourse.y)) {
             throw new ImposibleMoveException("BishopBlack can't move like that");
         }
         Cell[] steps = new Cell[Math.abs(sourse.x - dest.x)];
         int deltaX = Integer.compare(dest.x, sourse.x);
         int deltaY = Integer.compare(dest.y, sourse.y);
-        for (int i = 0; i < steps.length ; i++) {
-            steps[i] = Cell.find(sourse.x + deltaX, sourse.y + deltaY);
+        for (int i = 0; i < steps.length; i++) {
+            Cell temp = Cell.find(sourse.x + deltaX, sourse.y + deltaY);
+            steps[i] = temp;
         }
         return steps;
 
     }
     @Override
-    public Figure copy(Cell dest){
+    public Figure copy(Cell dest) {
         return new BishopBlack(dest);
     }
 }

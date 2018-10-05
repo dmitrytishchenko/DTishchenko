@@ -1,4 +1,4 @@
-package ru.job4j.Proffesion;
+package ru.job4j.proffesion;
 
 public class Proffesion {
     public String name;

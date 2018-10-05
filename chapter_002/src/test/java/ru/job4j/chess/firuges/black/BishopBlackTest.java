@@ -8,7 +8,7 @@ public class BishopBlackTest {
     @Test
     public void way() throws RuntimeException {
         BishopBlack bb = new BishopBlack(Cell.A1);
-        Cell[] expect = {Cell.A1, Cell.B2, Cell.C3, Cell.D4};
+        Cell[] expect = {Cell.B2, Cell.C3, Cell.D4};
         Cell[] result =  bb.way(Cell.A1, Cell.D4);
         Assert.assertEquals(result, expect);
     }

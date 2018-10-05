@@ -3,9 +3,9 @@ package ru.job4j;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.Figure.Paint;
-import ru.job4j.Figure.Square;
-import ru.job4j.Figure.Triangle;
+import ru.job4j.figure.Paint;
+import ru.job4j.figure.Square;
+import ru.job4j.figure.Triangle;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

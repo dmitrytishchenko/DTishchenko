@@ -1,4 +1,4 @@
-package ru.job4j.Figure;
+package ru.job4j.figure;
 
 public interface Shape {
     String draw();
