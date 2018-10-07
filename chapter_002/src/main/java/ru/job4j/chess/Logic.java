@@ -12,7 +12,7 @@ public class Logic {
     public void add(Figure figure) {
         this.figures[this.index++] = figure;
     }
-    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, OccupiedWayException {
+    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, OccupiedWayException, ImposibleMoveException {
         boolean result = false;
         int index = this.findBy(source);
         if (index != -1) {
