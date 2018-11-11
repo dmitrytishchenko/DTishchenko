@@ -5,6 +5,12 @@ public class User {
     private Integer id;
     private String city;
 
+    public User(String name, Integer id, String city) {
+        this.name = name;
+        this.id = id;
+        this.city = city;
+    }
+
     public String getName() {
         return name;
     }
