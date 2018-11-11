@@ -22,4 +22,12 @@ public class ConvertList2Array {
         }
         return array;
     }
+    public List<Integer> convert(List<int[]>list){
+        for (int[] value: list){
+            list.add(value);
+        }
+        ConvertList2Array convertList = new ConvertList2Array();
+        List<Integer> result = convertList.convert(list);
+        return result;
+    }
 }

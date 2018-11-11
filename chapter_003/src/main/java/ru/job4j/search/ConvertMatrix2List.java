@@ -7,8 +7,6 @@ package ru.job4j.search;
 public class ConvertMatrix2List {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
-        int goriz = 0;
-        int vert = 0;
         for (int[] value: array){
             for (int j: value){
                 list.add(j);
