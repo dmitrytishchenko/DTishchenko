@@ -5,6 +5,7 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
@@ -41,8 +42,8 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item();
         tracker.add(item);
-        tracker.delete(item.getId());
-        assertNull(tracker.findById(item.getId()));
+        boolean result = tracker.delete(item.getId());
+        assertThat(true, is(result));
     }
 
     @Test
@@ -50,8 +51,8 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test5", "testDescription5", 127L, "fifth item");
         tracker.add(item);
-        Item[] result = tracker.findAll();
-        assertThat(result, is(new Item[] {item}));
+        ArrayList<Item> result = tracker.findAll();
+        assertThat(result.get(0), is(item));
         }
 
     @Test
@@ -59,22 +60,12 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test6", "testDescription6", 128L, "sixth item");
         tracker.add(item);
-        Item[] result = tracker.findByName("test6");
-        assertThat(result [0], is(item));
+        ArrayList<Item> result = tracker.findByName("test6");
+        assertThat(result.get(0), is(item));
+    }
 
-    }
-    @Test
-    public void findByName2() {
-        Tracker tracker = new Tracker();
-        Item item = new Item("test7", "testDescription7", 129L, "seventh item");
-        tracker.add(item);
-        Item[] result = tracker.findByName("test7");
-        assertThat(result, is(new Item[]{item}));
-    }
-    @Test
-    public void delete2() {
-        int[] temp = {1, 2, 3, 4, 5};
-        System.arraycopy(temp, 2, temp, 1, 3);
-        System.out.println(Arrays.toString(temp));
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

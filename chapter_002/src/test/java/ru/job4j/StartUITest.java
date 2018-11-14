@@ -19,7 +19,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
     @Test
     public  void whenUserRequestAllItems() {
@@ -44,7 +44,7 @@ public class StartUITest {
         Item value = tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0], is(value));
+        assertThat(tracker.findAll().get(0), is(value));
     }
     @Test
     public void whenUserFindItemByName() {
@@ -52,7 +52,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getName(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findByName(item.getName())[0], is(item));
+        assertThat(tracker.findByName(item.getName()).get(0), is(item));
     }
     @Test
     public void whenUserFindItemById() {
@@ -106,7 +106,7 @@ public class StartUITest {
     public void whenUserFindItemByName2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        assertThat(tracker.findByName(item.getName())[0], is(item));
+        assertThat(tracker.findByName(item.getName()).get(0), is(item));
     }
     @Test
     public void whenUserFindItemById2() {
