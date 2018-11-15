@@ -7,6 +7,7 @@ import ru.job4j.tracker.Tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -25,8 +26,9 @@ public class TrackerTest {
     public void replace() {
         Tracker tracker = new Tracker();
         Item item = new Item("test2", "testDescription2", 124L, "second item");
+        tracker.add(item);
         Boolean result = tracker.replace(item.getId(), item);
-        assertThat(result, is(false));
+        assertThat(result, is(true));
     }
 
     @Test
@@ -43,7 +45,7 @@ public class TrackerTest {
         Item item = new Item();
         tracker.add(item);
         boolean result = tracker.delete(item.getId());
-        assertThat(true, is(result));
+        assertThat(result, is(true));
     }
 
     @Test
@@ -51,16 +53,16 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test5", "testDescription5", 127L, "fifth item");
         tracker.add(item);
-        ArrayList<Item> result = tracker.findAll();
+        List<Item> result = tracker.findAll();
         assertThat(result.get(0), is(item));
-        }
+    }
 
     @Test
     public void findByName() {
         Tracker tracker = new Tracker();
         Item item = new Item("test6", "testDescription6", 128L, "sixth item");
         tracker.add(item);
-        ArrayList<Item> result = tracker.findByName("test6");
+        List<Item> result = tracker.findByName("test6");
         assertThat(result.get(0), is(item));
     }
 

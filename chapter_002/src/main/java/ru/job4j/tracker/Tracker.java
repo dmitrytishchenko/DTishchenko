@@ -3,8 +3,8 @@ package ru.job4j.tracker;
 import java.util.*;
 
 public class Tracker {
-    private ArrayList<Item> items = new ArrayList<>();
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
+    //    private int position = 0;
     private static final Random RANDOM = new Random();
 
     public Item add(Item item) {
@@ -14,10 +14,10 @@ public class Tracker {
     }
     public boolean replace(String id, Item item) {
         boolean repl = false;
-        for (int i = 0; i != this.position; i++) {
-            if (items.get(i).getId().equals(id)) {
-                item.setId(items.get(i).getId());
-                items.add(item);
+        for (Item item1 : this.items){
+            if(item1 != null && item1.getId().equals(id)){
+                int value = this.items.indexOf(item1);
+                this.items.add(value, item);
                 repl = true;
                 break;
             }
@@ -26,30 +26,26 @@ public class Tracker {
     }
     public boolean delete(String id) {
         boolean result = false;
-        for (Item value : items) {
+        for (Item value : this.items) {
             if (value.getId().equals(id)) {
+                this.items.remove(value);
                 result = true;
+                break;
             }
-            this.items.remove(value);
-            break;
         }
         return result;
     }
-    public ArrayList<Item> findAll() {
-        for (Item value : this.items){
-            if (value != null){
-                break;
-            }
-        }
+    public List<Item> findAll() {
         return this.items;
     }
-    public ArrayList<Item> findByName(String key) {
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item temp: this.items) {
             if (temp != null && key.equals(temp.getName())) {
-                break;
+                result.add(temp);
             }
         }
-        return items;
+        return result;
     }
     public Item findById(String id) {
         Item result = null;
