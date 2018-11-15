@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Tracker {
     private List<Item> items = new ArrayList<>();
-    //    private int position = 0;
     private static final Random RANDOM = new Random();
 
     public Item add(Item item) {
@@ -15,20 +14,32 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean repl = false;
         for (Item item1 : this.items){
+            int value = 0;
             if(item1 != null && item1.getId().equals(id)){
-                int value = this.items.indexOf(item1);
-                this.items.add(value, item);
+                this.items.set(value, item);
                 repl = true;
                 break;
             }
+            value++;
         }
         return repl;
     }
+//    public boolean delete(String id) {
+//        boolean result = false;
+//        for (Item value : this.items) {
+//            if (value.getId().equals(id)) {
+//                this.items.remove(value);
+//                result = true;
+//                break;
+//            }
+//        }
+//        return result;
+//    }
     public boolean delete(String id) {
         boolean result = false;
-        for (Item value : this.items) {
-            if (value.getId().equals(id)) {
-                this.items.remove(value);
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).getId().equals(id)) {
+                this.items.remove(this.items.get(i));
                 result = true;
                 break;
             }
