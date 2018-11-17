@@ -51,11 +51,11 @@ public class MenuTracker {
     }
     public void fillactions(StartUI ui) {
         this.actions.add(new AddItem(0, "AddItem"));
-        this. actions.add(new MenuTracker.ShowItems(1, "ShowItems"));
+        this.actions.add(new MenuTracker.ShowItems(1, "ShowItems"));
         this.actions.add(new EditItem(2, "EditItem"));
         this.actions.add(this.new DeleteItem(3, "DeleteItem"));
         this.actions.add(new FindItemById(4, "FindItemById"));
-        this. actions.add(new MenuTracker.FindItemByName(5, "FindItemByName"));
+        this.actions.add(new MenuTracker.FindItemByName(5, "FindItemByName"));
         this.actions.add(new Exit(ui));
     }
     public int[] ranges() {

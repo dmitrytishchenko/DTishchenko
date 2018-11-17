@@ -13,9 +13,9 @@ public class Tracker {
     }
     public boolean replace(String id, Item item) {
         boolean repl = false;
-        for (Item item1 : this.items){
+        for (Item item1 : this.items) {
             int value = 0;
-            if(item1 != null && item1.getId().equals(id)){
+            if (item1 != null && item1.getId().equals(id)) {
                 this.items.set(value, item);
                 repl = true;
                 break;
@@ -24,22 +24,11 @@ public class Tracker {
         }
         return repl;
     }
-//    public boolean delete(String id) {
-//        boolean result = false;
-//        for (Item value : this.items) {
-//            if (value.getId().equals(id)) {
-//                this.items.remove(value);
-//                result = true;
-//                break;
-//            }
-//        }
-//        return result;
-//    }
     public boolean delete(String id) {
         boolean result = false;
         for (int i = 0; i < this.items.size(); i++) {
             if (this.items.get(i).getId().equals(id)) {
-                this.items.remove(this.items.get(i));
+                this.items.remove(i);
                 result = true;
                 break;
             }
