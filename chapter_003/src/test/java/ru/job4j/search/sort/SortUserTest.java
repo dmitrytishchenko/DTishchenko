@@ -15,10 +15,10 @@ public class SortUserTest {
     public void sort() throws Exception {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
-        list.add(new User("Petia", 19));
-        list.add(new User("Vasia", 20));
-        list.add(new User("Artem", 44));
-        list.add(new User("Zenia", 24));
+        list.add(new User("Petia", "19"));
+        list.add(new User("Vasia", "20"));
+        list.add(new User("Artem", "44"));
+        list.add(new User("Zenia", "24"));
         Set<User> result = sortUser.sort(list);
         TreeSet<User> treeSet = new TreeSet<>(list);
         assertThat(treeSet, is(result));
