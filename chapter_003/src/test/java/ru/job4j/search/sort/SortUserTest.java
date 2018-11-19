@@ -17,11 +17,10 @@ public class SortUserTest {
         List<User> list = new ArrayList<>();
         list.add(new User("Petia", 19));
         list.add(new User("Vasia", 20));
+        list.add(new User("Artem", 44));
+        list.add(new User("Zenia", 24));
         Set<User> result = sortUser.sort(list);
-        TreeSet<User> treeSet = new TreeSet<>();
-        treeSet.add(new User("Petia", 19));
-        treeSet.add(new User("Vasia", 20));
+        TreeSet<User> treeSet = new TreeSet<>(list);
         assertThat(treeSet, is(result));
     }
-
 }
