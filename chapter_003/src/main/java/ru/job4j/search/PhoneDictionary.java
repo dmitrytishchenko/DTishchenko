@@ -21,8 +21,10 @@ public class PhoneDictionary {
             if (value.getName().contains(key)
                     || value.getSurname().contains(key)
                     || value.getPhone().contains(key)
-                    || value.getAddress().contains(key));
-            result.add(value);
-        }return result;
+                    || value.getAddress().contains(key)) {
+                result.add(value);
+            }
+        }
+        return result;
     }
 }

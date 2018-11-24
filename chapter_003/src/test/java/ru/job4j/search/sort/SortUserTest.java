@@ -24,7 +24,7 @@ public class SortUserTest {
         assertThat(treeSet, is(result));
     }
     @Test
-    public void sortByNameLenght(){
+    public void sortByNameLenght() {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
         list.add(new User("Aleksey", 22));
@@ -40,7 +40,7 @@ public class SortUserTest {
         assertThat(result, is(expected));
     }
     @Test
-    public void sortByAllFields(){
+    public void sortByAllFields() {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
         list.add(new User("Aleksey", 22));

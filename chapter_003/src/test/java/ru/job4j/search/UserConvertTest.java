@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class UserConvertTest {
     @Test
-    public void convertListToHashMap(){
+    public void convertListToHashMap() {
 
         User user1 = new User("Bob", 12, "Moscow");
         User user2 = new User("Vasia", 3, "New York");
