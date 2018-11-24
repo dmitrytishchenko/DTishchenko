@@ -27,7 +27,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll(), is(new Item[]{item}));
+        assertThat(tracker.findAll().get(0), is(item));
     }
     @Test
     public void whenUserReplaceItem() {
@@ -35,7 +35,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"2", item.getId(), "test name2", "desc2", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findById(item.getId()).getName(), is("test name2"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name2"));
     }
     @Test
     public void whenUserDeleteItem() {
@@ -93,7 +93,7 @@ public class StartUITest {
     public  void whenUserRequestAllItems2() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        assertThat(tracker.findAll(), is(new Item[]{item}));
+        assertThat(tracker.findAll().get(0), is(item));
     }
     @Test
     public void whenUserReplaceItem2() {
