@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+/*
+ * пакет должен быть уникальным
+ * нет класса User
+ * import java.util.List не нужен
+ * в конструкторе TreeMap не указан Generic
+ * пустые строки
+ * метод trancfer необходимо разбить на два метода, легче будет читать
+ * метод toString отсутствуют пробелы
+ * */
 
+public class Bank {
 
-public class Bank {                                                      // нет полей класса, либо класса User
-
-    private TreeMap<User, ArrayList<Account>> treemap = new TreeMap<>(); // тип коллекции Map не указан (Generic)
+    private TreeMap<User, ArrayList<Account>> treemap = new TreeMap<>();
 
     public void addUser(User user) {
         this.treemap.put(user, new ArrayList<>());
@@ -39,8 +47,8 @@ public class Bank {                                                      // не
     }
 
     public boolean transfer(User user1, Account account1,
-                                 User user2, Account account2, double amount) {   // куча входящих аргументов, необходимо разбить на два метода
-        return this.treemap.get(user1).contains(account1)                         // много проверок в одном месте, разбить на 2 метода и будет проще читать
+                                 User user2, Account account2, double amount) {
+        return this.treemap.get(user1).contains(account1)
                 && this.treemap.get(user2).contains(account2)
                 && getActualAccount(user1, account1).transfer(
                 getActualAccount(user2, account2), amount);

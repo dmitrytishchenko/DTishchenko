@@ -1,9 +1,16 @@
-package com; // пакет должен быть уникальным
+package com;
 
-
+/*
+ * пакет должен быть уникальным
+ * поля должны быть private
+ * в методе trancfer 3 условия через "И", мне кажется это не очень хорошо
+ * пустые строки
+ * метод trancfer необходимо разбить на два метода, легче будет читать
+ * метод toString записать в одну строку
+ * */
 public class Account {
 
-    double values;  // поля должны быть private
+    double values;
     String reqs;
 
     public Account(double values, String requisites) {
@@ -22,7 +29,7 @@ public class Account {
 
     boolean transfer(Account destination, double amount) {
         boolean success = false;
-        if (amount > 0 && amount < this.values && destination != null) {   // 3 условия через "И", мне кажется это не очень хорошо
+        if (amount > 0 && amount < this.values && destination != null) {
             success = true;
             this.values -= amount;
             destination.values += amount;
@@ -32,7 +39,7 @@ public class Account {
 
     public String toString() {
         String otvet;
-        otvet = "Account{" + "values=" + values + ", reqs='" + reqs + "\\" + "}"; // отсутствие пробелов
+        otvet = "Account{" + "values=" + values + ", reqs='" + reqs + "\\" + "}";
         return otvet;
     }
 

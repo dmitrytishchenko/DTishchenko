@@ -1,6 +1,12 @@
-package com;   // пакет должен быть уникальным
+package com;
 
-
+/*
+* пакет должен быть уникальным
+* конструктор не нужен
+* нет класса User геттерами
+* при создании коллекции TreeSet не указан Generic
+* пустые строки
+* */
 import java.util.*;
 
 public class Sorter {
@@ -9,8 +15,8 @@ public class Sorter {
 
     }
 
-    Set<User> sort (List<User> list) {                   // нет полей класса, либо класса User
-        TreeSet<User> sortedList = new TreeSet<>();       // Generic не указан
+    Set<User> sort (List<User> list) {
+        TreeSet<User> sortedList = new TreeSet<>();
         sortedList.addAll(list);
         return sortedList;
     }
@@ -19,7 +25,7 @@ public class Sorter {
         Comparator<User> compar = new Comparator<User>() {
             @Override
             public int compare (User o1, User o2) {
-                return o1.getName().length() - o2.getName().length();  // отсутствует класс User с геттерами
+                return o1.getName().length() - o2.getName().length();
             }
         };
         list.sort(compar);

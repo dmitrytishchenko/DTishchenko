@@ -1,8 +1,15 @@
-package com;    // пакет должен быть уникальным
+package com;
 
 
 import java.util.*;
 
+/*
+* пакет должен быть уникальным
+* конструктор не нужен
+* тернарный оператор лучше вынести в отдельную строку, легче будет читаться метод
+* пустые строки
+* коментарии должны быть в javadocs
+* */
 public class Convert {
 
     public Convert(){
@@ -23,7 +30,7 @@ public class Convert {
     //Converts list to array
     public int[][] makeArray(List<Integer> list, int rws) {
         Iterator<Integer> iterator = list.iterator();
-        int cls = list.size() / rws + (list.size() % rws == 0 ? 0 : 1);     // пустые строки, тернарный оператор убратьв отдельную строку, легче будет читать
+        int cls = list.size() / rws + (list.size() % rws == 0 ? 0 : 1);
 
 
         int[][] array = new int[rws][cls];
