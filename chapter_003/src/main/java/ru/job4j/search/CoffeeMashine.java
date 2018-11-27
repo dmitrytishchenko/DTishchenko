@@ -1,9 +1,9 @@
 package ru.job4j.search;
 
-        import com.sun.deploy.util.ArrayUtil;
+import com.sun.deploy.util.ArrayUtil;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CoffeeMashine {
     /*
