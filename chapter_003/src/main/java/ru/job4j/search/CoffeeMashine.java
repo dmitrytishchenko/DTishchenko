@@ -1,9 +1,9 @@
 package ru.job4j.search;
 
-import com.sun.deploy.util.ArrayUtil;
+        import com.sun.deploy.util.ArrayUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 public class CoffeeMashine {
     /*
@@ -24,11 +24,10 @@ public class CoffeeMashine {
             }
             i--;
         }
-//        int[] result = new int[list.size()];
-//        for (int j = 0; j < list.size(); j++) {
-//            result[j] = list.get(j);
-//        }
-        int[] result = list.stream().mapToInt(Integer::intValue).toArray();
+        int[] result = new int[list.size()];
+        for (int j = 0; j < list.size(); j++) {
+            result[j] = list.get(j);
+        }
         return result;
     }
 }
