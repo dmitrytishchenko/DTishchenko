@@ -81,13 +81,15 @@ public class Bank {
         if (amount <= 0) {
             return false;
         }
-        for (int i = 0; i < users.size() - 1; i++) {
-            Account srcAccount = this.getUserAccount(srcPassport).get(i);
-            Account destAccount = this.getUserAccount(destPassport).get(i);
-            if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
-                srcAccount.setValue(srcAccount.getValue() - (int) amount);
-                destAccount.setValue(destAccount.getValue() + (int) amount);
-                result = true;
+        if (this.getUserAccount2(srcPassport, srcRequisite) != null && this.getUserAccount2(destPassport, destRequisite) != null) {
+            for (int i = 0; i < users.size() - 1; i++) {
+                Account srcAccount = this.getUserAccount(srcPassport).get(i);
+                Account destAccount = this.getUserAccount(destPassport).get(i);
+                if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
+                    srcAccount.setValue(srcAccount.getValue() - (int) amount);
+                    destAccount.setValue(destAccount.getValue() + (int) amount);
+                    result = true;
+                }
             }
         }
         return result;
@@ -99,18 +101,14 @@ public class Bank {
     * @param - requisite - реквизиты пользователя
     * return - список пользователей
     */
-    public List<Account> getUserAccount2(String passport, long requisite) {
-        List<Account> list = new ArrayList<>();
-        for (User value : this.users.keySet()) {
-            if (value.getPassport().equals(passport)) {
-                for (Account ac : this.users.get(requisite)) {
-                    if (ac.getRequisites() == requisite) {
-                        list = this.users.get(value);
-                    }
-                }
-            }
 
+    public Account getUserAccount2(String passport, String requisite) {
+        List<Account> list = getUserAccount(passport);
+        for (Account ac : list) {
+            if (requisite.equals(ac.getRequisites())) {
+                break;
+            }
         }
-        return list;
+        return list.get(0);
     }
 }
