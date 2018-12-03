@@ -77,6 +77,6 @@ public class BankTest {
         Account account = new Account(100, 101105);
         bank.addAccountToUser("12345", account);
         bank.getUserAccount2("12345", "101105");
-        assertThat(bank.getUserAccount2("12345", "101105"), is(account));
+        assertThat(bank.getUserAccount2("12345", "101105").orElse(account), is(account));
     }
 }

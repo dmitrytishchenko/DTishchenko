@@ -1,9 +1,6 @@
 package ru.job4j.search.banktransfer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Bank {
     /*
@@ -81,18 +78,18 @@ public class Bank {
         if (amount <= 0) {
             return false;
         }
-        if (this.getUserAccount2(srcPassport, srcRequisite) != null && this.getUserAccount2(destPassport, destRequisite) != null) {
-            for (int i = 0; i < users.size() - 1; i++) {
-                Account srcAccount = this.getUserAccount(srcPassport).get(i);
-                Account destAccount = this.getUserAccount(destPassport).get(i);
-                if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
-                    srcAccount.setValue(srcAccount.getValue() - (int) amount);
-                    destAccount.setValue(destAccount.getValue() + (int) amount);
-                    result = true;
-                }
+//        if (this.getUserAccount2(srcPassport, srcRequisite) != null && this.getUserAccount2(destPassport, destRequisite) != null) {
+        Optional<Account> src = this.getUserAccount2(srcPassport, srcRequisite);
+        Optional<Account> dest = this.getUserAccount2(destPassport, destRequisite);
+        for (int i = 0; i < users.size() - 1; i++) {
+            Account srcAccount = this.getUserAccount(srcPassport).get(i);
+            Account destAccount = this.getUserAccount(destPassport).get(i);
+            if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
+                srcAccount.setValue(srcAccount.getValue() - (int) amount);
+                destAccount.setValue(destAccount.getValue() + (int) amount);
+                result = true;
             }
-        }
-        return result;
+        }return result;
     }
 
     /*
@@ -102,13 +99,13 @@ public class Bank {
     * return - список пользователей
     */
 
-    public Account getUserAccount2(String passport, String requisite) {
+    public Optional<Account> getUserAccount2(String passport, String requisite) {
         List<Account> list = getUserAccount(passport);
         for (Account ac : list) {
             if (requisite.equals(ac.getRequisites())) {
                 break;
             }
         }
-        return list.get(0);
+        return Optional.of(list.get(0));
     }
 }
