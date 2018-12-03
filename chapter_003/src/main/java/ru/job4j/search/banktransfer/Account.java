@@ -2,9 +2,9 @@ package ru.job4j.search.banktransfer;
 
 public class Account {
     private int value;
-    private long requisites;
+    private String requisites;
 
-    public Account(int value, long requisites) {
+    public Account(int value, String requisites) {
         this.value = value;
         this.requisites = requisites;
     }
@@ -13,7 +13,7 @@ public class Account {
         return value;
     }
 
-    public long getRequisites() {
+    public String getRequisites() {
         return requisites;
     }
 

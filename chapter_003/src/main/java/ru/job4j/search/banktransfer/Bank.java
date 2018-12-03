@@ -6,7 +6,7 @@ public class Bank {
     /*
     * Коллекция Map с ключем User, значением - List<Account> - список счетов каждого пользователя
     */
-    Map<User, List<Account>> users = new HashMap<>();
+    protected Map<User, List<Account>> users = new HashMap<>();
 
     /*
     * Метод addUser - добавление нового пользователя
@@ -55,7 +55,7 @@ public class Bank {
     * @param - passport - паспорт пользователя
     */
     public List<Account> getUserAccount(String passport) {
-        List<Account> list = new ArrayList<>();
+        List<Account> list = null;
         for (User value : this.users.keySet()) {
             if (value.getPassport().equals(passport)) {
                 list = this.users.get(value);
@@ -78,18 +78,16 @@ public class Bank {
         if (amount <= 0) {
             return false;
         }
-//        if (this.getUserAccount2(srcPassport, srcRequisite) != null && this.getUserAccount2(destPassport, destRequisite) != null) {
-        Optional<Account> src = this.getUserAccount2(srcPassport, srcRequisite);
-        Optional<Account> dest = this.getUserAccount2(destPassport, destRequisite);
-        for (int i = 0; i < users.size() - 1; i++) {
-            Account srcAccount = this.getUserAccount(srcPassport).get(i);
-            Account destAccount = this.getUserAccount(destPassport).get(i);
-            if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
+        Account srcAccount = this.getUserAccount2(srcPassport, srcRequisite);
+        Account destAccount = this.getUserAccount2(destPassport, destRequisite);
+        if (srcAccount != null && destAccount != null) {
+            if (srcAccount.getValue() >= amount) {
                 srcAccount.setValue(srcAccount.getValue() - (int) amount);
                 destAccount.setValue(destAccount.getValue() + (int) amount);
                 result = true;
             }
-        }return result;
+        }
+        return result;
     }
 
     /*
@@ -99,13 +97,17 @@ public class Bank {
     * return - список пользователей
     */
 
-    public Optional<Account> getUserAccount2(String passport, String requisite) {
+    public Account getUserAccount2(String passport, String requisite) {
+        Account account = null;
         List<Account> list = getUserAccount(passport);
-        for (Account ac : list) {
-            if (requisite.equals(ac.getRequisites())) {
-                break;
+        if (list != null) {
+            for (Account ac : list) {
+                if (requisite.equals(ac.getRequisites())) {
+                    account = ac;
+                    break;
+                }
             }
         }
-        return Optional.of(list.get(0));
+        return account;
     }
 }
