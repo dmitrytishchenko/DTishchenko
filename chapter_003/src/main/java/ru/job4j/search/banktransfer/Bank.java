@@ -10,6 +10,7 @@ public class Bank {
     * Коллекция Map с ключем User, значением - List<Account> - список счетов каждого пользователя
     */
     Map<User, List<Account>> users = new HashMap<>();
+
     /*
     * Метод addUser - добавление нового пользователя
     * @param - user - пользователь
@@ -17,6 +18,7 @@ public class Bank {
     public void addUser(User user) {
         this.users.putIfAbsent(user, new ArrayList<>());
     }
+
     /*
     * Метод deleteUser - удаление пользователя
     * @param - user - пользователь
@@ -24,6 +26,7 @@ public class Bank {
     public void deleteUser(User user) {
         this.users.remove(user);
     }
+
     /*
     * Метод addAccountToUser - добавление нового счета для определенного пользователя
     * @param - passport - паспорт пользователя
@@ -36,6 +39,7 @@ public class Bank {
             }
         }
     }
+
     /*
     * Метод deleteAccountFromUser - удаления счета для определенного пользователя
     * @param - passport - паспорт пользователя
@@ -48,6 +52,7 @@ public class Bank {
             }
         }
     }
+
     /*
     * Метод getUserAccount - получить список счетов для пользователя
     * @param - passport - паспорт пользователя
@@ -61,6 +66,7 @@ public class Bank {
         }
         return list;
     }
+
     /*
     * Метод transferMoney -  для перечисления с одного счета на другой счет,
     * если если счёт не найден или не хватает денег на счёте srcAccount (с которого переводят) должен вернуть false.
@@ -75,14 +81,36 @@ public class Bank {
         if (amount <= 0) {
             return false;
         }
-        int index = 0;
-        Account srcAccount = this.getUserAccount(srcPassport).get(index);
-        Account destAccount = this.getUserAccount(destPassport).get(index);
-        if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
-            srcAccount.setValue(srcAccount.getValue() - (int) amount);
-            destAccount.setValue(destAccount.getValue() + (int) amount);
-            result = true;
+        for (int i = 0; i < users.size() - 1; i++) {
+            Account srcAccount = this.getUserAccount(srcPassport).get(i);
+            Account destAccount = this.getUserAccount(destPassport).get(i);
+            if (Integer.parseInt(srcRequisite) == srcAccount.getRequisites() && Integer.parseInt(destRequisite) == destAccount.getRequisites()) {
+                srcAccount.setValue(srcAccount.getValue() - (int) amount);
+                destAccount.setValue(destAccount.getValue() + (int) amount);
+                result = true;
+            }
         }
         return result;
+    }
+
+    /*
+    * Метод getUserAccount2 - для поиска акаунта пользователя по реквизитам и паспорту
+    * @param - passport - паспорт пользователя
+    * @param - requisite - реквизиты пользователя
+    * return - список пользователей
+    */
+    public List<Account> getUserAccount2(String passport, long requisite) {
+        List<Account> list = new ArrayList<>();
+        for (User value : this.users.keySet()) {
+            if (value.getPassport().equals(passport)) {
+                for (Account ac : this.users.get(requisite)) {
+                    if (ac.getRequisites() == requisite) {
+                        list = this.users.get(value);
+                    }
+                }
+            }
+
+        }
+        return list;
     }
 }

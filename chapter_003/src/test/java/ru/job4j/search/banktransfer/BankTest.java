@@ -68,4 +68,15 @@ public class BankTest {
         boolean result = bank.transferMoney("12345", "101501", "54321", "101502", 5);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void getUserAccount2() throws Exception {
+        Bank bank = new Bank();
+        User user = new User("Peyia", "12345");
+        bank.addUser(user);
+        Account account = new Account(100, 101105);
+        bank.addAccountToUser("12345", account);
+        bank.getUserAccount2("12345", 101105);
+        assertThat(bank.getUserAccount2("12345", 101105).size(), is(1));
+    }
 }
