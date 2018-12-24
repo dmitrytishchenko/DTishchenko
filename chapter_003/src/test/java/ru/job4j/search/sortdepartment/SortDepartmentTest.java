@@ -9,15 +9,15 @@ public class SortDepartmentTest {
     @Test
     public void sort() throws Exception {
         String[] depart = {
-                "K1",
-                "K1\\SK2",
                 "K1\\SK1",
-                "K2\\SK1\\SSK1",
-                "K1\\SK1\\SSK2",
+                "K1\\SK2",
                 "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK2",
+                "K2",
+//                "K1",
+//                "K2\\SK1",
+                "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2",
-                "K2\\SK1",
-                "K2"
         };
         String[] expected = {
                 "K1",
@@ -37,15 +37,15 @@ public class SortDepartmentTest {
     @Test
     public void reverseSort() throws Exception {
         String[] depart = {
-                "K2\\SK1",
+                "K1\\SK1",
+                "K1\\SK2",
+                "K1\\SK1\\SSK1",
                 "K1\\SK1\\SSK2",
                 "K2",
                 "K2\\SK1\\SSK1",
-                "K1",
                 "K2\\SK1\\SSK2",
-                "K1\\SK1",
-                "K1\\SK2",
-                "K1\\SK1\\SSK1"
+//                "K1",
+//                "K2\\SK1",
         };
         String[] expected = {
                 "K2",
