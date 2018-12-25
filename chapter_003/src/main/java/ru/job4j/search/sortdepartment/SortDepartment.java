@@ -18,58 +18,65 @@ public class SortDepartment {
 //    }
 
     public String[] sort(String[] depart) {
-        Arrays.sort(depart);
-        return depart;
-    }
-
-    public String[] reverseSort(String[] depart) {
         List<String> list = new ArrayList<>();
-        for (String s : depart) {
-            list.add(s);
+        for (String s : depart){
+            String[] dep = s.split("\\\\");
+            for (String mas : dep) {
+                list.add(mas);
+            }
         }
-
         list.sort(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                int a = o1.length();
-                int b = o2.length();
                 int result = 0;
-
-//                int min = Math.min(a, b);
-//                for (int i = 0; i < min; i++) {
-//                    char c1 = o1.charAt(i);
-//                    char c2 = o2.charAt(i);
-//                    if (c1 != c2) {
-//                        return c2 - c1;
-//                    }
-//                }
-//                return a - b;
-                String[] mas1 = o1.split("\\\\");
-                String[] mas2 = o2.split("\\\\");
-                int firstlength = mas1.length;
-                int secondlength = mas2.length;
-                int minimal = Math.min(firstlength, secondlength);
-                for (int i = 0; i < minimal; i++) {
-                    char[] c1 = mas1[i].toCharArray();
-                    char[] c2 = mas2[i].toCharArray();
-                    int charmin = Math.min(c1.length, c2.length);
-                    for (int j = 0; j < charmin; j++) {
-                        if (c1[j] != c2[j]) {
-                            result = c2[j] - c1[j];
+                int minim = Math.min(o1.length(), o2.length());
+                if (o1.length() > o2.length()) {
+                    result = 1;
+                } else if (o1.length() < o2.length()) {
+                    result = -1;
+                } else if (o1.length() == o2.length()) {
+                    for (int i = 0; i < minim ; i++) {
+                        if (o1.charAt(i) != o2.charAt(i)) {
+                            result = o1.compareTo(o2);
                             break;
                         }
                     }
                 }
-                if (result == 0) {
-                    if (a > b) {
-                        result = 1;
-                    } else {
-                        result = -1;
+                return result;
+            }
+        });
+//        Arrays.sort(depart);
+//        return depart;
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] reverseSort(String[] depart) {
+        List<String> list = new ArrayList<>();
+        for (String s : depart){
+            String[] dep = s.split("\\\\");
+            for (String mas : dep) {
+                list.add(mas);
+            }
+        }
+        list.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int result = 0;
+                if (o1.length() > o2.length()) {
+                    result = 1;
+                } else if (o1.length() < o2.length()) {
+                    result = -1;
+                } else if (o1.length() == o2.length()) {
+                    int min = Math.min(o1.length(), o2.length());
+                    for (int i = 0; i < min; i++) {
+                        if (o1.charAt(i) != o2.charAt(i)) {
+                            result = o2.compareTo(o1);
+                            break;
+                        }
                     }
                 }
                 return result;
             }
-
         });
         return list.toArray(new String[list.size()]);
     }
