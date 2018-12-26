@@ -44,8 +44,8 @@ public class SortDepartmentTest {
                 "K2",
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2",
-//                "K1",
-//                "K2\\SK1",
+                "K1",//
+                "K2\\SK1",//
         };
         String[] expected = {
                 "K2",

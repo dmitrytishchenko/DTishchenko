@@ -1,64 +1,30 @@
 package ru.job4j.search.sortdepartment;
 
+import javax.print.attribute.SetOfIntegerSyntax;
 import java.util.*;
 
 public class SortDepartment {
-//    public String[] department(String[] depart){
-//        List<String> list = new ArrayList<>();
-//        for (String s : depart) {
-//            for (int i = 0; i < s.length() ; i++) {
-//                if (s.charAt(i) == '\\') {
-//                    list.add(s.substring(0, i));
-//                } else if (i == s.length() - 1){
-//                    list.add(s.substring(0, i + 1));
-//                }
-//            }
-//        }
-//        return list.toArray(new String[list.size()]);
-//    }
+    private Set<String> set = new TreeSet<>();
 
     public String[] sort(String[] depart) {
-        List<String> list = new ArrayList<>();
-        for (String s : depart){
+        for (String s : depart) {
+            this.set.add(s);
+        }
+        return set.toArray(new String[set.size()]);
+    }
+
+    public Set<String> fullMassiv(String[] depart) {
+        for (String s : depart) {
             String[] dep = s.split("\\\\");
             for (String mas : dep) {
-                list.add(mas);
+                this.set.add(mas);
             }
         }
-        list.sort(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int result = 0;
-                int minim = Math.min(o1.length(), o2.length());
-                if (o1.length() > o2.length()) {
-                    result = 1;
-                } else if (o1.length() < o2.length()) {
-                    result = -1;
-                } else if (o1.length() == o2.length()) {
-                    for (int i = 0; i < minim ; i++) {
-                        if (o1.charAt(i) != o2.charAt(i)) {
-                            result = o1.compareTo(o2);
-                            break;
-                        }
-                    }
-                }
-                return result;
-            }
-        });
-//        Arrays.sort(depart);
-//        return depart;
-        return list.toArray(new String[list.size()]);
+        return set;
     }
 
     public String[] reverseSort(String[] depart) {
-        List<String> list = new ArrayList<>();
-        for (String s : depart){
-            String[] dep = s.split("\\\\");
-            for (String mas : dep) {
-                list.add(mas);
-            }
-        }
-        list.sort(new Comparator<String>() {
+        Set<String> descendingSet = new TreeSet<>(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 int result = 0;
@@ -78,6 +44,6 @@ public class SortDepartment {
                 return result;
             }
         });
-        return list.toArray(new String[list.size()]);
+        return descendingSet.toArray(new String[descendingSet.size()]);
     }
 }
