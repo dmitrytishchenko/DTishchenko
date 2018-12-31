@@ -14,8 +14,8 @@ public class SortDepartmentTest {
                 "K1\\SK1\\SSK1",
                 "K1\\SK1\\SSK2",
                 "K2",
-                "K1",//
-                "K2\\SK1",//
+//                "K1",//
+//                "K2\\SK1",//
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2",
         };
@@ -31,6 +31,10 @@ public class SortDepartmentTest {
                 "K2\\SK1\\SSK2"
         };
         SortDepartment sortdep = new SortDepartment();
+        int value = expected.length - depart.length;
+        for (int i = 0; i < value; i++) {
+            sortdep.add(depart);
+        }
         String[] result = sortdep.sort(depart);
         assertThat(result, is(expected));
     }
@@ -44,8 +48,8 @@ public class SortDepartmentTest {
                 "K2",
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2",
-                "K1",//
-                "K2\\SK1",//
+//                "K1",//
+//                "K2\\SK1",//
         };
         String[] expected = {
                 "K2",
@@ -59,6 +63,10 @@ public class SortDepartmentTest {
                 "K1\\SK1\\SSK1"
         };
         SortDepartment sortdepreverse = new SortDepartment();
+        int value = expected.length - depart.length;
+        for (int i = 0; i < value; i++) {
+            sortdepreverse.add(depart);
+        }
         String[] result = sortdepreverse.reverseSort(depart);
         assertThat(result, is(expected));
     }
