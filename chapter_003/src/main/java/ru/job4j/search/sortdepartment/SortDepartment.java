@@ -6,32 +6,15 @@ import java.util.*;
 public class SortDepartment {
 
     private Set<String> set = new TreeSet<>();
-    private Set<String> descendingSet = new TreeSet<>();
-
     class Comp implements Comparator<String> {
         @Override
         public int compare(String o1, String o2) {
             int result = 0;
-            String[] mas1 = o1.split("\\\\");
-            String[] mas2 = o2.split("\\\\");
-            int minim = Math.min(mas1.length, mas2.length);
-            for (int i = 0; i < minim; i++) {
-                if (!mas1[i].equals(mas2[i])) {
-                    result = mas2[i].compareTo(mas1[i]);
-                    break;
-                }
-            }
-            if (result == 0) {
-                if (mas1.length > mas2.length) {
-                    result = 1;
-                } else {
-                    result = -1;
-                }
-            }
-            return result;
+            int min = Math.min(o1.length(), o2.length());
+            result = -o1.substring(0, min).compareTo(o2.substring(0, min));
+            return result != 0 ? result : Integer.compare(o1.length(), o2.length());
         }
     }
-
     public String[] sort(String[] depart) {
         return this.set.toArray(new String[this.set.size()]);
     }
@@ -43,11 +26,10 @@ public class SortDepartment {
             for (String s : split) {
                 builder = builder.append(s);
                 set.add(builder.toString());
-                descendingSet.add(builder.toString());
                 builder = builder.append("\\");
             }
         }
-        return depart;
+        return set.toArray(new String[set.size()]);
     }
 
     public String[] reverseSort(String[] depart) {
