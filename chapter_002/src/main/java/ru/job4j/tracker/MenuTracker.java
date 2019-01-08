@@ -2,52 +2,18 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
-class EditItem extends BaseAction {
-    public EditItem(int key, String name) {
-        super(key, name);
-    }
-    public void execute(Input input, Tracker tracker) {
-        String id = input.ask("Please enter the task's id");
-        String name = input.ask("Please, enter the task's name");
-        String desc = input.ask("Please, enter the task's desc");
-        Item item = new Item(name, desc);
-        if (tracker.replace(id, item)) {
-            System.out.println("Item is replaced");
-        } else {
-            System.out.println("Item not found");
-        }
-    }
-}
-class FindItemById extends BaseAction {
-    public FindItemById(int key, String name) {
-        super(key, name);
-    }
-    public void execute(Input input, Tracker tracker) {
-        String id = input.ask("Please enter the task's id");
-        tracker.findById(id);
-    }
-}
-class Exit extends BaseAction {
-    private final StartUI ui;
-    Exit(StartUI ui) {
-        super(6, "Exit");
-        this.ui = ui;
-    }
-    public void execute(Input input, Tracker tracker) {
-        MenuTracker menu = new MenuTracker(input, tracker);
-        System.out.println("Выход из программы.");
-        this.ui.stop();
-    }
-}
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
+    private  final Consumer<String> output;
     private ArrayList<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
     public void fillactions(StartUI ui) {
         this.actions.add(new AddItem(0, "AddItem"));
@@ -71,7 +37,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                output.accept(action.info());
             }
         }
     }
@@ -85,13 +51,13 @@ public class MenuTracker {
             tracker.add(new Item(name, desc));
         }
     }
-    private static class ShowItems extends BaseAction {
+    private class ShowItems extends BaseAction {
         public ShowItems(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
             for (Item item: tracker.findAll()) {
-                System.out.println(String.format("%s. %s", item.getId(), item.getName()));
+                output.accept(String.format("%s. %s", item.getId(), item.getName()));
             }
         }
     }
@@ -102,20 +68,57 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please enter the task's id");
             if (tracker.delete(id)) {
-                System.out.println("Item deleted");
+                output.accept("Item deleted");
             } else {
-                System.out.println("Item not found");
+                output.accept("Item not found");
             }
         }
     }
-    private static class FindItemByName extends BaseAction {
+    private class FindItemByName extends BaseAction {
         public FindItemByName(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please enter the task's name");
             tracker.findByName(name);
-            System.out.println("Find the item " + name);
+            output.accept("Find the item " + name);
+        }
+    }
+    class Exit extends BaseAction {
+        private final StartUI ui;
+        Exit(StartUI ui) {
+            super(6, "Exit");
+            this.ui = ui;
+        }
+        public void execute(Input input, Tracker tracker) {
+            MenuTracker menu = new MenuTracker(input, tracker, output);
+            output.accept("Выход из программы.");
+            this.ui.stop();
+        }
+    }
+    class EditItem extends BaseAction {
+        public EditItem(int key, String name) {
+            super(key, name);
+        }
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter the task's id");
+            String name = input.ask("Please, enter the task's name");
+            String desc = input.ask("Please, enter the task's desc");
+            Item item = new Item(name, desc);
+            if (tracker.replace(id, item)) {
+                output.accept("Item is replaced");
+            } else {
+                output.accept("Item not found");
+            }
+        }
+    }
+    class FindItemById extends BaseAction {
+        public FindItemById(int key, String name) {
+            super(key, name);
+        }
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter the task's id");
+            tracker.findById(id);
         }
     }
 }
