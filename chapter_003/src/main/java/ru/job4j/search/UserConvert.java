@@ -2,13 +2,18 @@ package ru.job4j.search;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserConvert {
-    public HashMap<Integer, User> process(List<User> list) {
-        HashMap<Integer, User> users = new HashMap<>();
-        for (User value: list) {
-            users.put(value.getId(), value);
-        }
+    public Map<Integer, User> process(List<User> list) {
+        Map<Integer, User> users = list.stream().collect(Collectors.toMap(User :: getId, n -> n));
+//        HashMap<Integer, User> users = new HashMap<>();
+//        for (User value: list) {
+//            users.put(value.getId(), value);
+//        }
         return users;
     }
 }

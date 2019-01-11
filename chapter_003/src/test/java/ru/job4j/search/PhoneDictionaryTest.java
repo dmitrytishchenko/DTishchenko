@@ -16,5 +16,12 @@ public class PhoneDictionaryTest {
         List<Person> persons = phones.find("mi");
         assertThat(persons.iterator().next().getSurname(), is("Tishchenko"));
     }
+    @Test
+    public void whenFindBySurName() {
+        PhoneDictionary phoneDictionary = new PhoneDictionary();
+        phoneDictionary.add(new Person("Dmitriy", "Tishchenko", "9268634025", "Vlasiha"));
+        List<Person> people = phoneDictionary.find("shch");
+        assertThat(people.iterator().next().getName(), is("Dmitriy"));
+    }
 
 }
