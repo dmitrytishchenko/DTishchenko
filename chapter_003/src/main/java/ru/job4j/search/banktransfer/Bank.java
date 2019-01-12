@@ -1,6 +1,7 @@
 package ru.job4j.search.banktransfer;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bank {
     /*
@@ -30,24 +31,27 @@ public class Bank {
     * @param - account - новый счет пользователя
     */
     public void addAccountToUser(String passport, Account account) {
-        for (User value : this.users.keySet()) {
-            if (value.getPassport().equals(passport)) {
-                this.users.get(value).add(account);
-            }
-        }
+        this.users.keySet().stream()
+                .filter(n -> n.getPassport().equals(passport))
+                .forEach(n -> this.users.get(n).add(account));
+//               for (User value : this.users.keySet()) {
+//            if (value.getPassport().equals(passport)) {
+//                this.users.get(value).add(account);
     }
-
     /*
     * Метод deleteAccountFromUser - удаления счета для определенного пользователя
     * @param - passport - паспорт пользователя
     * @param - account - счет пользователя
     */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User value : this.users.keySet()) {
-            if (value.getPassport().equals(passport)) {
-                this.users.get(value).remove(account);
-            }
-        }
+        this.users.keySet().stream()
+                .filter(n -> n.getPassport().equals(passport))
+                .forEach(n -> this.users.get(n).remove(account));
+//        for (User value : this.users.keySet()) {
+//            if (value.getPassport().equals(passport)) {
+//                this.users.get(value).remove(account);
+//            }
+//        }
     }
 
     /*
@@ -55,12 +59,16 @@ public class Bank {
     * @param - passport - паспорт пользователя
     */
     public List<Account> getUserAccount(String passport) {
-        List<Account> list = null;
-        for (User value : this.users.keySet()) {
-            if (value.getPassport().equals(passport)) {
-                list = this.users.get(value);
-            }
-        }
+        List<Account> list = this.users.keySet().stream()
+                .filter(n -> n.getPassport().equals(passport))
+                .flatMap(n -> this.users.get(n).stream())
+                .collect(Collectors.toList());
+//        List<Account> list = null;
+//        for (User value : this.users.keySet()) {
+//            if (value.getPassport().equals(passport)) {
+//                list = this.users.get(value);
+//            }
+//        }
         return list;
     }
 
@@ -99,15 +107,20 @@ public class Bank {
 
     public Account getUserAccount2(String passport, String requisite) {
         Account account = null;
-        List<Account> list = getUserAccount(passport);
-        if (list != null) {
-            for (Account ac : list) {
-                if (requisite.equals(ac.getRequisites())) {
-                    account = ac;
-                    break;
-                }
-            }
-        }
+        List<Account> accounts = this.getUserAccount(passport);
+        account = accounts.stream()
+                .filter(n -> n.getRequisites().equals(requisite))
+                .filter(Objects:: nonNull).findFirst().get();
+//        Account account = null;
+//        List<Account> list = getUserAccount(passport);
+//        if (list != null) {
+//            for (Account ac : list) {
+//                if (requisite.equals(ac.getRequisites())) {
+//                    account = ac;
+//                    break;
+//                }
+//            }
+//        }
         return account;
     }
 }
