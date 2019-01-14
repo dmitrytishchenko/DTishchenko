@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Tracker {
     private List<Item> items = new ArrayList<>();
@@ -39,22 +41,26 @@ public class Tracker {
         return this.items;
     }
     public List<Item> findByName(String key) {
-        List<Item> result = new ArrayList<>();
-        for (Item temp: this.items) {
-            if (temp != null && key.equals(temp.getName())) {
-                result.add(temp);
-            }
-        }
+        List<Item> result = this.items.stream()
+                .filter(n -> n.getName().equals(key))
+                .collect(Collectors.toList());
+//        for (Item temp: this.items) {
+//            if (temp != null && key.equals(temp.getName())) {
+//                result.add(temp);
+//            }
+//        }
         return result;
     }
     public Item findById(String id) {
-        Item result = null;
-        for (Item item : items) {
-            if (item != null && id.equals(item.getId())) {
-                result = item;
-                break;
-            }
-        }
+        Item result = this.items.stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst().orElse(null);
+//        for (Item item : items) {
+//            if (item != null && id.equals(item.getId())) {
+//                result = item;
+//                break;
+//            }
+//        }
         return result;
     }
 
