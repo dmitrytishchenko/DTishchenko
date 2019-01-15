@@ -25,13 +25,6 @@ public enum Cell {
                 .filter(n -> n.x == x)
                 .filter(n -> n.y == y)
                 .findFirst().orElse(null);
-//        Cell result = null;
-//        for (Cell cell : Cell.values()) {
-//            if (cell.x == x && cell.y == y) {
-//                result = cell;
-//                break;
-//            }
-//        }
         return result;
     }
 }

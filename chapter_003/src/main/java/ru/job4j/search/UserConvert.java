@@ -10,10 +10,6 @@ import java.util.stream.Stream;
 public class UserConvert {
     public Map<Integer, User> process(List<User> list) {
         Map<Integer, User> users = list.stream().collect(Collectors.toMap(User :: getId, n -> n));
-//        HashMap<Integer, User> users = new HashMap<>();
-//        for (User value: list) {
-//            users.put(value.getId(), value);
-//        }
         return users;
     }
 }

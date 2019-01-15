@@ -45,13 +45,5 @@ public class Logic {
         return IntStream.range(0, this.figures.length)
                 .filter(n -> this.figures[n].position().equals(cell))
                 .findFirst().orElse(-1);
-//        int rst = -1;
-//        for (int index = 0; index != this.figures.length; index++) {
-//            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
-//                rst = index;
-//                break;
-//            }
-//        }
-//        return rst;
     }
 }
