@@ -11,16 +11,16 @@ public class PhoneDictionaryTest {
 
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(new Person("Dmitriy", "Tishchenko", "9268634025", "Vlasiha"));
-        List<Person> persons = phones.find("mi");
+        var persons = phones.find("mi");
         assertThat(persons.iterator().next().getSurname(), is("Tishchenko"));
     }
     @Test
     public void whenFindBySurName() {
-        PhoneDictionary phoneDictionary = new PhoneDictionary();
+        var phoneDictionary = new PhoneDictionary();
         phoneDictionary.add(new Person("Dmitriy", "Tishchenko", "9268634025", "Vlasiha"));
-        List<Person> people = phoneDictionary.find("shch");
+        var people = phoneDictionary.find("shch");
         assertThat(people.iterator().next().getName(), is("Dmitriy"));
     }
 
