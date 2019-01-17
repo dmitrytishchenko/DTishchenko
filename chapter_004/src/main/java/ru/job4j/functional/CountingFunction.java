@@ -1,4 +1,4 @@
-package ru.job4j.functional_interface;
+package ru.job4j.functional;
 
 import java.util.ArrayList;
 import java.util.List;

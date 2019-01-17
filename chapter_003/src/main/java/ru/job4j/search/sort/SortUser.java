@@ -13,7 +13,7 @@ public class SortUser {
     }
 
     public List<User> sortNameLength(List<User> list) {
-        List<User> result = list.stream().sorted((n1,n2) -> n1.getName().length() - n2.getName().length()).collect(Collectors.toList());
+        List<User> result = list.stream().sorted((n1, n2) -> n1.getName().length() - n2.getName().length()).collect(Collectors.toList());
         return result;
     }
 

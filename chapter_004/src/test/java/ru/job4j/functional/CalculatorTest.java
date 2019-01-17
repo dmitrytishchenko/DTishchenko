@@ -1,8 +1,7 @@
-package ru.job4j.functional_interface;
+package ru.job4j.functional;
 
 import org.junit.Test;
 
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

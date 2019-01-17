@@ -1,4 +1,4 @@
-package ru.job4j.functional_interface;
+package ru.job4j.functional;
 
 public class MathUtil {
     public static double add(int left, int second) {

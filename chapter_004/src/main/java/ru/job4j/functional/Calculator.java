@@ -1,4 +1,4 @@
-package ru.job4j.functional_interface;
+package ru.job4j.functional;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -8,7 +8,7 @@ public class Calculator {
         double calc(int left, int right);
     }
     public void multiple(int start, int finish, int value, BiFunction<Integer, Integer, Double> op, Consumer<Double> media) {
-        for (int index = start; index != finish ; index++) {
+        for (int index = start; index != finish; index++) {
             media.accept(op.apply(value, index));
         }
     }

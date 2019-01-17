@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private final Consumer<String> output = new Consumer<String>(){
+    private final Consumer<String> output = new Consumer<String>() {
         private final PrintStream stdout = new PrintStream(out);
         @Override
         public void accept(String s) {
