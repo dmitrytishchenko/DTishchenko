@@ -13,7 +13,6 @@ public class CalculatorTest {
     public void whenAdd1Until3() {
         Calculator calculator = new Calculator();
         List<Double> buffer = new ArrayList<>();
-//        calculator.multiple(0, 3, 1, (value, index) -> (double) value + index, result -> buffer.add(result));
         calculator.multiple(0, 3, 1, MathUtil::add, // static call
                 buffer::add);  // non-static call
         assertThat(buffer, is(Arrays.asList(1D, 2D, 3D)));
