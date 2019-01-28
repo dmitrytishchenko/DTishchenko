@@ -44,23 +44,12 @@ public class Tracker {
         List<Item> result = this.items.stream()
                 .filter(n -> n.getName().equals(key))
                 .collect(Collectors.toList());
-//        for (Item temp: this.items) {
-//            if (temp != null && key.equals(temp.getName())) {
-//                result.add(temp);
-//            }
-//        }
         return result;
     }
     public Item findById(String id) {
         Item result = this.items.stream()
                 .filter(n -> n.getId().equals(id))
                 .findFirst().orElse(null);
-//        for (Item item : items) {
-//            if (item != null && id.equals(item.getId())) {
-//                result = item;
-//                break;
-//            }
-//        }
         return result;
     }
 
@@ -76,14 +65,42 @@ public class Tracker {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Tracker tracker = (Tracker) o;
-
         return items.equals(tracker.items);
     }
-
     @Override
     public int hashCode() {
         return items.hashCode();
+    }
+
+    public enum TrackerSingleEnum {
+        INSTANCE;
+        public Item add(Item model){
+            return model;
+        }
+    }
+    public static class TrackerSingle {
+        private static TrackerSingle instance;
+        private static final TrackerSingle INSTANCE = new TrackerSingle();
+        private TrackerSingle() {
+        }
+        public static TrackerSingle getInstance() {
+            if (instance == null) {
+                instance = new TrackerSingle();
+            }
+            return instance;
+        }
+        public static TrackerSingle getInstance2() {
+            return INSTANCE;
+        }
+        public static TrackerSingle getInstance3() {
+            return Holder.INSTANCE;
+        }
+        public Item add(Item model) {
+            return model;
+        }
+        private static final class Holder {
+            private static final TrackerSingle INSTANCE = new TrackerSingle();
+        }
     }
 }
