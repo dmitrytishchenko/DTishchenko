@@ -14,8 +14,9 @@ public class ProfilesTest {
         Profile profile1 = new Profile(new Address("Moscow", "Mira", 15, 23));
         Profile profile2 = new Profile(new Address("Kirov", "Lenina", 11, 88));
         Profile profile3 = new Profile(new Address("Rostov", "Zoi Kosmodemianskoi", 9, 43));
-        List<Profile> list = Arrays.asList(profile1, profile2, profile3);
-        List<Address> expected = Arrays.asList(profile1.getAddress(), profile2.getAddress(), profile3.getAddress());
+        Profile profile4 = new Profile(new Address("Rostov", "Zoi Kosmodemianskoi", 9, 43));
+        List<Profile> list = Arrays.asList(profile1, profile2, profile3, profile4);
+        List<Address> expected = Arrays.asList(profile2.getAddress(), profile1.getAddress(), profile3.getAddress());
         List<Address> result = Profiles.collect(list);
         assertThat(result, is(expected));
     }
