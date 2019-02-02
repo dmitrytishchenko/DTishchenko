@@ -33,10 +33,7 @@ public class Student implements Comparator<Student> {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", scope=" + scope +
-                '}';
+        return "Student{" + "name='" + name + '\'' + ", scope=" + scope + '}';
     }
 
     @Override

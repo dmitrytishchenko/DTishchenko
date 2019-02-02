@@ -1,4 +1,4 @@
-package ru.job4j.functional.touristCompany;
+package ru.job4j.functional.touristcompany;
 
 import org.junit.Test;
 

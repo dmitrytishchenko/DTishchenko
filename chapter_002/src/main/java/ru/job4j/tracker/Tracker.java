@@ -75,7 +75,7 @@ public class Tracker {
 
     public enum TrackerSingleEnum {
         INSTANCE;
-        public Item add(Item model){
+        public Item add(Item model) {
             return model;
         }
     }
