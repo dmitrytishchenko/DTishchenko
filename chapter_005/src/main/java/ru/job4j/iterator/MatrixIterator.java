@@ -45,9 +45,4 @@ public class MatrixIterator implements Iterator {
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        MatrixIterator matrixIterator = new MatrixIterator(new int[][]{{1}, {3, 4}, {7}});
-        System.out.println(matrixIterator.getNumber());
-    }
 }
