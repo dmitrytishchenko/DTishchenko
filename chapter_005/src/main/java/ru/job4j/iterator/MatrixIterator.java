@@ -1,6 +1,7 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class MatrixIterator implements Iterator {
     int[][] array;
@@ -26,12 +27,13 @@ public class MatrixIterator implements Iterator {
     }
 
     @Override
-    public Integer next() {
-        Integer result = null;
+    public Integer next() throws NoSuchElementException{
         if (hasNext()) {
-            result = this.array[str][stlb];
+            Integer result = this.array[str][stlb];
             getNumber();
+            return result;
+        } else {
+            throw new NoSuchElementException("Элемент массива отсутствует");
         }
-        return result;
     }
 }
