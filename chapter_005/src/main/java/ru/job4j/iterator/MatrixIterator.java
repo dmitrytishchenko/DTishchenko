@@ -4,15 +4,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class MatrixIterator implements Iterator {
-    int[][] array;
-    int str = 0;
-    int stlb = 0;
+    private int[][] array;
+    private int str = 0;
+    private int stlb = 0;
 
     public MatrixIterator(int[][] array) {
         this.array = array;
     }
 
-    public void getNumber() {
+    private void getNumber() {
         if (stlb < array[str].length - 1) {
             stlb++;
         } else {
@@ -27,7 +27,7 @@ public class MatrixIterator implements Iterator {
     }
 
     @Override
-    public Integer next() throws NoSuchElementException{
+    public Integer next() {
         if (hasNext()) {
             Integer result = this.array[str][stlb];
             getNumber();
