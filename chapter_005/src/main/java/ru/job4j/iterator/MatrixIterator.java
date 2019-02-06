@@ -27,7 +27,7 @@ public class MatrixIterator implements Iterator {
     }
 
     @Override
-    public Integer next() throws ru.job4j.iterator.NoSuchElementException {
+    public Integer next() {
         if (hasNext()) {
             Integer result = this.array[str][stlb];
             getNumber();
