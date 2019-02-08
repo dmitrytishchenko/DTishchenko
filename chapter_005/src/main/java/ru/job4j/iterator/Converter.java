@@ -1,11 +1,12 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Converter {
-    private Iterator<Integer> result;
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
+            Iterator<Integer> result;
             @Override
             public boolean hasNext() {
                 while (result == null || !result.hasNext()) {
@@ -18,8 +19,9 @@ public class Converter {
             }
 
             @Override
-            public Integer next() {
+            public Integer next() throws NoSuchElementException {
                 if (!hasNext()) {
+                    throw new NoSuchElementException("Элемент массива отсутствует");
                 }
                 return result.next();
             }
