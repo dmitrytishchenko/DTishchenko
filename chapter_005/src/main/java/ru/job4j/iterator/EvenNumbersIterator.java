@@ -25,13 +25,10 @@ public class EvenNumbersIterator implements Iterator {
     }
     @Override
     public Integer next() throws NoSuchElementException {
-        int result;
-        if (hasNext()) {
-            result = numbers[index++];
-        } else {
+        if (!hasNext()) {
             throw new NoSuchElementException("Элемент массива отсутствует");
         }
-        return result;
+        return numbers[index++];
     }
 }
 
