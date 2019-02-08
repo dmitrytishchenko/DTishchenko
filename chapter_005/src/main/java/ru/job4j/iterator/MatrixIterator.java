@@ -27,7 +27,7 @@ public class MatrixIterator implements Iterator {
     }
 
     @Override
-    public Integer next() {
+    public Integer next()throws NoSuchElementException {
         if (hasNext()) {
             Integer result = this.array[str][stlb];
             getNumber();

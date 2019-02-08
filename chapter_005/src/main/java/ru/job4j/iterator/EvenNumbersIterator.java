@@ -24,8 +24,8 @@ public class EvenNumbersIterator implements Iterator {
         return false;
     }
     @Override
-    public Integer next() {
-        int result = 0;
+    public Integer next() throws NoSuchElementException {
+        int result;
         if (hasNext()) {
             result = numbers[index++];
         } else {
