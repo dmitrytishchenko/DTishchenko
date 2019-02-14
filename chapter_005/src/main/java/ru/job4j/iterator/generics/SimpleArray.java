@@ -15,7 +15,7 @@ public class SimpleArray<T> implements Iterable<T> {
         this.mas[position++] = model;
     }
     public void set(int index, T model) {
-        if (index > 0 && index <= this.mas.length - 1) {
+        if (index > 0 && index < position) {
             this.mas[index] = model;
         } else {
             throw new IndexOutOfBoundsException("Индекс находится за пределами массива");

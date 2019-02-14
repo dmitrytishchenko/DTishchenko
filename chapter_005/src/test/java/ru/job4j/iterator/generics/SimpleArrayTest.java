@@ -15,7 +15,8 @@ public class SimpleArrayTest {
     @Test
     public void whenModelSetToArrayIndex() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
-        int[] mas = new int[]{1, 2};
+        simpleArray.add(1);
+        simpleArray.add(2);
         simpleArray.set(1, 5);
         assertThat(simpleArray.mas[1], is(5));
     }
