@@ -1,4 +1,4 @@
-package ru.job4j.iterator.generics;
+package ru.job4j.generics;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -15,7 +15,7 @@ public class SimpleArray<T> implements Iterable<T> {
         this.mas[position++] = model;
     }
     public void set(int index, T model) {
-        if (index > 0 && index < position) {
+        if (index >= 0 && index < position) {
             this.mas[index] = model;
         } else {
             throw new IndexOutOfBoundsException("Индекс находится за пределами массива");
@@ -48,5 +48,8 @@ public class SimpleArray<T> implements Iterable<T> {
                 return (T) SimpleArray.this.mas[index++];
             }
         };
+    }
+    public int getLenght() {
+        return this.mas.length;
     }
 }

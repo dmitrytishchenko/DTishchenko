@@ -1,4 +1,4 @@
-package ru.job4j.iterator.generics;
+package ru.job4j.generics;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;

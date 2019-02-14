@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Converter {
-    Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
+    public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
             Iterator<Integer> result;
             @Override
