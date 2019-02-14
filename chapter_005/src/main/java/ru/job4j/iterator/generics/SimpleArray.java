@@ -5,21 +5,25 @@ import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
     Object[] mas;
-    int index = 0;
+    private int position = 0;
 
     public SimpleArray(int size) {
         this.mas = new Object[size];
     }
 
     public void add(T model) {
-        this.mas[index++] = model;
+        this.mas[position++] = model;
     }
     public void set(int index, T model) {
-        this.mas[index] = model;
+        if (index > 0 && index <= this.mas.length - 1) {
+            this.mas[index] = model;
+        } else {
+            throw new IndexOutOfBoundsException("Индекс находится за пределами массива");
+        }
     }
     public void remove(int index) {
         System.arraycopy(this.mas, index + 1, this.mas, index, this.mas.length - index - 1);
-        this.index--;
+        this.position--;
         this.mas[this.mas.length - 1] = null;
     }
 
@@ -33,7 +37,7 @@ public class SimpleArray<T> implements Iterable<T> {
             private int index;
             @Override
             public boolean hasNext() {
-                return SimpleArray.this.mas[this.index] == null || this.index < SimpleArray.this.mas.length - 1;
+                return this.index < position;
             }
 
             @Override
