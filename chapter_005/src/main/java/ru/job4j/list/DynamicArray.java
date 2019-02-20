@@ -53,7 +53,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
             @Override
             public boolean hasNext() {
-                if(modCount > expectedModCount) {
+                if (modCount > expectedModCount) {
                     throw new ConcurrentModificationException("Коллекция модифицирована");
                 }
                 return carret < index;
