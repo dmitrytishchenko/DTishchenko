@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinList<E> implements Iterable<E> {
+public class SimpleLinkedList<E> implements Iterable<E> {
     private int size;
     private Node<E> first;
     private Node<E> last;
@@ -62,5 +62,25 @@ public class LinList<E> implements Iterable<E> {
         public Node(E date) {
             this.date = date;
         }
+    }
+    public E removeLast() {
+        E result = null;
+        if (size == 1) {
+            result = last.date;
+            last = null;
+            first = null;
+            size--;
+        } else if (size == 2) {
+            result = last.date;
+            last = last.previus;
+            first = last;
+            size--;
+        } else if (size > 2) {
+            result = last.date;
+            last = last.previus;
+            last.next = null;
+            size--;
+        }
+        return result;
     }
 }

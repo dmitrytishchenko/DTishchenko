@@ -9,11 +9,11 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class LinListTest {
-    private LinList<Integer> list;
+    private SimpleLinkedList<Integer> list;
 
     @Before
     public void beforeTest() {
-        list = new LinList<>();
+        list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);
