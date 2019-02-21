@@ -83,4 +83,24 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         }
         return result;
     }
+    public E removeFirst() {
+        E result = null;
+        if (size == 1) {
+            result = first.date;
+            last = null;
+            first = null;
+            size--;
+        } else if (size == 2) {
+            result = first.date;
+            first = first.next;
+            first = last;
+            size--;
+        } else if (size > 2) {
+            result = first.date;
+            first = first.next;
+            first.previus = null;
+            size--;
+        }
+        return result;
+    }
 }
