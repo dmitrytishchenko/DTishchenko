@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SimpleLinkedList<E> implements Iterable<E> {
-    private int size;
+    public int size;
     private Node<E> first;
     private Node<E> last;
     private int modCount = 0;
