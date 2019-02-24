@@ -8,13 +8,13 @@ public class Node<E> {
         this.value = value;
     }
 
-    public boolean hasCycle(Node first) {
+    public static boolean hasCycle(Node first) {
         Node one = first;
         Node two = first;
-        if (one != null && two != null) {
+        while (one != null && two != null) {
             two = two.next;
             one = one.next.next;
-            if (two == one) {
+            if (one == two) {
                 return true;
             }
         }
