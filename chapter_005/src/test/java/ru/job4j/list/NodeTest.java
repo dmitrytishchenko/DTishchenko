@@ -31,4 +31,18 @@ public class NodeTest {
         boolean result = Node.hasCycle(first);
         assertThat(result, is(true));
     }
+    @Test
+    public void whenListIsNotCycledThenGetFalse2() {
+        Node<Integer> first = new Node<>(1);
+        Node<Integer> two = new Node<>(2);
+        Node<Integer> third = new Node<>(3);
+        Node<Integer> four = new Node<>(4);
+        Node<Integer> five = new Node<>(5);
+        first.next = two;
+        two.next = third;
+        third.next = four;
+        four.next = five;
+        boolean result = Node.hasCycle(first);
+        assertThat(result, is(false));
+    }
 }

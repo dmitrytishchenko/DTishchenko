@@ -11,7 +11,7 @@ public class Node<E> {
     public static boolean hasCycle(Node first) {
         Node one = first;
         Node two = first;
-        while (one != null && two != null) {
+        while (one != null && one.next != null) {
             two = two.next;
             one = one.next.next;
             if (one == two) {
