@@ -13,6 +13,18 @@ public class Simplemap {
         public User(String name) {
             this.name = name;
         }
+        /**
+         * у хэшкода должен быть максимальный разбег в пределах int
+         * использовать поля, которые используются в методе equals() (можно использовать меньше полей, чем в equals())
+         * согласно документации переопределять hashcode вместе с equals()
+         * если hashcode объектов равны, то не обязательно, что объекты равны и называется коллизией
+         */
+        @Override
+        public int hashCode() {
+            int result = 17;
+            result = result * 31 * children;
+            return result;
+        }
     }
     public void map() {
         User user1 = new User("Dima");
