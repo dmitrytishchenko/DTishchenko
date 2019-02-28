@@ -25,6 +25,10 @@ public class Simplemap {
             result = result * 31 * children;
             return result;
         }
+        /**
+         * После переопределения hashcode() объекты при выводе на печать выводятся согласно их хэшкодам,
+         * т.е. после переопределения карта отсортирована на основе хэшкода
+         */
     }
     public void map() {
         User user1 = new User("Dima");
