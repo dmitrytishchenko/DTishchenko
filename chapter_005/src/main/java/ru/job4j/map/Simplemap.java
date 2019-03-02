@@ -35,12 +35,16 @@ public class Simplemap {
          * согласно документации переопределять hashcode вместе с equals()
          * если hashcode объектов равны, то не обязательно, что объекты равны и называется коллизией
          */
-//        @Override
-//        public int hashCode() {
-//            int result = 17;
-//            result = result * 31 * children;
-//            return result;
-//        }
+        @Override
+        public int hashCode() {
+            int result = 17;
+            result = result * 31 * children;
+            return result;
+        }
+        /**
+         * При переопределении методов equals() и hashCode() мы добавляем user1 в мапу, далее user2
+         * и т.к. объекты одинаковы, то user2 перезатирает user1 и в выводе на печать получаем user2
+         */
 
         /**
          * После переопределения hashcode() объекты при выводе на печать выводятся согласно их хэшкодам,
