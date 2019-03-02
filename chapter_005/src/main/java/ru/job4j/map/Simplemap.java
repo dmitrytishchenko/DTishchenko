@@ -13,18 +13,35 @@ public class Simplemap {
         public User(String name) {
             this.name = name;
         }
+
+        /**
+         * При переопределении только метода equals(), нет подтверждения, что объекты равны, поэтому будет на печать выведено 2 объекта
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            User user = (User) o;
+            return name.equals(user.name);
+        }
+
         /**
          * у хэшкода должен быть максимальный разбег в пределах int
          * использовать поля, которые используются в методе equals() (можно использовать меньше полей, чем в equals())
          * согласно документации переопределять hashcode вместе с equals()
          * если hashcode объектов равны, то не обязательно, что объекты равны и называется коллизией
          */
-        @Override
-        public int hashCode() {
-            int result = 17;
-            result = result * 31 * children;
-            return result;
-        }
+//        @Override
+//        public int hashCode() {
+//            int result = 17;
+//            result = result * 31 * children;
+//            return result;
+//        }
+
         /**
          * После переопределения hashcode() объекты при выводе на печать выводятся согласно их хэшкодам,
          * т.е. после переопределения карта отсортирована на основе хэшкода
