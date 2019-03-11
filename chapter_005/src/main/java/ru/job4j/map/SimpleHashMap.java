@@ -30,17 +30,21 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         this.table = new MyEntry[capasity];
     }
 
+    public static int indexFor(int h, int lenght) {
+        return h & (lenght - 1);
+    }
+
     public boolean insert(K key, V value) {
         boolean result = true;
-        for (int i = 0; i < size; i++) {
-            if (table[i].getKey().equals(key)) {
-                table[i].setValue(value);
-                result = false;
-            }
-        }
-        if (result) {
+        int index = indexFor(key.hashCode(), table.length);
+        if (table[index] == null) {
             ensureCapasity();
-            table[size++] = new MyEntry<>(key, value);
+            table[index] = new MyEntry<>(key, value);
+            size++;
+        } else {
+            if (table[index].key.equals(key)) {
+                table[index].setValue(value);
+            }
         }
         return result;
     }
@@ -58,22 +62,20 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public V get(K key) {
         V result = null;
-        for (int i = 0; i < size; i++) {
-            if (table[i].getKey().equals(key)) {
-                result = table[i].getValue();
-            }
+        int index = indexFor(key.hashCode(), table.length);
+        if (table[index].key.equals(key)) {
+            result = table[index].getValue();
         }
         return result;
     }
 
     public boolean delete(K key) {
         boolean result = false;
-        for (int i = 0; i < size; i++) {
-            if (table[i].getKey().equals(key)) {
-                table[i] = null;
-                size--;
-                result = true;
-            }
+        int index = indexFor(key.hashCode(), table.length);
+        if (table[index].key.equals(key)) {
+            table[index] = null;
+            size--;
+            result = true;
         }
         return result;
     }
@@ -90,13 +92,16 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
             @Override
             public boolean hasNext() {
-                return carret < size;
+                return carret <= size;
             }
 
             @Override
             public K next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException("Элемент отсутствует");
+                while (table[carret] == null && carret < table.length) {
+                    carret++;
+                }
+                if (carret > table.length) {
+                    throw new NoSuchElementException("No element");
                 }
                 return (K) table[carret++].key;
             }
