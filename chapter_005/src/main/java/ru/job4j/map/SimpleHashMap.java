@@ -55,17 +55,17 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         }
         int newCapasity = capasity * 2;
         MyEntry[] newTable = new MyEntry[newCapasity];
-        trasfer(newCapasity);
+        trasfer(newTable);
         table = newTable;
         threshold = (int) (newCapasity * loadFactor);
     }
 
-    public void trasfer(int newCapasity) {
-        MyEntry[] newTable = new MyEntry[newCapasity];
-        for (MyEntry<K, V> entries : table) {
-            int index = indexFor(entries.key.hashCode(), newTable.length);
-            while (entries != null) {
-                newTable[index] = entries;
+    public void trasfer(MyEntry[] newTable) {
+        int newCapacity = newTable.length; // новый размер массива
+        for (int i = 0; i < table.length; i++) { // проходим по старому массиву через цикл
+            while (table[i] != null) { // условие, пока не закончатся элементы
+                int index = indexFor(table[i].hash, newCapacity); // находим новые бакеты для всех элементов на основе новой длинны
+                newTable[index] = table[i]; // помещаем элементы из старого массива в новый по индексам(бакетам)
             }
         }
     }
