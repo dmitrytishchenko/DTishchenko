@@ -1,7 +1,6 @@
 package ru.job4j.map;
 
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -50,9 +49,24 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     public void ensureCapasity() {
-        if (threshold == size) {
-            int newSize = capasity * 2;
-            table = Arrays.copyOf(table, newSize);
+        if (table.length == capasity) {
+            threshold = Integer.MAX_VALUE;
+            return;
+        }
+        int newCapasity = capasity * 2;
+        MyEntry[] newTable = new MyEntry[newCapasity];
+        trasfer(newCapasity);
+        table = newTable;
+        threshold = (int) (newCapasity * loadFactor);
+    }
+
+    public void trasfer(int newCapasity) {
+        MyEntry[] newTable = new MyEntry[newCapasity];
+        for (MyEntry<K, V> entries : table) {
+            int index = indexFor(entries.key.hashCode(), newTable.length);
+            while (entries != null) {
+                newTable[index] = entries;
+            }
         }
     }
 
