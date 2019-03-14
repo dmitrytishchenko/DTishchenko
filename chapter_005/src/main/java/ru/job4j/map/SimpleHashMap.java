@@ -49,22 +49,20 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     public void ensureCapasity() {
-        if (table.length == capasity) {
-            threshold = Integer.MAX_VALUE;
-            return;
+        if (size >= threshold) {
+            int newCapasity = capasity * 2;
+            MyEntry[] newTable = new MyEntry[newCapasity];
+            trasfer(newTable);
+            table = newTable;
+            threshold = (int) (newCapasity * loadFactor);
         }
-        int newCapasity = capasity * 2;
-        MyEntry[] newTable = new MyEntry[newCapasity];
-        trasfer(newTable);
-        table = newTable;
-        threshold = (int) (newCapasity * loadFactor);
     }
 
     public void trasfer(MyEntry[] newTable) {
         int newCapacity = newTable.length; // новый размер массива
         for (int i = 0; i < table.length; i++) { // проходим по старому массиву через цикл
-            while (table[i] != null) { // условие, пока не закончатся элементы
-                int index = indexFor(table[i].hash, newCapacity); // находим новые бакеты для всех элементов на основе новой длинны
+            if (table[i] != null) { // условие, пока не закончатся элементы
+                int index = indexFor(table[i].hashCode(), newCapacity); // находим новые бакеты для всех элементов на основе новой длинны
                 newTable[index] = table[i]; // помещаем элементы из старого массива в новый по индексам(бакетам)
             }
         }
@@ -77,7 +75,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     public V get(K key) {
         V result = null;
         int index = indexFor(key.hashCode(), table.length);
-        if (table[index].key.equals(key)) {
+        if (table[index] != null && table[index].key.equals(key)) {
             result = table[index].getValue();
         }
         return result;

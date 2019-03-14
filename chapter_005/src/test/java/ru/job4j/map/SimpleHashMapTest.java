@@ -17,24 +17,25 @@ public class SimpleHashMapTest {
         map.insert(1, "one");
         map.insert(2, "two");
         map.insert(3, "three");
-        map.insert(4, "four");
+//        map.insert(4, "four");
         map.insert(5, "five");
     }
 
     @Test
     public void whenInsertNewMap() {
-        assertThat(map.size(), is(5));
+        assertThat(map.size(), is(4));
     }
 
     @Test
     public void whenAddToMapAndGetByKey() {
-        assertThat(map.get(4), is("four"));
+        assertThat(map.get(3), is("three"));
     }
 
     @Test
     public void whenAddToMapAndDeleteByKey() {
         map.delete(1);
-        assertThat(map.size(), is(4));
+        assertThat(map.size(), is(3));
+
     }
 
     @Test
@@ -46,8 +47,6 @@ public class SimpleHashMapTest {
         assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(3));
-        assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(4));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(5));
         assertThat(it.hasNext(), is(false));
@@ -69,7 +68,6 @@ public class SimpleHashMapTest {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
-        assertThat(it.next(), is(4));
         assertThat(it.next(), is(5));
     }
 }
