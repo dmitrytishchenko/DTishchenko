@@ -65,23 +65,20 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             Queue<Node<T>> data = new LinkedList<>();
-
-            public void addRoot() {
+            {
                 data.offer(root);
             }
-
             @Override
             public boolean hasNext() {
                 return !data.isEmpty();
             }
-
             @Override
             public T next() {
                 Node<T> element;
                 if (!hasNext()) {
                     throw new NoSuchElementException("No elements");
                 } else {
-                    element = data.peek();
+                    element = data.remove();
                     for (Node<T> child : element.leaves()) {
                         data.offer(child);
                     }

@@ -42,10 +42,17 @@ public class TreeTest {
     @Test
     public void whenNextByTree() {
         Iterator<Integer> it = tree.iterator();
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(4));
+        assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(5));
+        assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(6));
     }
 
