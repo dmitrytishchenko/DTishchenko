@@ -65,4 +65,17 @@ public class TreeTest {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
     }
+
+    @Test
+    public void whenTheTreeIsBinary() {
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void whenTheTreeIsNotBinare() {
+        Tree<Integer> tree1 = new Tree<>(1);
+        tree1.add(1, 2);
+        tree1.add(1, 2);
+        assertThat(tree1.isBinary(), is(false));
+    }
 }

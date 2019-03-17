@@ -56,6 +56,24 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
         return rsl;
     }
 
+    public boolean isBinary() {
+        boolean result = false;
+        int index = 0;
+        Queue<Node<T>> data = new LinkedList<>();
+        data.offer(root);
+        if (!data.isEmpty()) {
+            Node<T> element = data.poll();
+            for (Node<T> child : element.leaves()) {
+                data.offer(child);
+                index++;
+            }
+            if (index > 2) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns an iterator over elements of type {@code T}.
      *
@@ -65,13 +83,16 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             Queue<Node<T>> data = new LinkedList<>();
+
             {
                 data.offer(root);
             }
+
             @Override
             public boolean hasNext() {
                 return !data.isEmpty();
             }
+
             @Override
             public T next() {
                 Node<T> element;
