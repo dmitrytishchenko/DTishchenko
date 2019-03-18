@@ -26,11 +26,11 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
         boolean result = false;
         if (!findBy(child).isPresent()) {
             Optional<Node<T>> par = findBy(parent);
-            result = par.isPresent();
-            if (result) {
-                par.get().add(new Node<>(child));
-                result = true;
-            }
+            par.isPresent();
+            par.get().add(new Node<>(child));
+            result = true;
+        } else {
+            result = false;
         }
         return result;
     }
