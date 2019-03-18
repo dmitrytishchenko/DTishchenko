@@ -30,6 +30,8 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
             par.get().add(new Node<>(child));
             result = true;
         } else {
+            Optional<Node<T>> ch = findBy(child);
+            ch.isPresent();
             result = false;
         }
         return result;
