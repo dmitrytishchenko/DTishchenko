@@ -57,7 +57,7 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
     }
 
     public boolean isBinary() {
-        boolean result = false;
+        boolean result = true;
         Queue<Node<T>> data = new LinkedList<>();
         data.offer(root);
         if (!data.isEmpty()) {
@@ -65,8 +65,8 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
             for (Node<T> child : element.leaves()) {
                 data.offer(child);
             }
-            if (element.leaves().size() <= 2) {
-                result = true;
+            if (element.leaves().size() > 2) {
+                result = false;
             }
         }
         return result;
