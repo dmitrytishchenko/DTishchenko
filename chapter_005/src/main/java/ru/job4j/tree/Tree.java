@@ -24,15 +24,11 @@ public class Tree<T extends Comparable<T>> implements SimpleTree<T> {
     @Override
     public boolean add(T parent, T child) {
         boolean result = false;
-        if (!findBy(child).isPresent()) { // если в нашем дереве нет child
-            Optional<Node<T>> par = findBy(parent); // находим родителя
-            if (par.isPresent()) { // проверяем, что он существует
-                par.get().add(new Node<>(child)); // добавляем к родителю нового ребенка
-                result = true;
-            }
-            if (findBy(child).isPresent()) { // если в нашем дереве есть ребенок, которого мы должны добавить
-                result = false; // результат фалс
-            }
+        Optional<Node<T>> par1 = findBy(parent);
+        Optional<Node<T>> ch = findBy(child);
+        if (par1.isPresent() && !ch.isPresent()) {
+            par1.get().add(new Node<>(child));
+            result = true;
         }
         return result;
     }
