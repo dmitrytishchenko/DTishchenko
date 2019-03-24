@@ -20,11 +20,10 @@ public class AnalizeTest {
     public void whenAddOneDelTwo() {
         previous.add(user);
         previous.add(user2);
-        previous.add(user3);
         current.add(user3);
         current.add(user4);
         Analize store = new Analize();
-        assertThat(store.diff(previous, current), is(new Analize.Info(1, 0, 2)));
+        assertThat(store.diff(previous, current), is(new Analize.Info(2, 0, 2)));
     }
 
     @Test
@@ -36,6 +35,6 @@ public class AnalizeTest {
         current.add(user3);
         current.add(user4);
         Analize store = new Analize();
-        assertThat(store.diff(previous, current), is(new Analize.Info(4, 2, 2)));
+        assertThat(store.diff(previous, current), is(new Analize.Info(4, 2, 0)));
     }
 }

@@ -1,9 +1,6 @@
 package ru.job4j.statistics;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Analize {
     public Info diff(List<User> previous, List<User> current) {
@@ -11,18 +8,15 @@ public class Analize {
         Info info = new Info(0, 0, 0);
 //        создаем карту с ключем id и значением name
         Map<Integer, String> map = new HashMap<>();
-//        заносим в нашу карту ключ-значения user, через стрим
-        previous.stream().forEach(user -> map.put(user.id, user.name));
-//        находим количество добавленных user, путем сравнения исходного списка и измененного(все user, которых нет в исходном списке)
-        info.added = (int) current.stream()
-                .filter(user -> !previous.contains(user)).count();
-//        находим количество измененных user, путем прохода по измененному списку и сравнения name при одинаковом id
-        info.changed = (int) current.stream()
-                .filter(user -> map.containsKey(user.id)
-                        && !map.get(user.id).equals(user.name)).count();
-//        находим количество удаленных user, путем сравнения исходного списка с измененным
-        info.deleted = (int) previous.stream().filter(user -> !current.contains(user)).count();
-
+        current.stream().forEach(user -> map.put(user.id, user.name));
+        for (User user : previous) {
+            if (map.containsKey(user.id) && !map.containsKey(user.name)) {
+                info.changed++;
+            } else if (!map.containsKey(user.id)) {
+                info.deleted++;
+            }
+        }
+        info.added = current.size();
         return info;
     }
 
