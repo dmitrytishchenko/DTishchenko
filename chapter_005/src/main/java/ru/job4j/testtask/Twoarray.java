@@ -1,7 +1,6 @@
 package ru.job4j.testtask;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Twoarray {
     private List<Integer> ar1;
@@ -14,13 +13,19 @@ public class Twoarray {
 
     public boolean compare(List<Integer> ar1, List<Integer> ar2) {
         Map<Integer, Integer> map = new HashMap<>();
-        int index = 0;
         for (Integer i : ar1) {
-            map.put(i, index);
-            index++;
+            if (map.get(i) == null) {
+                map.put(i, 1);
+            } else {
+                map.put(i, i + 1);
+            }
         }
-        for (Integer i : ar2) {
-            map.remove(i);
+        for (Integer j : ar2) {
+            if (map.values().contains(1)) {
+                map.remove(j);
+            } else {
+                map.remove(j, j + 1);
+            }
         }
         return map.isEmpty();
     }

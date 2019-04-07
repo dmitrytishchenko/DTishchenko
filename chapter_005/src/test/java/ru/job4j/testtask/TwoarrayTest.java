@@ -15,12 +15,12 @@ public class TwoarrayTest {
         List<Integer> ar1 = new ArrayList<>();
         List<Integer> ar2 = new ArrayList<>();
         ar1.add(1);
-        ar1.add(2);
-        ar1.add(3);
+        ar1.add(1);
+        ar1.add(1);
         ar1.add(4);
         ar2.add(4);
-        ar2.add(3);
-        ar2.add(2);
+        ar2.add(1);
+        ar2.add(1);
         ar2.add(1);
         Twoarray twoarray = new Twoarray();
         boolean result = twoarray.compare(ar1, ar2);
