@@ -17,14 +17,16 @@ public class Twoarray {
             if (map.get(i) == null) {
                 map.put(i, 1);
             } else {
-                map.put(i, i + 1);
+                map.put(i, map.get(i) + 1);
             }
         }
-        for (Integer j : ar2) {
-            if (map.values().contains(1)) {
-                map.remove(j);
-            } else {
-                map.remove(j, j + 1);
+        if (ar1.size() == ar2.size()) {
+            for (Integer j : ar2) {
+                if (map.get(j) != null && map.get(j) > 1) {
+                    map.put(j, map.get(j) - 1);
+                } else {
+                    map.remove(j);
+                }
             }
         }
         return map.isEmpty();
