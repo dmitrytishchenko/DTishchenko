@@ -1,0 +1,114 @@
+create table if not exists users
+(
+	id serial not null
+		constraint users_pkey
+			primary key,
+	firstname varchar(50),
+	secondname varchar(50)
+);
+
+alter table users owner to postgres;
+
+create table if not exists roles
+(
+	id serial not null
+		constraint roles_pkey
+			primary key,
+	description text,
+	users_id integer
+		constraint roles_users_id_fkey
+			references users
+);
+
+alter table roles owner to postgres;
+
+create table if not exists rules
+(
+	id serial not null
+		constraint rules_pkey
+			primary key,
+	description text
+);
+
+alter table rules owner to postgres;
+
+create table if not exists comments
+(
+	id serial not null
+		constraint comments_pkey
+			primary key,
+	description text
+);
+
+alter table comments owner to postgres;
+
+create table if not exists attachs
+(
+	id serial not null
+		constraint attachs_pkey
+			primary key,
+	description text
+);
+
+alter table attachs owner to postgres;
+
+create table if not exists items
+(
+	id serial not null
+		constraint items_pkey
+			primary key,
+	description text,
+	comments_id integer
+		constraint items_comments_id_fkey
+			references comments,
+	attachs_id integer
+		constraint items_attachs_id_fkey
+			references attachs,
+	users_id integer
+		constraint items_users_id_fkey
+			references users
+);
+
+alter table items owner to postgres;
+
+create table if not exists category
+(
+	id serial not null
+		constraint category_pkey
+			primary key,
+	description text,
+	items_id integer
+		constraint category_items_id_fkey
+			references items
+);
+
+alter table category owner to postgres;
+
+create table if not exists state
+(
+	id serial not null
+		constraint state_pkey
+			primary key,
+	description text,
+	items_id integer
+		constraint state_items_id_fkey
+			references items
+);
+
+alter table state owner to postgres;
+
+create table if not exists roles_rules
+(
+	id serial not null
+		constraint roles_rules_pkey
+			primary key,
+	roles_id integer
+		constraint roles_rules_roles_id_fkey
+			references roles,
+	rules_id integer
+		constraint roles_rules_rules_id_fkey
+			references rules
+);
+
+alter table roles_rules owner to postgres;
+

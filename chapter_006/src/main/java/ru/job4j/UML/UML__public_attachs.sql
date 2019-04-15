@@ -1,0 +1,1 @@
+INSERT INTO public.attachs (id, description) VALUES (1, 'movie.mp4');

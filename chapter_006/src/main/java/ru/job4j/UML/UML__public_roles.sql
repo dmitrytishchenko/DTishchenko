@@ -1,0 +1,1 @@
+INSERT INTO public.roles (id, description, users_id) VALUES (1, 'Dracula', null);

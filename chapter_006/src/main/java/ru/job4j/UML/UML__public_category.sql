@@ -1,0 +1,1 @@
+INSERT INTO public.category (id, description, items_id) VALUES (1, 'horrors', null);
