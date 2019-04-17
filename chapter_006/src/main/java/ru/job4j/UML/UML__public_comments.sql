@@ -1,0 +1,1 @@
+INSERT INTO public.comments (id, description) VALUES (1, 'Beautifully');

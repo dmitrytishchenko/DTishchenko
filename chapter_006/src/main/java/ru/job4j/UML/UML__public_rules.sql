@@ -1,0 +1,1 @@
+INSERT INTO public.rules (id, description) VALUES (1, 'without blood');

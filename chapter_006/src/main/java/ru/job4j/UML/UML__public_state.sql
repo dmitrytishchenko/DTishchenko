@@ -1,0 +1,1 @@
+INSERT INTO public.state (id, description, items_id) VALUES (1, 'Done', null);

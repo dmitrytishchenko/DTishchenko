@@ -1,0 +1,1 @@
+INSERT INTO public.items (id, description, comments_id, attachs_id, users_id) VALUES (1, 'item from the Academy', null, null, null);
