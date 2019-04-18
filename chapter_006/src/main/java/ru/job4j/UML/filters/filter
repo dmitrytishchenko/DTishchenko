@@ -1,0 +1,74 @@
+create table if not exists types
+(
+	id serial not null
+		constraint types_pkey
+			primary key,
+	name varchar(50)
+);
+
+alter table types owner to postgres;
+
+create table if not exists product
+(
+	id serial not null
+		constraint product_pkey
+			primary key,
+	name varchar(100),
+	type_id integer
+		constraint product_type_id_fkey
+			references types,
+	expired_date date,
+	price integer
+);
+
+alter table product owner to postgres;
+
+
+В системе заданы таблицы
+
+product(id, name, type_id, expired_date, price)
+
+type(id, name)
+
+Задание.
+
+1. Написать запрос получение всех продуктов с типом "СЫР"
+
+2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
+
+3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
+
+4. Написать запрос, который выводит самый дорогой продукт.
+
+5. Написать запрос, который выводит количество всех продуктов определенного типа.
+
+6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
+
+7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.
+
+8. Вывести все продукты и их тип.
+
+--create table types (id serial primary key, name character varying(50));
+--insert into types(name) values('сыр');
+--insert into types(name) values('молоко');
+--insert into types(name) values('мороженное');
+--select*from types;
+--create table product (id serial primary key, name character varying(100), type_id int references types(id), expired_date date, price int);
+--select*from product;
+--insert into product(name, type_id, expired_date, price) values('сыр Гауда', (select id from types where name = 'сыр'),'2019-04-28', 330);
+--insert into product(name, type_id, expired_date, price) values('сыр Российский', (select id from types where name = 'сыр'),'2019-05-12', 380);
+--insert into product(name, type_id, expired_date, price) values('сыр Массдам', (select id from types where name = 'сыр'),'2019-05-14', 390);
+--insert into product(name, type_id, expired_date, price) values('мороженное Лакомка', (select id from types where name = 'мороженное'),'2019-08-14', 80);
+--insert into product(name, type_id, expired_date, price) values('мороженное Эскимо', (select id from types where name = 'мороженное'),'2019-09-11', 70);
+--insert into product(name, type_id, expired_date, price) values('мороженное Пломбир', (select id from types where name = 'мороженное'),'2019-07-14', 65);
+--insert into product(name, type_id, expired_date, price) values('молоко Деревенское', (select id from types where name = 'молоко'),'2019-04-22', 70);
+--insert into product(name, type_id, expired_date, price) values('молоко Пастеризованное', (select id from types where name = 'молоко'),'2019-05-29', 50);
+--insert into product(name, type_id, expired_date, price) values('молоко сгущенное', (select id from types where name = 'молоко'),'2019-09-22', 90);
+--select*from product as p where p.type_id=(select id from types where name='сыр');
+--select*from product as p where p.name like '%мороженное%';
+--select*from product as p where p.expired_date > '2019-04-30' and p.expired_date < '2019-06-01';
+--select*from product as p where p.price=(select max(price) from product);
+--select count(p.type_id) from product as p where p.type_id= (select id from types where name='сыр');
+--select*from product as p where p.type_id in ((select id from types where name='сыр'),(select id from types where name='молоко'));
+--select type_id, count(type_id) from product as p group by type_id having count(type_id)< 10;
+--select p.name, p.type_id from product as p;

@@ -1,0 +1,9 @@
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (1, 'сыр Гауда', 1, '2019-04-28', 330);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (2, 'сыр Российский', 1, '2019-05-12', 380);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (3, 'сыр Массдам', 1, '2019-05-14', 390);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (4, 'мороженное Лакомка', 3, '2019-08-14', 80);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (5, 'мороженное Эскимо', 3, '2019-09-11', 70);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (6, 'мороженное Пломбир', 3, '2019-07-14', 65);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (7, 'молоко Деревенское', 2, '2019-04-22', 70);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (8, 'молоко Пастеризованное', 2, '2019-05-29', 50);
+INSERT INTO public.product (id, name, type_id, expired_date, price) VALUES (9, 'молоко сгущенное', 2, '2019-09-22', 90);
