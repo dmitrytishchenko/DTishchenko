@@ -1,10 +1,11 @@
 package ru.job4j.tracker;
 
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Tracker {
+public class Tracker implements ITracker {
     private List<Item> items = new ArrayList<>();
     private static final Random RANDOM = new Random();
 

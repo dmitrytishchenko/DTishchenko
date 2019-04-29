@@ -1,16 +1,15 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class MenuTracker {
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     private  final Consumer<String> output;
     private ArrayList<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+    public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -45,7 +44,7 @@ public class MenuTracker {
         public AddItem(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Please, enter the task's name");
             String desc = input.ask("Please, enter the task's desc");
             tracker.add(new Item(name, desc));
@@ -55,7 +54,7 @@ public class MenuTracker {
         public ShowItems(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             for (Item item: tracker.findAll()) {
                 output.accept(String.format("%s. %s", item.getId(), item.getName()));
             }
@@ -65,7 +64,7 @@ public class MenuTracker {
         public DeleteItem(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please enter the task's id");
             if (tracker.delete(id)) {
                 output.accept("Item deleted");
@@ -78,7 +77,7 @@ public class MenuTracker {
         public FindItemByName(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Please enter the task's name");
             tracker.findByName(name);
             output.accept("Find the item " + name);
@@ -90,7 +89,7 @@ public class MenuTracker {
             super(6, "Exit");
             this.ui = ui;
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker menu = new MenuTracker(input, tracker, output);
             output.accept("Выход из программы.");
             this.ui.stop();
@@ -100,7 +99,7 @@ public class MenuTracker {
         public EditItem(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please enter the task's id");
             String name = input.ask("Please, enter the task's name");
             String desc = input.ask("Please, enter the task's desc");
@@ -116,7 +115,7 @@ public class MenuTracker {
         public FindItemById(int key, String name) {
             super(key, name);
         }
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please enter the task's id");
             tracker.findById(id);
         }
