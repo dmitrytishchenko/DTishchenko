@@ -57,10 +57,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public boolean replace(String id, Item item) {
         boolean result = false;
-        String sql = "UPDATE item AS i SET name = ?, description = ? WHERE i.id = id";
+        String sql = "UPDATE item AS i SET name = ?, description = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, item.getName());
             ps.setString(2, item.getDesc());
+            ps.setString(3, id);
             int value = ps.executeUpdate();
             if (value > 0) {
                 result = true;
@@ -68,7 +69,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         } catch (SQLException e) {
             LOG.error("Error replaced the item", e);
         }
-
         return result;
     }
 
