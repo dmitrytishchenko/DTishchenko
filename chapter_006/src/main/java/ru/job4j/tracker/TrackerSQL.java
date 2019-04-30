@@ -28,7 +28,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public boolean createTable() {
         boolean result = false;
         try (Statement st = connection.createStatement()) {
-            result = st.execute("CREATE TABLE IF NOT EXISTS item "
+            result = st.execute("CREATE TABLE IF NOT EXISTS item"
                     + "(id varchar(100) primary key, "
                     + "name varchar (100),"
                     + "description varchar(100))");
@@ -41,10 +41,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item add(Item item) {
         Item result = null;
-        String sql = "INSERT INTO item(name, description) VALUES(?, ?)";
+        String sql = "INSERT INTO item(id, name, description) VALUES(?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, item.getName());
-            ps.setString(2, item.getDesc());
+            ps.setString(1, item.getId());
+            ps.setString(2, item.getName());
+            ps.setString(3, item.getDesc());
             ps.executeUpdate();
             result = item;
         } catch (SQLException e) {
@@ -120,18 +121,17 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item findById(String id) {
-        Item item = null;
-        String sql = "SELECT id FROM item WHERE id = ?";
+        String sql = "SELECT  * FROM item WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                item = new Item(rs.getString(id));
+                return new Item(rs.getString("id"));
             }
         } catch (SQLException e) {
             LOG.error("Error find the item", e);
         }
-        return item;
+        throw new IllegalStateException(String.format("Item %s does not exists", id));
     }
 
     @Override
@@ -139,5 +139,17 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         if (this.connection != null) {
             connection.close();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        TrackerSQL sql = new TrackerSQL();
+        sql.init();
+//        sql.createTable();
+//        sql.add(new Item("12345", "name1", "desc1"));
+//        sql.replace("12345", new Item("name2", "desc2"));
+//        sql.findAll();
+//        sql.findByName("name2");
+//        sql.findById("12345");
+//        sql.delete("12345");
     }
 }

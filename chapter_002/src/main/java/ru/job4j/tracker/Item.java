@@ -25,6 +25,12 @@ public class Item {
         this.id = id;
     }
 
+    public Item(String id, String name, String desc) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+    }
+
     public String getName() {
         return this.name;
     }
