@@ -1,27 +1,37 @@
 package ru.job4j.xmlxslt;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 public class StoreSQL implements AutoCloseable {
-    private final Config config;
+    private Config config;
     private Connection connection;
+    public List<Entry> list = new ArrayList<>();
 
     public StoreSQL(Config config) {
         this.config = config;
         try {
-            this.connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            this.connection = DriverManager.getConnection("jdbc:sqlite:");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public StoreSQL(List<Entry> list) {
+        this.list = list;
+    }
+
+    public StoreSQL() {
     }
 
     /**
      * создание базы данных
      */
     public void createNewDatabase(String storage) {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:test.db" + storage)) {
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + storage)) {
             if (connection != null) {
                 DatabaseMetaData metaData = connection.getMetaData();
                 System.out.println("The driver name is " + metaData.getDriverName());
@@ -34,28 +44,40 @@ public class StoreSQL implements AutoCloseable {
 
     /**
      * создание таблицы с полем int field
-     * очистка таблицы
      */
     public void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS Entries (field INT)";
-        String clearTable = "DELETE FROM Entries";
         try (Statement st = connection.createStatement()) {
+            String sql = "CREATE TABLE IF NOT EXISTS entry (field INT)";
             st.execute(sql);
-            System.out.println("Table Entries is created");
+            System.out.println("Table entry is created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * очистка таблицы
+     */
+    public void clearTable() {
+        try (Statement st = connection.createStatement()) {
+            String clearTable = "DELETE FROM entry";
             st.execute(clearTable);
-            System.out.println("Table Entries is cleared");
+            System.out.println("Table entry is cleared");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void generate(int size) {
-        String sql = "INSERT INTO Entries (field) VALUES(?)";
+        this.clearTable();
+        String sql = "INSERT INTO entry (field)VALUES(?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             connection.setAutoCommit(false);
             for (int i = 1; i <= size; i++) {
                 ps.setInt(1, i);
+                ps.addBatch();
             }
+            ps.executeBatch();
             System.out.println("Table is full");
             connection.commit();
         } catch (Exception e) {
@@ -69,14 +91,12 @@ public class StoreSQL implements AutoCloseable {
     }
 
     public List<Entry> load() {
-        List<Entry> list = new ArrayList<>();
-        String sql = "SELECT field FROM Entries";
+        String sql = "SELECT * FROM entry";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Entry entry = new Entry(rs.getInt("field"));
                 list.add(entry);
-                System.out.println(list);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,15 +109,5 @@ public class StoreSQL implements AutoCloseable {
         if (connection != null) {
             connection.close();
         }
-    }
-
-    public static void main(String[] args) {
-        Config config = new Config();
-        StoreSQL st = new StoreSQL(config);
-        config.init();
-        st.createNewDatabase("magnit");
-        st.createTable();
-        st.generate(5);
-        st.load();
     }
 }
