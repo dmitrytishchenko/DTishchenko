@@ -14,16 +14,15 @@ public class MainStart {
     private static File scheme = new File(new ConvertXSQT().xsl);
 
     public static void main(String[] args) throws JAXBException, SAXException, IOException, ParserConfigurationException {
+        //создание базы данных "magnit"
         Config config = new Config();
         StoreSQL st = new StoreSQL(config);
-        //создание базы данных "magnit"
-        st.createNewDatabase("magnit");
         //создание новой таблицы
         st.createTable();
         //генерация 5 записей
         st.generate(5);
         //создание списка элементов
-        List <Entry> list = st.load();
+        List<Entry> list = st.load();
         StoreXML storeXML = new StoreXML(target);
         //преобразование списка в файл .xml через JAXB
         storeXML.save(list);
@@ -31,8 +30,8 @@ public class MainStart {
         ConvertXSQT convertXSQT = new ConvertXSQT();
         convertXSQT.convert(target, target2, scheme);
         //парсинг .xml
-        SaxPars saxPars = new SaxPars(target2);
-        saxPars.parsing();
-        System.out.println(saxPars.getSum());
+//        SaxPars saxPars = new SaxPars(target2);
+//        saxPars.parsing();
+//        System.out.println(saxPars.getSum());
     }
 }

@@ -4,7 +4,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,8 +28,7 @@ public class StoreXML {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             // сериализация
-            StoreSQL storeSQL = new StoreSQL();
-            jaxbMarshaller.marshal(Arrays.asList(storeSQL.load()), target);
+            jaxbMarshaller.marshal(new StoreSQL(list), target);
         } catch (JAXBException e) {
             e.printStackTrace();
         }

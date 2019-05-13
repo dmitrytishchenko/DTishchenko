@@ -11,10 +11,13 @@ public class StoreSQL implements AutoCloseable {
     private Connection connection;
     public List<Entry> list = new ArrayList<>();
 
+    /**
+     * создание базы данных
+     */
     public StoreSQL(Config config) {
         this.config = config;
         try {
-            this.connection = DriverManager.getConnection("jdbc:sqlite:");
+            this.connection = DriverManager.getConnection("jdbc:sqlite:magnit.db");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,22 +29,6 @@ public class StoreSQL implements AutoCloseable {
 
     public StoreSQL() {
     }
-
-    /**
-     * создание базы данных
-     */
-    public void createNewDatabase(String storage) {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + storage)) {
-            if (connection != null) {
-                DatabaseMetaData metaData = connection.getMetaData();
-                System.out.println("The driver name is " + metaData.getDriverName());
-                System.out.println("A new database has been created.");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     /**
      * создание таблицы с полем int field
      */
