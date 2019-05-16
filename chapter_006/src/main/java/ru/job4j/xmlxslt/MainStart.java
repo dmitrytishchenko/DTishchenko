@@ -11,11 +11,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainStart {
-    private static File target = new File("target.xml");
-    private static File target2 = new File("target2.xml");
-    private static File scheme = new File("xsl.xsl");
+    int size;
 
-    public static void main(String[] args) throws JAXBException, IOException, SAXException, ParserConfigurationException {
+    public MainStart(int size) {
+        this.size = size;
+    }
+
+    public void start() throws JAXBException, ParserConfigurationException, SAXException, IOException {
+        File target = new File("target.xml");
+        File target2 = new File("target2.xml");
+        File scheme = new File("xsl.xsl");
         //создание базы данных "magnit"
         long startApplication = System.currentTimeMillis();
         Config config = new Config();
@@ -23,7 +28,7 @@ public class MainStart {
         //создание новой таблицы
         st.createTable();
         //генерация 5 записей
-        st.generate(1000000);
+        st.generate(this.size);
         //создание списка элементов
         List<Entry> list = st.load();
         StoreXML storeXML = new StoreXML(target);
@@ -39,5 +44,11 @@ public class MainStart {
         parser.parse(target2, saxPars);
         System.out.println(saxPars.getSum());
         System.out.println(System.currentTimeMillis() - startApplication);
+    }
+
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, JAXBException {
+        MainStart mainStart = new MainStart(1000000);
+        mainStart.start();
+
     }
 }
