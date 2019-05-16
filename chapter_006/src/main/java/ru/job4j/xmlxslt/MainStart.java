@@ -47,8 +47,6 @@ public class MainStart {
     }
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, JAXBException {
-        MainStart mainStart = new MainStart(1000000);
-        mainStart.start();
-
+        new MainStart(1000000).start();
     }
 }
