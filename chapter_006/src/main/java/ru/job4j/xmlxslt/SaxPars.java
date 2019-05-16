@@ -5,14 +5,9 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.io.IOException;
 
 public class SaxPars extends DefaultHandler {
-    String thisElement = " ";
     int sum = 0;
     File file;
 
@@ -22,11 +17,6 @@ public class SaxPars extends DefaultHandler {
 
     public int getSum() {
         return sum;
-    }
-
-    @Override
-    public void startDocument() throws SAXException {
-        System.out.println("Start parse XML");
     }
 
     /**
@@ -54,25 +44,8 @@ public class SaxPars extends DefaultHandler {
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if("field".equals(qName)) {
-            sum += Integer.parseInt(attributes.getValue(0));
+        if (qName.equals("entry")) {
+            sum += Integer.valueOf(attributes.getValue("field2"));
         }
-    }
-
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        thisElement = " ";
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-        System.out.println("Stop parse XML");
-    }
-
-    public void parsing() throws ParserConfigurationException, SAXException, IOException {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = factory.newSAXParser();
-        SaxPars saxPars = new SaxPars(file);
-        parser.parse("target2.xml", saxPars);
     }
 }
