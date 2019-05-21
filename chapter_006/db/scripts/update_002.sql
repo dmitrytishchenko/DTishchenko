@@ -1,0 +1,1 @@
+create table items (id varchar(20), name varchar(200), description varchar(500));
