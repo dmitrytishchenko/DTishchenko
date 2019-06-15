@@ -5,14 +5,13 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
+
 
     @Test
     public void add() {
@@ -35,8 +34,9 @@ public class TrackerTest {
     public void findById() {
         Tracker tracker = new Tracker();
         Item item = new Item("test3", "testDescrition3", 125L, "third item");
-        Item result = tracker.findById("12346");
-        assertThat(null, is(result));
+        tracker.add(item);
+        Item result = tracker.findById(item.getId());
+        assertThat(result, is(item));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TrackerTest {
     }
 
     @Test
-    public void findall() {
+    public void findAll() {
         Tracker tracker = new Tracker();
         Item item = new Item("test5", "testDescription5", 127L, "fifth item");
         tracker.add(item);
@@ -64,15 +64,5 @@ public class TrackerTest {
         tracker.add(item);
         List<Item> result = tracker.findByName("test6");
         assertThat(result.get(0), is(item));
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 }

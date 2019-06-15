@@ -1,3 +1,6 @@
+/**
+Создание исходных таблиц
+ */
 CREATE TABLE company
 (
 id integer NOT NULL,

@@ -23,9 +23,6 @@ public class Item {
     }
     public Item() {
     }
-    public Item(String id) {
-        this.id = id;
-    }
 
     public Item(String id, String name, String desc) {
         this.id = id;
