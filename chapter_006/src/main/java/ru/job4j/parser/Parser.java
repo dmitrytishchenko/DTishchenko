@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Parser implements Job {
-    private static final Logger logger = LoggerFactory.getLogger(Parser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Parser.class);
     private String name;
     private String text;
     private String link;
@@ -23,7 +23,7 @@ public class Parser implements Job {
 
     public static void main(String[] args) throws SchedulerException {
         ConfigPars configPars = new ConfigPars();
-        logger.info("create a connection to this database");
+        LOGGER.info("create a connection to this database");
         String expression = configPars.get("CronTrigger");
         JobDetail job = JobBuilder.newJob(Parser.class).build();
         Trigger t1 = TriggerBuilder.newTrigger()
@@ -32,22 +32,22 @@ public class Parser implements Job {
         Scheduler sc = StdSchedulerFactory.getDefaultScheduler();
         sc.start();
         sc.scheduleJob(job, t1);
-        logger.info("Run the application using cron trigger");
+        LOGGER.info("Run the application using cron trigger");
     }
 
-    public List<Vacancy> parsing() {
+    public List<Vacancy> parsing(String query) {
         List<Vacancy> list = new LinkedList<>();
         try {
-            Document doc = Jsoup.connect(String.format("http://www.sql.ru/forum/job-offers/")).get();
+            Document doc = Jsoup.connect(String.format(query)).get();
             Elements tablePages = doc.select("table[class=sort_options]");
             Elements countPages = tablePages.select("td[style=text-align:left]");
             int page = Integer.valueOf(countPages.select("a").last().text());
-            logger.info("Find the total number of pages forum" + page);
+            LOGGER.info("Find the total number of pages forum" + page);
             for (int i = 1; i <= page; i++) {
-                Document document = Jsoup.connect(String.format("http://www.sql.ru/forum/job-offers/%s", i)).get();
+                Document document = Jsoup.connect(String.format(query + "%s", i)).get();
                 for (Element el : document.select("tr")) {
                     Elements description = el.select("td.postslisttopic");
-                    logger.info("find the job description ");
+                    LOGGER.info("find the job description ");
                     time = el.select("td[style].altCol").text();
 //                    проверяем дату нашей вакансии, если она раньше 1 января 2019 года
                     if (!time.equals("вчера") || !time.equals("сегодня")) {
@@ -72,13 +72,13 @@ public class Parser implements Job {
                                 }
                             }
                         } catch (Exception e) {
-                            logger.error("Parsing date error", e);
+                            LOGGER.error("Parsing date error", e);
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            logger.error("Parsing forum error", e);
+            LOGGER.error("Parsing forum error", e);
         }
         return list;
     }
@@ -89,8 +89,9 @@ public class Parser implements Job {
         DBVacancy dbVacancy = new DBVacancy(config);
         dbVacancy.createDB();
         dbVacancy.createTable();
+        String query = "http://www.sql.ru/forum/job-offers/";
         Parser parser = new Parser();
-        List<Vacancy> vacancies = parser.parsing();
+        List<Vacancy> vacancies = parser.parsing(query);
         for (Vacancy vacancy : vacancies) {
             dbVacancy.add(vacancy);
         }
