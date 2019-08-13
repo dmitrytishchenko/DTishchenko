@@ -1,10 +1,8 @@
 package ru.job4j.condition;
-
 /**
  * Это четвертая моя программа
- *
- * @author Dmitriy Tishchenko
  * @version 1.04 3.12.2017
+ * @author Dmitriy Tishchenko
  */
 public class Point {
     private int x;
