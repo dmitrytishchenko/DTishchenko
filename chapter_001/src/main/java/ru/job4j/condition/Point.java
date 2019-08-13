@@ -1,8 +1,7 @@
 package ru.job4j.condition;
-
 /**
  * Это четвертая моя программа
- *
+ * @version 1.04 3.12.2017
  * @author Dmitriy Tishchenko
  * @version 1.04 3.12.2017
  */
