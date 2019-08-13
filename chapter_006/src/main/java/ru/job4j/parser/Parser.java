@@ -31,6 +31,7 @@ public class Parser implements Job {
         dbVacancy.createDB();
         dbVacancy.createTable();
         List<Vacancy> vacancies = new SqlParser().parse();
+        System.out.println(vacancies.size());
         for (Vacancy vacancy : vacancies) {
             dbVacancy.add(vacancy);
         }
