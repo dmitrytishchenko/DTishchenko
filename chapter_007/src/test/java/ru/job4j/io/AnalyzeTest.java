@@ -2,10 +2,7 @@ package ru.job4j.io;
 
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -15,9 +12,23 @@ public class AnalyzeTest {
     public void whenReadSourceThenWriteTarget() {
         Analyze analyze = new Analyze();
         String s;
+        String serverLog = "200 10:56:01\n"
+                + "500 10:57:01\n"
+                + "400 10:58:01\n"
+                + "200 10:59:01\n"
+                + "500 11:01:02\n"
+                + "200 11:02:02";
         String result = "";
-        String source = "C:\\projects\\DTishchenko\\chapter_007\\src\\main\\resources\\Source.txt";
-        String target = "C:\\projects\\DTishchenko\\chapter_007\\src\\main\\resources\\Target.txt";
+        String parent = System.getProperty("java.io.tmpdir");
+        File file = new File(parent + "\\Source");
+        File file1 = new File(parent + "\\Target");
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(serverLog);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String source = file.getAbsolutePath();
+        String target = file1.getAbsolutePath();
         analyze.unavailable(source, target);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(target)));
