@@ -16,6 +16,7 @@ public class SearchTest {
     public void whenFoldersContainsFiles() {
 
         String parent = System.getProperty("java.io.tmpdir");
+        System.out.println(parent);
 
         File dir1 = new File(parent + "\\dir1");
         File dir2 = new File(parent + "\\dir1\\dir2");

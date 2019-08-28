@@ -14,10 +14,8 @@ public class Search {
             if (f.isDirectory()) {
                 data.addAll(Arrays.asList(f.listFiles()));
             } else {
-                for (String ext : exts) {
-                    if (f.getName().endsWith(ext)) {
-                        result.add(f);
-                    }
+                if (check(f, exts)) {
+                    result.add(f);
                 }
             }
         }
@@ -33,10 +31,18 @@ public class Search {
                 }
             }
         } else {
-            for (String ext : exts) {
-                if (file.getName().endsWith(ext)) {
-                    result.add(file);
-                }
+            if (check(file, exts)) {
+                result.add(file);
+            }
+        }
+        return result;
+    }
+
+    public boolean check(File file, List<String> exts) {
+        Boolean result = false;
+        for (String ext : exts) {
+            if (file.getName().endsWith(ext)) {
+                result = true;
             }
         }
         return result;
