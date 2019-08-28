@@ -31,13 +31,13 @@ public class MaxTest {
     @Test
     public void whenThreeNumber() {
         Max max = new Max();
-        int result = max.max(1, 20, 30);
+        int result = max.max(20, 30);
         assertThat(result, is(30));
     }
     @Test
     public void whenFourNumber() {
         Max max = new Max();
-        int result = max.max(1, 20, 30, 40);
+        int result = max.max(30, 40);
         assertThat(result, is(40));
     }
 }
