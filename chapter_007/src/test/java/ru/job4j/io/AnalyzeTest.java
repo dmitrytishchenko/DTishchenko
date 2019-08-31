@@ -19,9 +19,9 @@ public class AnalyzeTest {
                 + "500 11:01:02\n"
                 + "200 11:02:02";
         String result = "";
-        String parent = System.getProperty("java.io.tmpdir");
-        File file = new File(parent + "\\Source");
-        File file1 = new File(parent + "\\Target");
+        String parent = System.getProperty("java.io.tmpdir") + File.separator;
+        File file = new File(parent + "Source");
+        File file1 = new File(parent + "Target");
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(serverLog);
         } catch (IOException e) {

@@ -1,1 +1,1 @@
-create table items2 (id varchar(20), name varchar(200), description varchar(500));
+create table items (id varchar(20), name varchar(200), description varchar(500));

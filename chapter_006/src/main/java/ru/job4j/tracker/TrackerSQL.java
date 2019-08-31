@@ -2,28 +2,52 @@ package ru.job4j.tracker;
 
 import org.apache.logging.log4j.Logger;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 
 public class TrackerSQL implements ITracker, AutoCloseable {
-    private final Connection connection;
+    private Connection connection;
     private static final Logger LOG = getLogger(TrackerSQL.class);
 
     public TrackerSQL(Connection connection) {
         this.connection = connection;
     }
 
+    public TrackerSQL() {
+        this.init();
+    }
+
+    public boolean init() {
+        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            assert in != null;
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            this.connection = DriverManager.getConnection(
+                    config.getProperty("url"),
+                    config.getProperty("username"),
+                    config.getProperty("password")
+            );
+            this.createTable();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+        return this.connection != null;
+    }
+
     public boolean createTable() {
         boolean result = false;
-        try (Statement st = connection.createStatement()) {
-            result = st.execute("CREATE TABLE IF NOT EXISTS item"
-                    + "(id varchar(100) primary key, "
-                    + "name varchar (100),"
-                    + "description varchar(100))");
+        try (PreparedStatement preparedStatement = connection.prepareStatement("create table  if not exists items"
+                + "(id varchar(100) primary key,"
+                + "name varchar (100),"
+                + "description varchar (100))")) {
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
