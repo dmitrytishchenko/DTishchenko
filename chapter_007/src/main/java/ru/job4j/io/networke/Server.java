@@ -61,7 +61,7 @@ public class Server implements NetworkFileMenedger {
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
                 if (f.isDirectory()) {
-                    result = f.getPath();
+                    result = f.getAbsolutePath();
                     break;
                 }
             }
@@ -83,6 +83,19 @@ public class Server implements NetworkFileMenedger {
             int count;
             while ((count = bis.read()) != -1) {
                 fos.write(count);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void downloadFile2(String source, String target) {
+        try (FileInputStream fis = new FileInputStream(source);
+             FileOutputStream fos = new FileOutputStream(target)) {
+            byte[] buffer = new byte[8192];
+            int size;
+            while ((size = fis.read(buffer)) != -1) {
+                fos.write(buffer, 0, size);
             }
         } catch (IOException e) {
             e.printStackTrace();
