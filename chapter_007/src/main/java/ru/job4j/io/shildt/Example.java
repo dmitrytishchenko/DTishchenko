@@ -1,6 +1,9 @@
 package ru.job4j.io.shildt;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Example {
     static String dirname = "C:\\projects\\DTishchenko\\chapter_007\\src\\main\\java\\ru\\job4j\\io\\shildt";
@@ -188,17 +191,47 @@ public class Example {
         }
     }
 
-    public static void main(String[] args) {
-//        dir();
-//        filter();
-//        listFile();
-//        fis();
-//        fos();
-//        bais();
-//        baos();
-//        data();
-//rand();
+    public static void reader() {
+        try (FileReader fr = new FileReader("Query.txt")) {
+            int a;
+            while ((a = fr.read()) != -1) {
+                System.out.println((char) a);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public static void writer() {
+        String source = "Now is the time for all good men to come to the aid of "
+                + "their country and pay their due taxes";
+        char[] buf = source.toCharArray();
+        try (FileWriter fw = new FileWriter("Example.txt")) {
+            for (int i = 0; i < buf.length; i++) {
+                fw.write(buf[i]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void console() {
+        Console con;
+        con = System.console();
+        if (con != null) {
+            String str = con.readLine();
+            System.out.println("Вы ввели: " + str);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        File file = new File("Example.txt");
+
+        Path path = Paths.get(file.getPath());
+        System.out.println(Files.isDirectory(path));
+        System.out.println(Files.isRegularFile(path));
+        System.out.println(Files.exists(path));
+        Files.delete(path);
+
+    }
 }
