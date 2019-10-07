@@ -45,7 +45,10 @@ public class Args {
     private String directory;
     private File output;
     private String exclude;
-
+//java -jar pack.jar
+// -d c:\project\job4j\
+// -e *.java
+// -o project.zip
     public Args(String[] args) {
         for (int i = 0; i < args.length; i++) {
             if (args[i].contains("-d")) {
