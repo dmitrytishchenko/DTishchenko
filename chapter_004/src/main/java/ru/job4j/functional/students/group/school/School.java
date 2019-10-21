@@ -14,6 +14,5 @@ public class School {
     public static Map<String, Student> collect2(List<Student> students) {
         return students.stream()
                 .collect(Collectors.toMap(Student::getSurName, s -> s));
-
     }
 }
