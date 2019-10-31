@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 
-public class InteractCalc {
+public class InteractCalc implements Add, Subtract, Multiple, Div {
     private Map<Action.Type, BiFunction<Double, Double, Double>> dispatch = new HashMap<>();
     private Calculator calculator;
     boolean run = true;
@@ -16,6 +16,7 @@ public class InteractCalc {
         this.calculator = calculator;
     }
 
+    @Override
     public BiFunction<Double, Double, Double> add() {
         return (first, second) -> {
             calculator.add(first, second);
@@ -24,6 +25,7 @@ public class InteractCalc {
         };
     }
 
+    @Override
     public BiFunction<Double, Double, Double> subtract() {
         return (first, second) -> {
             calculator.subtract(first, second);
@@ -32,6 +34,7 @@ public class InteractCalc {
         };
     }
 
+    @Override
     public BiFunction<Double, Double, Double> multiple() {
         return (first, second) -> {
             calculator.multiple(first, second);
@@ -40,6 +43,7 @@ public class InteractCalc {
         };
     }
 
+    @Override
     public BiFunction<Double, Double, Double> div() {
         return (first, second) -> {
             calculator.div(first, second);
