@@ -80,7 +80,9 @@ public class Interact {
     }
 
     public static void main(String[] args) {
-        Interact in = new Interact(new Calculator());
-        in.input();
+        Map<String, BiFunction<Double, Double, Double>> commandAdd = new HashMap<>();
+        Add add = new StandardCalculator(commandAdd);
+        double result = add.add().apply(2.0, 3.0);
+        System.out.println(result);
     }
 }

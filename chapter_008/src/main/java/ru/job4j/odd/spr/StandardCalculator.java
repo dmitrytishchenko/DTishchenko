@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 /**
  * Operation of standard calculator.
  */
-public class StandardCalculator {
+public class StandardCalculator implements Add{
     /**
      * Map dispatch, with key - String and value - BiFunction.
      */
@@ -31,6 +31,7 @@ public class StandardCalculator {
      *
      * @return BiFunction
      */
+    @Override
     public BiFunction<Double, Double, Double> add() {
         return (first, second) -> {
             calculator.add(first, second);
