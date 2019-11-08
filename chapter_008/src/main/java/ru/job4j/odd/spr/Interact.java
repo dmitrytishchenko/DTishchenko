@@ -1,11 +1,13 @@
 package ru.job4j.odd.spr;
 
 import ru.job4j.calculator.Calculator;
+import ru.job4j.odd.spr.ocp.EngineerCalculator;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Implementation of the Calculator from the console.
@@ -23,6 +25,7 @@ public class Interact {
      * Map dispatch, with key - String and value - BiFunction.
      */
     private Map<String, BiFunction<Double, Double, Double>> dispatch = new HashMap<>();
+    private Map<String, Function<Double, Double>> engineerMap = new HashMap<>();
 
     /**
      * @param calculator
@@ -37,6 +40,8 @@ public class Interact {
     public Double input() {
         double result = 0;
         StandardCalculator sc = new StandardCalculator(this.dispatch);
+        EngineerCalculator ec = new EngineerCalculator(this.engineerMap);
+        ec.init();
         sc.init();
         Scanner scanner = new Scanner(System.in);
         String action;
@@ -55,6 +60,12 @@ public class Interact {
                 System.out.println("Введите второе значение");
                 secondNumber = scanner.nextDouble();
                 result = sc.operation(action, secondNumber);
+            } else if (action.equals("sin") || action.equals("cos") || action.equals("tan")
+                    || action.equals("asin") || action.equals("acos") || action.equals("atan")) {
+                System.out.println("Введите значение");
+                firstNumber = scanner.nextDouble();
+                result = ec.operation(action, firstNumber);
+                System.out.println(String.format("Результат равен %s", result));
             } else {
                 System.out.println("Введите первое значение");
                 firstNumber = scanner.nextDouble();
@@ -75,14 +86,18 @@ public class Interact {
         System.out.println("- - вычитание");
         System.out.println("* - умножение");
         System.out.println("/ - деление");
+        System.out.println("sin - синус угла");
+        System.out.println("cos - косинус угла");
+        System.out.println("tan - тангенс угла");
+        System.out.println("asin - арксинус угла");
+        System.out.println("acos - арккосинус угла");
+        System.out.println("atan - арктангенс угла");
         System.out.println("LR - использовать последний результат");
         System.out.println("Exit - выход");
     }
 
     public static void main(String[] args) {
-        Map<String, BiFunction<Double, Double, Double>> commandAdd = new HashMap<>();
-        Add add = new StandardCalculator(commandAdd);
-        double result = add.add().apply(2.0, 3.0);
-        System.out.println(result);
+        Interact it = new Interact(new Calculator());
+        it.input();
     }
 }
