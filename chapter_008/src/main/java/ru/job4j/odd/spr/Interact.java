@@ -51,17 +51,17 @@ public class Interact {
         while (run) {
             showMenu();
             action = scanner.next();
-            if (action.equals("Exit")) {
+            if ("Exit".equals(action)) {
                 System.out.println("Калькулятор завершил свою работу");
                 break;
-            } else if (action.equals("LR")) {
+            } else if ("LR".equals(action)) {
                 showMenu();
                 action = scanner.next();
                 System.out.println("Введите второе значение");
                 secondNumber = scanner.nextDouble();
                 result = sc.operation(action, secondNumber);
-            } else if (action.equals("sin") || action.equals("cos") || action.equals("tan")
-                    || action.equals("asin") || action.equals("acos") || action.equals("atan")) {
+            } else if ("sin".equals(action) || "cos".equals(action) || "tan".equals(action)
+                    || "asin".equals(action) || "acos".equals(action) || "atan".equals(action)) {
                 System.out.println("Введите значение");
                 firstNumber = scanner.nextDouble();
                 result = ec.operation(action, firstNumber);
