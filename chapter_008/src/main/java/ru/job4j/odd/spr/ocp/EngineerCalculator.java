@@ -1,14 +1,14 @@
 package ru.job4j.odd.spr.ocp;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class EngineerCalculator {
-    private Map<String, Function<Double, Double>> dispatch = new HashMap<>();
+public class EngineerCalculator implements Action {
+    private Map<String, Function<Double, Double>> dispatch;
 
     public EngineerCalculator(Map<String, Function<Double, Double>> dispatch) {
         this.dispatch = dispatch;
+        this.init();
     }
 
     public Function<Double, Double> sin() {
@@ -51,5 +51,10 @@ public class EngineerCalculator {
 
     public double operation(String op, double value) {
         return this.dispatch.get(op).apply(value);
+    }
+
+    @Override
+    public double calc(String input, double holder) {
+        return this.dispatch.get(input).apply(holder);
     }
 }

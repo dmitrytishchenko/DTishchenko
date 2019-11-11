@@ -1,6 +1,7 @@
 package ru.job4j.odd.spr;
 
 import ru.job4j.calculator.Calculator;
+import ru.job4j.odd.spr.ocp.Action;
 import ru.job4j.odd.spr.ocp.EngineerCalculator;
 
 import java.util.HashMap;
@@ -41,7 +42,6 @@ public class Interact {
         double result = 0;
         StandardCalculator sc = new StandardCalculator(this.dispatch);
         EngineerCalculator ec = new EngineerCalculator(this.engineerMap);
-        ec.init();
         sc.init();
         Scanner scanner = new Scanner(System.in);
         String action;
@@ -97,7 +97,8 @@ public class Interact {
     }
 
     public static void main(String[] args) {
-        Interact it = new Interact(new Calculator());
-        it.input();
+        Map<String, Function<Double, Double>> dispatch = new HashMap<>();
+        Action action = new EngineerCalculator(dispatch);
+        System.out.println(action.calc("sin", 0.5));
     }
 }
