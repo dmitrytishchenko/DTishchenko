@@ -40,38 +40,27 @@ public class Interact {
      */
     public Double input() {
         double result = 0;
-        StandardCalculator sc = new StandardCalculator(this.dispatch);
-        EngineerCalculator ec = new EngineerCalculator(this.engineerMap);
-        sc.init();
         Scanner scanner = new Scanner(System.in);
-        String action;
-        double firstNumber;
-        double secondNumber;
+        String operation;
         System.out.println("Калькулятор готов к работе");
+        Action ec = new EngineerCalculator(engineerMap);
+        Action sc = new StandardCalculator(dispatch);
         while (run) {
             showMenu();
-            action = scanner.next();
-            if ("Exit".equals(action)) {
+            operation = scanner.next();
+            if ("Exit".equals(operation)) {
                 System.out.println("Калькулятор завершил свою работу");
                 break;
-            } else if ("LR".equals(action)) {
+            } else if ("LR".equals(operation)) {
                 showMenu();
-                action = scanner.next();
+                operation = scanner.next();
                 System.out.println("Введите второе значение");
-                secondNumber = scanner.nextDouble();
-                result = sc.operation(action, secondNumber);
-            } else if ("sin".equals(action) || "cos".equals(action) || "tan".equals(action)
-                    || "asin".equals(action) || "acos".equals(action) || "atan".equals(action)) {
-                System.out.println("Введите значение");
-                firstNumber = scanner.nextDouble();
-                result = ec.operation(action, firstNumber);
-                System.out.println(String.format("Результат равен %s", result));
+                double secondNumber = scanner.nextDouble();
+                result =  ((StandardCalculator) sc).oper(operation, secondNumber);
             } else {
-                System.out.println("Введите первое значение");
-                firstNumber = scanner.nextDouble();
-                System.out.println("Введите второе значение");
-                secondNumber = scanner.nextDouble();
-                result = sc.operation(action, firstNumber, secondNumber);
+               result = new Action().calc(operation);
+//                result = ec.calc(operation);
+//                result = sc.calc(operation);
             }
         }
         return result;
@@ -97,8 +86,10 @@ public class Interact {
     }
 
     public static void main(String[] args) {
-        Map<String, Function<Double, Double>> dispatch = new HashMap<>();
-        Action action = new EngineerCalculator(dispatch);
-        System.out.println(action.calc("sin", 0.5));
+//        Map<String, Function<Double, Double>> dispatch = new HashMap<>();
+//        Action action = new EngineerCalculator(dispatch);
+//        System.out.println(action.calc("sin", 0.5));
+        Interact it = new Interact(new Calculator());
+        it.input();
     }
 }

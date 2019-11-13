@@ -1,14 +1,16 @@
 package ru.job4j.odd.spr;
 
 import ru.job4j.calculator.Calculator;
+import ru.job4j.odd.spr.ocp.Action;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.function.BiFunction;
 
 /**
  * Operation of standard calculator.
  */
-public class StandardCalculator implements Add {
+public class StandardCalculator implements Add, Action {
     /**
      * Map dispatch, with key - String and value - BiFunction.
      */
@@ -24,6 +26,7 @@ public class StandardCalculator implements Add {
 
     public StandardCalculator(Map<String, BiFunction<Double, Double, Double>> dispatch) {
         this.dispatch = dispatch;
+        init();
     }
 
     /**
@@ -112,7 +115,19 @@ public class StandardCalculator implements Add {
      * @param second - second number.
      * @return - the result of the calculator.
      */
-    public double operation(String op, double second) {
+    public double oper(String op, double second) {
         return dispatch.get(op).apply(lastResult, second);
+    }
+
+    @Override
+    public double calc(String input) {
+        Scanner scanner = new Scanner(System.in);
+        double firstNumber;
+        double secondNumber;
+        System.out.println("Введите первое значение");
+        firstNumber = scanner.nextDouble();
+        System.out.println("Введите второе значение");
+        secondNumber = scanner.nextDouble();
+        return this.dispatch.get(input).apply(firstNumber, secondNumber);
     }
 }

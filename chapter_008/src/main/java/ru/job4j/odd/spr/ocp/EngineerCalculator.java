@@ -1,6 +1,7 @@
 package ru.job4j.odd.spr.ocp;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.function.Function;
 
 public class EngineerCalculator implements Action {
@@ -49,12 +50,12 @@ public class EngineerCalculator implements Action {
         return this;
     }
 
-    public double operation(String op, double value) {
-        return this.dispatch.get(op).apply(value);
-    }
-
     @Override
-    public double calc(String input, double holder) {
-        return this.dispatch.get(input).apply(holder);
+    public double calc(String input) {
+        Scanner scanner = new Scanner(System.in);
+        double firstNumber;
+        System.out.println("Введите значение");
+        firstNumber = scanner.nextDouble();
+        return this.dispatch.get(input).apply(firstNumber);
     }
 }
