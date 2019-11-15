@@ -3,6 +3,7 @@ package ru.job4j.odd.spr;
 import ru.job4j.calculator.Calculator;
 import ru.job4j.odd.spr.ocp.Action;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.BiFunction;
@@ -14,7 +15,7 @@ public class StandardCalculator implements Add, Action {
     /**
      * Map dispatch, with key - String and value - BiFunction.
      */
-    protected Map<String, BiFunction<Double, Double, Double>> dispatch;
+    protected Map<String, BiFunction<Double, Double, Double>> dispatch = new HashMap<>();
     /**
      * Object Calculator.
      */

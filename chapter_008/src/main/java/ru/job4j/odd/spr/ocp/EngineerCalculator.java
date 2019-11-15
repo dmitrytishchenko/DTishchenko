@@ -1,14 +1,17 @@
 package ru.job4j.odd.spr.ocp;
 
-import java.util.HashMap;
+import ru.job4j.odd.spr.StandardCalculator;
+
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class EngineerCalculator implements Action {
-    private Map<String, Function<Double, Double>> engineMap = new HashMap<>();
+public class EngineerCalculator extends StandardCalculator implements Action {
+    private Map<String, Function<Double, Double>> engineMap;
 
-    public EngineerCalculator(Map<String, Function<Double, Double>> engineMap) {
+    public EngineerCalculator(Map<String, Function<Double, Double>> engineMap, Map<String, BiFunction<Double, Double, Double>> disp) {
+        super(disp);
         this.engineMap = engineMap;
         this.init();
     }

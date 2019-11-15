@@ -1,6 +1,5 @@
 package ru.job4j.odd.spr;
 
-import ru.job4j.calculator.Calculator;
 import ru.job4j.odd.spr.ocp.Action;
 import ru.job4j.odd.spr.ocp.EngineerCalculator;
 
@@ -15,10 +14,6 @@ import java.util.function.Function;
  */
 public class Interact {
     /**
-     * Object Calculator.
-     */
-    private Calculator calculator;
-    /**
      * The run variable for the loop.
      */
     private boolean run = true;
@@ -26,16 +21,10 @@ public class Interact {
      * Map dispatch, with key - String and value - BiFunction.
      */
     private Map<String, BiFunction<Double, Double, Double>> dispatch = new HashMap<>();
-    private StandardCalculator sc = new StandardCalculator(dispatch);
     private Map<String, Function<Double, Double>> engineerMap = new HashMap<>();
-    private EngineerCalculator ec = new EngineerCalculator(engineerMap);
 
-
-    /**
-     * @param calculator
-     */
-    public Interact(Calculator calculator) {
-        this.calculator = calculator;
+    public Interact() {
+        input();
     }
     /**
      * @return double result operation of the calculator.
@@ -45,7 +34,7 @@ public class Interact {
         Scanner scanner = new Scanner(System.in);
         String operation;
         System.out.println("Калькулятор готов к работе");
-        Action ec = new EngineerCalculator(engineerMap);
+        Action ec = new EngineerCalculator(engineerMap, dispatch);
         while (run) {
             showMenu();
             operation = scanner.next();
@@ -57,9 +46,8 @@ public class Interact {
                 operation = scanner.next();
                 System.out.println("Введите второе значение");
                 double secondNumber = scanner.nextDouble();
-                result =  sc.oper(operation, secondNumber);
+                result =  ((EngineerCalculator) ec).oper(operation, secondNumber);
             } else {
-//                result = sc.calc(operation);
                 result = ec.calc(operation);
             }
         }
@@ -86,7 +74,6 @@ public class Interact {
     }
 
     public static void main(String[] args) {
-        Interact it = new Interact(new Calculator());
-        it.input();
+        new Interact();
     }
 }
