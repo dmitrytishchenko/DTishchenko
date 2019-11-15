@@ -14,7 +14,7 @@ public class StandardCalculator implements Add, Action {
     /**
      * Map dispatch, with key - String and value - BiFunction.
      */
-    private Map<String, BiFunction<Double, Double, Double>> dispatch;
+    protected Map<String, BiFunction<Double, Double, Double>> dispatch;
     /**
      * Object Calculator.
      */

@@ -1,14 +1,15 @@
 package ru.job4j.odd.spr.ocp;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
 public class EngineerCalculator implements Action {
-    private Map<String, Function<Double, Double>> dispatch;
+    private Map<String, Function<Double, Double>> engineMap = new HashMap<>();
 
-    public EngineerCalculator(Map<String, Function<Double, Double>> dispatch) {
-        this.dispatch = dispatch;
+    public EngineerCalculator(Map<String, Function<Double, Double>> engineMap) {
+        this.engineMap = engineMap;
         this.init();
     }
 
@@ -37,7 +38,7 @@ public class EngineerCalculator implements Action {
     }
 
     public void load(String action, Function<Double, Double> func) {
-        this.dispatch.put(action, func);
+        this.engineMap.put(action, func);
     }
 
     public EngineerCalculator init() {
@@ -52,10 +53,13 @@ public class EngineerCalculator implements Action {
 
     @Override
     public double calc(String input) {
+        double result;
         Scanner scanner = new Scanner(System.in);
         double firstNumber;
         System.out.println("Введите значение");
         firstNumber = scanner.nextDouble();
-        return this.dispatch.get(input).apply(firstNumber);
+        result = this.engineMap.get(input).apply(firstNumber);
+        System.out.println(result);
+        return result;
     }
 }

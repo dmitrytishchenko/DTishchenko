@@ -26,7 +26,10 @@ public class Interact {
      * Map dispatch, with key - String and value - BiFunction.
      */
     private Map<String, BiFunction<Double, Double, Double>> dispatch = new HashMap<>();
+    private StandardCalculator sc = new StandardCalculator(dispatch);
     private Map<String, Function<Double, Double>> engineerMap = new HashMap<>();
+    private EngineerCalculator ec = new EngineerCalculator(engineerMap);
+
 
     /**
      * @param calculator
@@ -34,7 +37,6 @@ public class Interact {
     public Interact(Calculator calculator) {
         this.calculator = calculator;
     }
-
     /**
      * @return double result operation of the calculator.
      */
@@ -44,7 +46,6 @@ public class Interact {
         String operation;
         System.out.println("Калькулятор готов к работе");
         Action ec = new EngineerCalculator(engineerMap);
-        Action sc = new StandardCalculator(dispatch);
         while (run) {
             showMenu();
             operation = scanner.next();
@@ -56,11 +57,10 @@ public class Interact {
                 operation = scanner.next();
                 System.out.println("Введите второе значение");
                 double secondNumber = scanner.nextDouble();
-                result =  ((StandardCalculator) sc).oper(operation, secondNumber);
+                result =  sc.oper(operation, secondNumber);
             } else {
-               result = new Action().calc(operation);
-//                result = ec.calc(operation);
 //                result = sc.calc(operation);
+                result = ec.calc(operation);
             }
         }
         return result;
@@ -86,9 +86,6 @@ public class Interact {
     }
 
     public static void main(String[] args) {
-//        Map<String, Function<Double, Double>> dispatch = new HashMap<>();
-//        Action action = new EngineerCalculator(dispatch);
-//        System.out.println(action.calc("sin", 0.5));
         Interact it = new Interact(new Calculator());
         it.input();
     }
