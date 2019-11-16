@@ -23,11 +23,10 @@ public class StandardCalculator implements Add, Action {
     /**
      * Variable lastResult to record the last result.
      */
-    private double lastResult = 0;
+    private double lastResult;
 
     public StandardCalculator(Map<String, BiFunction<Double, Double, Double>> dispatch) {
-        this.dispatch = dispatch;
-        init();
+        this.init();
     }
 
     /**
@@ -120,15 +119,28 @@ public class StandardCalculator implements Add, Action {
         return dispatch.get(op).apply(lastResult, second);
     }
 
+    public double lr(Scanner scanner) {
+        System.out.println("Выберите действие");
+        String input = scanner.next();
+        System.out.println("Введите второе значение");
+        double secondNumber = scanner.nextDouble();
+        return this.dispatch.get(input).apply(lastResult, secondNumber);
+    }
+
     @Override
     public double calc(String input) {
         Scanner scanner = new Scanner(System.in);
-        double firstNumber;
-        double secondNumber;
-        System.out.println("Введите первое значение");
-        firstNumber = scanner.nextDouble();
-        System.out.println("Введите второе значение");
-        secondNumber = scanner.nextDouble();
-        return this.dispatch.get(input).apply(firstNumber, secondNumber);
+        if ("LR".equals(input)) {
+            lastResult = lr(scanner);
+        } else {
+            double firstNumber;
+            double secondNumber;
+            System.out.println("Введите первое значение");
+            firstNumber = scanner.nextDouble();
+            System.out.println("Введите второе значение");
+            secondNumber = scanner.nextDouble();
+            lastResult = this.dispatch.get(input).apply(firstNumber, secondNumber);
+        }
+        return lastResult;
     }
 }

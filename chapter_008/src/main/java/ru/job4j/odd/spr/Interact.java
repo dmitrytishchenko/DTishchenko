@@ -41,12 +41,6 @@ public class Interact {
             if ("Exit".equals(operation)) {
                 System.out.println("Калькулятор завершил свою работу");
                 break;
-            } else if ("LR".equals(operation)) {
-                showMenu();
-                operation = scanner.next();
-                System.out.println("Введите второе значение");
-                double secondNumber = scanner.nextDouble();
-                result =  ((EngineerCalculator) ec).oper(operation, secondNumber);
             } else {
                 result = ec.calc(operation);
             }
