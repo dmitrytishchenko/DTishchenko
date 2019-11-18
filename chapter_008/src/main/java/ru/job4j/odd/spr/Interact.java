@@ -1,7 +1,7 @@
 package ru.job4j.odd.spr;
 
-import ru.job4j.odd.spr.ocp.Action;
-import ru.job4j.odd.spr.ocp.EngineerCalculator;
+import ru.job4j.odd.ocp.Action;
+import ru.job4j.odd.ocp.EngineerCalculator;
 
 import java.util.HashMap;
 import java.util.Map;

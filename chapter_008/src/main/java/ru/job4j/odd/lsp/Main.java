@@ -1,4 +1,4 @@
-package ru.job4j.odd.spr.lsp;
+package ru.job4j.odd.lsp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

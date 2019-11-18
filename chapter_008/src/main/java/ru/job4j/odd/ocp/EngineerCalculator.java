@@ -1,4 +1,4 @@
-package ru.job4j.odd.spr.ocp;
+package ru.job4j.odd.ocp;
 
 import ru.job4j.odd.spr.StandardCalculator;
 

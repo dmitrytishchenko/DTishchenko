@@ -1,4 +1,4 @@
-package ru.job4j.odd.spr.lsp;
+package ru.job4j.odd.lsp;
 
 public class ControllQuality {
     private Check check;
