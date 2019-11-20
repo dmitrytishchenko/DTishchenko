@@ -19,6 +19,8 @@ public class Parking {
         if (sizeCar > 0) {
             this.placeCars[countCars++] = car;
             this.sizeCar--;
+        } else {
+            System.out.println("Парковочных мест для легковых автомобилей больше нет.");
         }
     }
 
@@ -35,7 +37,7 @@ public class Parking {
             }
             countTraks++;
         } else {
-            System.out.println("Парковочных мест больше нет!!!");
+            System.out.println("Парковочных мест для шрузовых автомобилей больше нет!!!");
         }
     }
 
@@ -45,5 +47,13 @@ public class Parking {
 
     public int getCountTraks() {
         return countTraks;
+    }
+
+    public int getSizeCar() {
+        return sizeCar;
+    }
+
+    public int getSizeTrack() {
+        return sizeTrack;
     }
 }

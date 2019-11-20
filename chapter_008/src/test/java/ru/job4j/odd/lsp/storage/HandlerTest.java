@@ -36,5 +36,35 @@ public class HandlerTest {
         parking.addTrack(track1, car1);
         assertThat(parking.getCountTraks(), is(3));
     }
+
+    @Test
+    public void whenCarsCanNotPark() {
+        Parking parking = new Parking(10, 2);
+        Car car1 = new Bmv();
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        parking.addCar(car1);
+        assertThat(parking.getSizeCar(), is(0));
+    }
+
+    @Test
+    public void whenTracksCanNotPark() {
+        Parking parking = new Parking(10, 2);
+        Car car1 = new Bmv();
+        Track track1 = new Ford();
+        parking.addTrack(track1, car1);
+        parking.addTrack(track1, car1);
+        parking.addTrack(track1, car1);
+        parking.addTrack(track1, car1);
+        assertThat(parking.getSizeTrack(), is(0));
+    }
 }
 
