@@ -66,5 +66,19 @@ public class HandlerTest {
         parking.addTrack(track1, car1);
         assertThat(parking.getSizeTrack(), is(0));
     }
+    @Test
+    public void whenCarNotPark() {
+        Parking parking = new Parking(10, 2);
+        Car car = new Bmv();
+        boolean result = parking.park(car);
+        assertThat(result, is(false));
+    }
+    @Test
+    public void whenTrackNotPark() {
+        Parking parking = new Parking(10, 2);
+        Car car = new Bmv();
+        boolean result = parking.park(car);
+        assertThat(result, is(false));
+    }
 }
 

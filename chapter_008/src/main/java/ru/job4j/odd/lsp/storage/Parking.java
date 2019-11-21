@@ -14,6 +14,12 @@ public class Parking {
         this.placeCars = new Car[sizeCar];
         this.placeTrack = new Track[sizeTrack];
     }
+    public boolean park(Car car) {
+        return false;
+    }
+    public boolean park(Track track) {
+        return false;
+    }
 
     public void addCar(Car car) {
         if (sizeCar > 0) {
@@ -37,7 +43,7 @@ public class Parking {
             }
             countTraks++;
         } else {
-            System.out.println("Парковочных мест для шрузовых автомобилей больше нет!!!");
+            System.out.println("Парковочных мест для грузовых автомобилей больше нет!!!");
         }
     }
 
