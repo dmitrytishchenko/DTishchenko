@@ -76,8 +76,8 @@ public class HandlerTest {
     @Test
     public void whenTrackNotPark() {
         Parking parking = new Parking(10, 2);
-        Car car = new Bmv();
-        boolean result = parking.park(car);
+        Track track = new Ford();
+        boolean result = parking.park(track);
         assertThat(result, is(false));
     }
 }
