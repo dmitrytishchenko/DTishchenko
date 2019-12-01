@@ -1,11 +1,11 @@
 package ru.job4j.odd.isp;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StartMenu {
     public static void main(String[] args) {
-        Map<Task, String> map = new LinkedHashMap<>();
+        Map<String, Task> map = new TreeMap<>();
         new Menu(map).showMenu();
     }
 }

@@ -1,37 +1,43 @@
 package ru.job4j.odd.isp;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Menu implements MenuInterf {
-    private Map<Task, String> map = new LinkedHashMap<>();
+    private Map<String, Task> map = new TreeMap<>();
 
-    public Menu(Map<Task, String> map) {
+    public Menu(Map<String, Task> map) {
         this.map = map;
         init();
     }
 
     @Override
     public void init() {
-        this.map.put(new Task("Задача 1."), new Task("Задача 1.").todo());
-        this.map.put(new Task("Задача 1.1"), new Task("Задача 1.1").todo());
-        this.map.put(new Task("Задача 1.1.1"), new Task("Задача 1.1.1").todo());
-        this.map.put(new Task("Задача 1.1.2"), new Task("Задача 1.1.2").todo());
-        this.map.put(new Task("Задача 2."), new Task("Задача 2.").todo());
-        this.map.put(new Task("Задача 2.1"), new Task("Задача 2.1").todo());
+        this.map.put("1.", new Task("task1"));
+        this.map.put("1.1", new Task("task2"));
+        this.map.put("1.1.1", new Task("task3"));
+        this.map.put("1.1.2", new Task("task4"));
+        this.map.put("2.", new Task("task5"));
+        this.map.put("2.1.", new Task("task6"));
+        this.map.put("2.1.1", new Task("task7"));
+        this.map.put("2.1.2", new Task("task8"));
     }
 
     @Override
     public void showMenu() {
-        for (Task task : map.keySet()) {
-            String[] mas = task.getName().split(" ");
-            if (mas[1].equals("1.") || mas[1].equals("2.")) {
-                System.out.println(String.format("%s  =>  %s", task.getName(), map.get(task)));
-            } else if (mas[1].equals("1.1") || mas[1].equals("2.1")) {
-                System.out.println(String.format("===== %s  =>  %s", task.getName(), map.get(task)));
-            } else if (mas[1].equals("1.1.1") || mas[1].equals("1.1.2")) {
-                System.out.println(String.format("========== %s  =>  %s", task.getName(), map.get(task)));
+        for (String key : map.keySet()) {
+            getTask(key);
+        }
+    }
+
+    public Task getTask(String key) {
+        Task result = null;
+        for (String str : map.keySet()) {
+            if (key.equals(str)) {
+                result = map.get(str);
+                System.out.println(String.format("%s  -  %s", str, map.get(str).getName()));
             }
         }
+        return result;
     }
 }
