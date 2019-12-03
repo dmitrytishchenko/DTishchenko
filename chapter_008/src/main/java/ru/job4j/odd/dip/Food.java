@@ -1,4 +1,4 @@
-package ru.job4j.odd.lsp;
+package ru.job4j.odd.dip;
 
 import java.util.Date;
 

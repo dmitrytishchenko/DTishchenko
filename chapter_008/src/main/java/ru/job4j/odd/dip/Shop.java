@@ -1,4 +1,4 @@
-package ru.job4j.odd.lsp;
+package ru.job4j.odd.dip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,6 @@ public class Shop implements Check {
 
     @Override
     public void check(Food food) {
-
         long life = food.getLife();
         long now = food.getNow();
         if (life * 0.25 < now && now < life * 0.75) {
@@ -18,5 +17,9 @@ public class Shop implements Check {
             shopList.add(food);
         }
         System.out.println(shopList.size());
+    }
+
+    public List<Food> getShopList() {
+        return shopList;
     }
 }

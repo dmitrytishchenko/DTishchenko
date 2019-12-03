@@ -1,4 +1,4 @@
-package ru.job4j.odd.lsp;
+package ru.job4j.odd.dip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,5 +14,9 @@ public class Warehouse implements Check {
             warehouseList.add(food);
         }
         System.out.println(warehouseList.size());
+    }
+
+    public List<Food> getWarehouseList() {
+        return warehouseList;
     }
 }
