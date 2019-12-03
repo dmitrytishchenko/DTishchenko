@@ -14,27 +14,27 @@ public class Parking {
         this.placeCars = new Car[sizeCar];
         this.placeTrack = new Track[sizeTrack];
     }
-    public boolean park(Car car) {
-        return false;
-    }
-    public boolean park(Track track) {
-        return false;
-    }
 
-    public void addCar(Car car) {
+    public boolean park(Car car) {
+        boolean result = false;
         if (sizeCar > 0) {
             this.placeCars[countCars++] = car;
             this.sizeCar--;
+            result = true;
         } else {
             System.out.println("Парковочных мест для легковых автомобилей больше нет.");
         }
+        return result;
     }
 
-    public void addTrack(Track track, Car car) {
+    public boolean park(Track track, Car car) {
+        boolean result = false;
         if (sizeTrack > 0) {
             for (int i = 0; i < placeTrack.length; i++) {
                 placeTrack[countTraks++] = track;
                 this.sizeTrack--;
+                result = true;
+                break;
             }
         } else if (this.sizeCar >= 5) {
             for (int i = 0; i < 5; i++) {
@@ -42,9 +42,11 @@ public class Parking {
                 this.sizeCar--;
             }
             countTraks++;
+            result = true;
         } else {
             System.out.println("Парковочных мест для грузовых автомобилей больше нет!!!");
         }
+        return result;
     }
 
     public int getCountCars() {
