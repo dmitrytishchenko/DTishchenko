@@ -1,7 +1,5 @@
 package ru.job4j.odd.isp;
 
-public interface MenuInterf {
-    void init();
-
+public interface MenuShow {
     void showMenu();
 }

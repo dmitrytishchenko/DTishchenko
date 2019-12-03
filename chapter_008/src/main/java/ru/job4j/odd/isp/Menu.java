@@ -3,7 +3,7 @@ package ru.job4j.odd.isp;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Menu implements MenuInterf {
+public class Menu implements FullMenu, AssignTask {
     private Map<String, Task> map = new TreeMap<>();
 
     public Menu(Map<String, Task> map) {
@@ -30,6 +30,7 @@ public class Menu implements MenuInterf {
         }
     }
 
+    @Override
     public Task getTask(String key) {
         Task result = null;
         for (String str : map.keySet()) {

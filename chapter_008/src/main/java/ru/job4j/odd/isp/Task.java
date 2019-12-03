@@ -1,6 +1,6 @@
 package ru.job4j.odd.isp;
 
-public class Task implements TaskInterf {
+public class Task implements ActionTask {
     private String name;
 
     public Task(String name) {
