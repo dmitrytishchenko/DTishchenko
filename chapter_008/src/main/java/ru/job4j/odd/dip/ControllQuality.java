@@ -3,38 +3,39 @@ package ru.job4j.odd.dip;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControllQuality implements ExtractList {
-    private Check check;
+public class ControllQuality implements ExtractList, ResotrCheck, Verify {
     private List<Food> list = new ArrayList<>();
+    private Shop shop;
+    private Trash trash;
+    private Warehouse warehouse;
 
-    public ControllQuality(Check check) {
-        this.check = check;
+    public ControllQuality(Shop shop, Trash trash, Warehouse warehouse) {
+        this.shop = shop;
+        this.trash = trash;
+        this.warehouse = warehouse;
     }
 
-    public ControllQuality() {
-    }
-
+    @Override
     public void executeCheck(Food food) {
-        check.check(food);
+        food.check(shop, trash, warehouse);
     }
 
+    @Override
     public void resort() {
-        extract(new Shop().getShopList());
-        extract(new Trash().getTrashList());
-        extract(new Warehouse().getWarehouseList());
-        for (Food food : list) {
-            check.check(food);
+        extract(shop.getShopList());
+        extract(trash.getTrashList());
+        extract(warehouse.getWarehouseList());
+        for (Food food : this.list) {
+            executeCheck(food);
         }
     }
+
     @Override
     public List<Food> extract(List<Food> list) {
         for (Food food : list) {
             this.list.add(food);
         }
-        return list;
-    }
-
-    public List<Food> getList() {
-        return list;
+        list.clear();
+        return this.list;
     }
 }
