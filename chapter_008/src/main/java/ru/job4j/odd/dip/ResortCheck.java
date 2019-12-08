@@ -1,5 +1,5 @@
 package ru.job4j.odd.dip;
 
-public interface ResotrCheck {
+public interface ResortCheck {
     void resort();
 }

@@ -2,7 +2,7 @@ package ru.job4j.odd.dip;
 
 import java.util.Date;
 
-public class Food implements Check {
+public class Food {
     private String name;
     private Date expaireDate;
     private Date createDate;
@@ -49,19 +49,19 @@ public class Food implements Check {
         this.disscount = disscount;
     }
 
-    @Override
-    public void check(Shop shop, Trash trash, Warehouse warehouse) {
-        long life = getLife();
-        long now = getNow();
-        if (life * 0.25 < now && now < life * 0.75) {
-            shop.getShopList().add(this);
-        } else if (now > life * 0.75 && now < life) {
-            this.setDisscount(50);
-            shop.getShopList().add(this);
-        } else if (life < now) {
-            trash.getTrashList().add(this);
-        } else if (life * 0.25 > now) {
-            warehouse.getWarehouseList().add(this);
-        }
-    }
+//    @Override
+//    public void check(Shop shop, Trash trash, Warehouse warehouse) {
+//        long life = getLife();
+//        long now = getNow();
+//        if (life * 0.25 < now && now < life * 0.75) {
+//            shop.getShopList().add(this);
+//        } else if (now > life * 0.75 && now < life) {
+//            this.setDisscount(50);
+//            shop.getShopList().add(this);
+//        } else if (life < now) {
+//            trash.getTrashList().add(this);
+//        } else if (life * 0.25 > now) {
+//            warehouse.getWarehouseList().add(this);
+//        }
+//    }
 }
