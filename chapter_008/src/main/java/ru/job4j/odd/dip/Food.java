@@ -1,4 +1,4 @@
-package ru.job4j.odd.lsp;
+package ru.job4j.odd.dip;
 
 import java.util.Date;
 
@@ -48,4 +48,20 @@ public class Food {
     public void setDisscount(int disscount) {
         this.disscount = disscount;
     }
+
+//    @Override
+//    public void check(Shop shop, Trash trash, Warehouse warehouse) {
+//        long life = getLife();
+//        long now = getNow();
+//        if (life * 0.25 < now && now < life * 0.75) {
+//            shop.getShopList().add(this);
+//        } else if (now > life * 0.75 && now < life) {
+//            this.setDisscount(50);
+//            shop.getShopList().add(this);
+//        } else if (life < now) {
+//            trash.getTrashList().add(this);
+//        } else if (life * 0.25 > now) {
+//            warehouse.getWarehouseList().add(this);
+//        }
+//    }
 }
