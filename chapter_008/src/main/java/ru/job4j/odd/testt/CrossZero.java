@@ -3,7 +3,7 @@ package ru.job4j.odd.testt;
 import java.util.Random;
 import java.util.Scanner;
 
-public class CrossZero implements Win, Move, ShowField {
+public class CrossZero implements Win, ShowField, Players, Start {
     private int size;
     private int horiz;
     private int vertical;
@@ -27,16 +27,35 @@ public class CrossZero implements Win, Move, ShowField {
         }
     }
 
-    public void start() {
+    @Override
+    public void startPlayerToComp() {
         printField();
         boolean run = true;
         while (run) {
-            movePlayerX();
+            playerMove("X");
             printField();
             if (win()) {
                 break;
             }
-            movePlayerO();
+            playerCompMove("O");
+            printField();
+            if (win()) {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void startCompToComp() {
+        printField();
+        boolean run = true;
+        while (run) {
+            playerCompMove("X");
+            printField();
+            if (win()) {
+                break;
+            }
+            playerCompMove("O");
             printField();
             if (win()) {
                 break;
@@ -53,32 +72,33 @@ public class CrossZero implements Win, Move, ShowField {
         return result;
     }
 
+
     @Override
-    public void movePlayerX() {
+    public void playerMove(String str) {
         System.out.println("Ход предоставляется игроку.");
         System.out.println("Введите ход по вертикали");
         this.vertical = scanner.nextInt();
         System.out.println("Введите ход по горизонтали");
         this.horiz = scanner.nextInt();
         if (this.field[this.vertical][this.horiz] == null) {
-            this.field[this.vertical][this.horiz] = "X";
+            this.field[this.vertical][this.horiz] = str;
         } else {
             System.out.println("Данное поле занято, сделайте ход заново");
-            movePlayerX();
+            playerMove(str);
         }
     }
 
     @Override
-    public void movePlayerO() {
+    public void playerCompMove(String str) {
         System.out.println("Ход предоставляется компьютеру.");
         Random random = new Random();
         int horizO = random.nextInt(size);
         int verticalO = random.nextInt(size);
         if (this.field[verticalO][horizO] == null) {
-            this.field[verticalO][horizO] = "O";
+            this.field[verticalO][horizO] = str;
         } else {
             System.out.println("Данное поле занято, сделайте ход заново");
-            movePlayerO();
+            playerCompMove(str);
         }
     }
 
@@ -87,7 +107,7 @@ public class CrossZero implements Win, Move, ShowField {
         boolean result = false;
         if (checkLines(symb) || checkDiagonal(symb)) {
             result = true;
-            System.out.println("Win player!!!!!!");
+            System.out.println("Win player with X !!!!!!");
         }
         return result;
     }
@@ -97,7 +117,7 @@ public class CrossZero implements Win, Move, ShowField {
         boolean result = false;
         if (checkLines(symb) || checkDiagonal(symb)) {
             result = true;
-            System.out.println("Win computer!!!!!!");
+            System.out.println("Win player with O !!!!!!");
         }
         return result;
     }
