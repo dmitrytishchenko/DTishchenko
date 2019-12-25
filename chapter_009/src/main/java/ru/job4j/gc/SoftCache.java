@@ -1,7 +1,6 @@
 package ru.job4j.gc;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.ref.SoftReference;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,7 +24,7 @@ public class SoftCache {
         if (cach == null) {
             String fileCach = null;
             try {
-                fileCach = Files.readString(Paths.get(filePath + File.separator + key));
+                fileCach = Files.readString(Paths.get(filePath));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -36,8 +35,11 @@ public class SoftCache {
     }
 
     public static void main(String[] args) {
-        SoftCache softCache = new SoftCache("C:\\projects\\DTishchenko\\chapter_009\\src\\main\\java\\ru\\job4j\\gc\\");
-        System.out.println(softCache.getCash("Names.txt"));
-        System.out.println(softCache.getCash("Address.txt"));
+        String filePath1 = new File("Names.txt").getAbsolutePath();
+        String filePath2 = new File("Address.txt").getAbsolutePath();
+        SoftCache softCache1 = new SoftCache(filePath1);
+        SoftCache softCache2 = new SoftCache(filePath2);
+        System.out.println(softCache1.getCash("Names.txt"));
+        System.out.println(softCache2.getCash("Address.txt"));
     }
 }
