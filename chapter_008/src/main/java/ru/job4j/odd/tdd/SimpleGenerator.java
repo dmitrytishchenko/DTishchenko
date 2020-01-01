@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class SimpleGenerator {
 
-    private final Pattern KEYS = Pattern.compile("([\\$][\\{]([a-z]){1,}[\\}])");
+    private final Pattern keys = Pattern.compile("([\\$][\\{]([a-z]){1,}[\\}])");
     private String template;
 
     public SimpleGenerator(String template) {
@@ -16,9 +16,9 @@ public class SimpleGenerator {
     public String generate(Map<String, String> map) {
         int count = 0;
         try {
-            Matcher m = KEYS.matcher(template);
+            Matcher m = keys.matcher(template);
             while (m.find()) {
-                template = template.replaceFirst(KEYS.pattern(), map.get(m.group()));
+                template = template.replaceFirst(keys.pattern(), map.get(m.group()));
                 count++;
             }
             if (count < map.keySet().size()) {
