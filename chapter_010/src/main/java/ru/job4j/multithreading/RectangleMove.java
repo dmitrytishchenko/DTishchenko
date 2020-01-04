@@ -8,10 +8,11 @@ public class RectangleMove implements Runnable {
     public RectangleMove(Rectangle rect) {
         this.rect = rect;
     }
+
     @Override
     public void run() {
         int delta = 1;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             if (this.rect.getX() == 0) {
                 delta = 1;
             } else if (this.rect.getX() == 300) {
@@ -22,6 +23,7 @@ public class RectangleMove implements Runnable {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
