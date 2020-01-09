@@ -6,30 +6,30 @@ import java.io.IOException;
 import java.net.URL;
 
 public class FileDownload {
+    private long timePause = 0;
 
-    public static void main(String[] args) {
-        String file = args[0];
-        String fileOut = args[1];
-        try (BufferedInputStream in = new BufferedInputStream(new URL(file).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream(fileOut)) {
+    public void start(String inputFile, String outFile, int maxSpeed) {
+        long startTime = System.currentTimeMillis();
+        try (BufferedInputStream in = new BufferedInputStream(new URL(inputFile).openStream());
+             FileOutputStream fileOutputStream = new FileOutputStream(outFile)) {
             byte[] dataBuffer = new byte[1024];
             long size = 0;
             int bytesRead;
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 size += bytesRead;
-                long actualTime = 1000;
-                int speed = Integer.parseInt(args[2]) * 1024;
-                long expectedTime = size / speed;
-                if (actualTime <= expectedTime) {
+                long endTime = System.currentTimeMillis();
+                long actualTime = endTime - startTime; //время скачивания одного килобайта
+                long expectedTime = size / maxSpeed;
+                if (actualTime > expectedTime) {
+                    timePause = actualTime - expectedTime;
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(timePause);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
             }
-            System.out.println(dataBuffer.length);
         } catch (IOException e) {
             e.printStackTrace();
         }
