@@ -19,9 +19,9 @@ public class FileDownload {
                 size += bytesRead;
                 long endTime = System.currentTimeMillis();
                 long actualTime = endTime - startTime; //время скачивания одного килобайта
-                long expectedTime = size / maxSpeed;
-                if (actualTime > expectedTime) {
-                    timePause = actualTime - expectedTime;
+                long expectedTime = (size / maxSpeed) * 1000;
+                if (actualTime < expectedTime) {
+                    timePause = expectedTime - actualTime;
                     try {
                         Thread.sleep(timePause);
                     } catch (InterruptedException e) {
