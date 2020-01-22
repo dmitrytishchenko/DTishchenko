@@ -10,14 +10,16 @@ import java.util.NoSuchElementException;
  * @since 17.02.2019
  */
 public class DynamicArray<E> implements Iterable<E> {
-    private Object[] container;
-    private int size;
+    private int size = 3;
+    private Object[] container = new Object[size];
     private int index = 0;
     private int modCount = 0;
 
-    public DynamicArray(int size) {
-        this.container = new Object[size];
-        this.size = size;
+    public DynamicArray() {
+    }
+
+    public DynamicArray(int newSize) {
+        this.size = newSize;
     }
 
     public void add(E value) {
