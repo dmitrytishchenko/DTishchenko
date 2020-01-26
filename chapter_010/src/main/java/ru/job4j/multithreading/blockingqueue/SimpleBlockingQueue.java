@@ -10,31 +10,42 @@ import java.util.Queue;
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
+    private final Object lock = new Object();
     private int size;
 
     public SimpleBlockingQueue(int size) {
         this.size = size;
     }
+    public SimpleBlockingQueue() {
+    }
 
     public synchronized void offer(T value) {
-        if (this.size >= this.queue.size()) {
-            this.queue.add(value);
-            notify();
+        synchronized (this.lock) {
+            if (this.size >= this.queue.size()) {
+                this.queue.add(value);
+                this.lock.notify();
+            }
         }
     }
 
     public synchronized T poll() {
-        while (this.queue.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        synchronized (this.lock) {
+            while (this.queue.isEmpty()) {
+                try {
+                    this.lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return this.queue.poll();
     }
 
-    public int getSize() {
+    public synchronized int getSize() {
         return this.queue.size();
+    }
+
+    public synchronized boolean isEmptyQueue() {
+       return this.queue.isEmpty();
     }
 }

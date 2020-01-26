@@ -8,17 +8,22 @@ import static org.junit.Assert.*;
 public class SimpleBlockingQueueTest {
     @Test
     public void addThreeElements() throws InterruptedException {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(1);
+        int size = 3;
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(size);
         Thread producer = new Thread(new Runnable() {
             @Override
             public void run() {
-                queue.offer(1);
+                for (int i = 0; i < size; i++) {
+                    queue.offer(1);
+                }
             }
         });
         Thread consumer = new Thread(new Runnable() {
             @Override
             public void run() {
-                queue.poll();
+                while (!queue.isEmptyQueue()) {
+                    queue.poll();
+                }
             }
         });
         producer.start();
