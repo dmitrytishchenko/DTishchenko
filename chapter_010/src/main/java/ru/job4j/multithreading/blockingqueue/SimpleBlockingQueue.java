@@ -19,16 +19,23 @@ public class SimpleBlockingQueue<T> {
     public SimpleBlockingQueue() {
     }
 
-    public void offer(T value) {
+    public synchronized void offer(T value) {
         synchronized (this.lock) {
             if (this.size >= this.queue.size()) {
                 this.queue.add(value);
-                this.lock.notify();
+
+            } else {
+                try {
+                    this.lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            this.lock.notify();
         }
     }
 
-    public T poll() {
+    public synchronized T poll() {
         synchronized (this.lock) {
             while (this.queue.isEmpty()) {
                 try {
@@ -41,11 +48,11 @@ public class SimpleBlockingQueue<T> {
         return this.queue.poll();
     }
 
-    public int getSize() {
+    public synchronized int getSize() {
         return this.queue.size();
     }
 
-    public boolean isEmptyQueue() {
+    public synchronized boolean isEmptyQueue() {
        return this.queue.isEmpty();
     }
 }
