@@ -11,9 +11,6 @@ public class SingleLockList<T> implements Iterable<T> {
     @GuardedBy("this.")
     private DynamicArray<T> list = new DynamicArray();
 
-    public SingleLockList() {
-    }
-
     public synchronized void add(T value) {
         this.list.add(value);
     }
@@ -27,14 +24,15 @@ public class SingleLockList<T> implements Iterable<T> {
         return copy(this.list).iterator();
     }
 
-    public Save<T> save(DynamicArray<T> list) {
-        return new Save<>(list);
+    public synchronized DynamicArray<T> save(DynamicArray<T> list) {
+        new Storage<T>().setList(list);
+        return new Storage<T>().getList();
     }
 
     public synchronized DynamicArray<T> copy(DynamicArray<T> list) {
-        Save<T> save = save(list);
         Storage<T> st = new Storage<>();
-        st.setSave(save);
-        return st.getSave().getList();
+        st.setList(new SingleLockList<T>().save(list));
+        st.setList(list);
+        return st.getList();
     }
 }

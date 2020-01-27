@@ -1,13 +1,15 @@
 package ru.job4j.multithreading.synch;
 
-public class Storage<T> {
-    private Save<T> save;
+import ru.job4j.list.DynamicArray;
 
-    public Save<T> getSave() {
-        return save;
+public class Storage<T> {
+    private DynamicArray<T> list;
+
+    public DynamicArray<T> getList() {
+        return list;
     }
 
-    public void setSave(Save<T> save) {
-        this.save = save;
+    public void setList(DynamicArray<T> list) {
+        this.list = list;
     }
 }
