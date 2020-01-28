@@ -9,12 +9,12 @@ public class SimpleBlockingQueueTest {
     @Test
     public void addThreeElements() throws InterruptedException {
         int size = 3;
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(size);
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue();
         Thread producer = new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < size; i++) {
-                    queue.offer(1);
+                    queue.offer(i);
                 }
             }
         });
@@ -22,7 +22,11 @@ public class SimpleBlockingQueueTest {
             @Override
             public void run() {
                 while (!queue.isEmptyQueue()) {
-                    queue.poll();
+                    try {
+                        queue.poll();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
