@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 @ThreadSafe
 public class SingleLockList<T> implements Iterable<T> {
-    @GuardedBy("this.")
+    @GuardedBy("this")
     private DynamicArray<T> list = new DynamicArray();
 
     public synchronized void add(T value) {
@@ -24,14 +24,8 @@ public class SingleLockList<T> implements Iterable<T> {
         return copy(this.list).iterator();
     }
 
-    public synchronized DynamicArray<T> save(DynamicArray<T> list) {
-        new Storage<T>().setList(list);
-        return new Storage<T>().getList();
-    }
-
     public synchronized DynamicArray<T> copy(DynamicArray<T> list) {
         Storage<T> st = new Storage<>();
-        st.setList(new SingleLockList<T>().save(list));
         st.setList(list);
         return st.getList();
     }
