@@ -12,6 +12,7 @@ public class SimpleBlockingQueue<T> {
 
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
+    @GuardedBy("this")
     private int sizeLimit = 3;
 
     public synchronized void offer(T value) {
