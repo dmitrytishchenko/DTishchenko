@@ -11,7 +11,6 @@ import static org.hamcrest.core.Is.is;
 public class NonBlockCashTest {
     @Test
     public void whenThrowException() throws InterruptedException {
-
         ConcurrentHashMap<Integer, Base> map = new ConcurrentHashMap<>();
         NonBlockCash cash = new NonBlockCash(map);
         Base base1 = new Base(1, 0);

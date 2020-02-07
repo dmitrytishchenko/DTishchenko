@@ -13,7 +13,7 @@ public class NonBlockCash {
         this.map.put(model.getId(), model);
     }
 
-    public synchronized void update(Base model) {
+    public void update(Base model) {
         this.map.computeIfPresent(model.getId(), (id, base) -> {
             if (model.getVersion() != getVers(model)) {
                 throw new OptimisticException("Версия не совпадает!");
@@ -32,11 +32,11 @@ public class NonBlockCash {
         }
     }
 
-    public synchronized int getVers(Base model) {
+    public int getVers(Base model) {
         return this.map.get(model.getId()).getVersion();
     }
 
-    public synchronized void increment(Base model) {
+    public void increment(Base model) {
         model.setVersion(model.getVersion() + 1);
     }
 }
