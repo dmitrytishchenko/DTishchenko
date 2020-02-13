@@ -24,7 +24,7 @@ public class SimpleBlockingQueue<T> {
             }
         }
         this.queue.add(value);
-        notify();
+        notifyAll();
     }
 
     public synchronized T poll() throws InterruptedException {
@@ -32,7 +32,7 @@ public class SimpleBlockingQueue<T> {
             wait();
         }
         T value = this.queue.poll();
-        notify();
+        notifyAll();
         return value;
     }
 
