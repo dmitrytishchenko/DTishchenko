@@ -12,12 +12,13 @@ public class TaskWorker implements Runnable {
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted())
-        try {
-            task = tasks.poll();
-            task.run();
-        } catch (InterruptedException e) {
-           Thread.currentThread().interrupt();
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                task = tasks.poll();
+                task.run();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 }
