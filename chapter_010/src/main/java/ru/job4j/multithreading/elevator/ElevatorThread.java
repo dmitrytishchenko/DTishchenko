@@ -1,5 +1,6 @@
 package ru.job4j.multithreading.elevator;
 
+import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
 public class ElevatorThread implements Runnable {
@@ -7,7 +8,8 @@ public class ElevatorThread implements Runnable {
     private CountDownLatch cd;
     private int move = 0;
     private int request;
-    private int level;
+    private int level = 1;
+    private Scanner scanner = new Scanner(System.in);
 
     public ElevatorThread(CountDownLatch cd, int request, Args args) {
         this.cd = cd;
@@ -16,25 +18,48 @@ public class ElevatorThread implements Runnable {
         new Thread(this).start();
     }
 
-
     @Override
     public void run() {
-        movement();
-        for (int i = 0; i < this.move; i++) {
-            cd.countDown();
-            System.out.printf("Лифт проезжает - %s этаж ", i);
-            System.out.println();
+        while (true) {
+            call();
+            if (this.level == 1) {
+                movement();
+                for (int i = 1; i < this.move; i++) {
+                    cd.countDown();
+                    movementElevator(i);
+                }
+            } else if (this.level < this.request) {
+                movement();
+                for (int i = this.level; i < this.request; i++) {
+                    cd.countDown();
+                    movementElevator(i);
+
+                }
+                this.level = this.request;
+            } else {
+                movement();
+                for (int i = this.level; i > this.request; i--) {
+                    cd.countDown();
+                    movementElevator(i);
+                }
+                this.level = this.request;
+            }
+            System.out.println("Лифт прибыл на " + this.level + " этаж");
             try {
-                Thread.sleep(1500);
+                System.out.println("Двери лифта открыты");
+                Thread.sleep(Integer.valueOf(this.args.getTimeOpenDoors()) * 1000);
+                System.out.println("Двери лифта закрыты");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Лифт прибыл на " + this.level + " этаж");
+    }
+
+    public void movementElevator(int value) {
+        System.out.printf("Лифт проезжает - %s этаж ", value);
+        System.out.println();
         try {
-            System.out.println("Двери лифта открыты");
-            Thread.sleep(Integer.valueOf(this.args.getTimeOpenDoors()) * 1000);
-            System.out.println("Двери лифта закрыты");
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -43,18 +68,31 @@ public class ElevatorThread implements Runnable {
     public int movement() {
         if (this.move == 0) {
             this.move += this.request;
-            this.level = this.move;
+            this.level = this.request;
         } else if (this.level > this.request) {
             this.move = this.level - this.request;
-            this.level = this.request;
         } else {
             this.move = this.request - this.level;
-            level = request;
         }
         return this.move;
     }
 
-    public int getLevel() {
-        return level;
+    public void call() {
+        System.out.println("Укажите где Вы находитесь : лифт или подъезд");
+        if (scanner.next().equals("лифт")) {
+            request = callFromElevator();
+        } else {
+            request = callFromTheEntrance();
+        }
+    }
+
+    public int callFromElevator() {
+        System.out.println("Вызов команды из лифта. Укажите этаж.");
+        return scanner.nextInt();
+    }
+
+    public int callFromTheEntrance() {
+        System.out.println("Вызов команды из подъезда. Укажите этаж.");
+        return scanner.nextInt();
     }
 }
