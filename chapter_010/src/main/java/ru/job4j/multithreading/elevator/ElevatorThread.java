@@ -17,29 +17,60 @@ public class ElevatorThread extends Thread {
 
     @Override
     public void run() {
-        lock.lock();
-        workElevator();
+        moveTo(this.request);
     }
 
-    public void workElevator() {
+    /**
+     * метод movementElevator(int value) выводит в консоль информацию о движении лифта
+     *
+     * @param value - этаж который проезжает лифт
+     */
+    public void movementElevator(int value) {
+        System.out.printf("Лифт проезжает - %s этаж ", value);
+        System.out.println();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * метод movement() вычисляет количество этажей которые необходимо проехать
+     *
+     * @return количество этажей для движения
+     */
+    public int movement() {
+        if (this.move == 0) {
+            this.move += this.request;
+            this.level = this.request;
+        } else if (this.level > this.request) {
+            this.move = this.level - this.request;
+        } else {
+            this.move = this.request - this.level;
+        }
+        return this.move;
+    }
+
+    public void moveTo(int floor) {
         lock.lock();
-        if (this.level == 1) {
+        if (now() == 1) {
             movement();
             for (int i = 1; i < this.move; i++) {
                 movementElevator(i);
             }
-        } else if (this.level < this.request) {
+        } else if (now() < floor) {
             movement();
-            for (int i = this.level; i < this.request; i++) {
+            for (int i = now(); i < floor; i++) {
                 movementElevator(i);
             }
-            this.level = this.request;
+            this.level = floor;
         } else {
             movement();
-            for (int i = this.level; i > this.request; i--) {
+            for (int i = now(); i > floor; i--) {
                 movementElevator(i);
             }
-            this.level = this.request;
+            this.level = floor;
         }
         System.out.println("Лифт прибыл на " + this.level + " этаж");
         try {
@@ -52,25 +83,7 @@ public class ElevatorThread extends Thread {
         lock.unlock();
     }
 
-    public void movementElevator(int value) {
-        System.out.printf("Лифт проезжает - %s этаж ", value);
-        System.out.println();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int movement() {
-        if (this.move == 0) {
-            this.move += this.request;
-            this.level = this.request;
-        } else if (this.level > this.request) {
-            this.move = this.level - this.request;
-        } else {
-            this.move = this.request - this.level;
-        }
-        return this.move;
+    public int now() {
+        return this.level;
     }
 }
