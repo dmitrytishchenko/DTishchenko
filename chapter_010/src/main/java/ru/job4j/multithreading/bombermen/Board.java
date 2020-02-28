@@ -19,7 +19,7 @@ public class Board {
         }
     }
 
-    public boolean move(Cell source, Cell dist) {
+    public synchronized boolean move(Cell source, Cell dist) {
         boolean result = false;
         try {
             if (this.board[dist.getX()][dist.getY()].tryLock(500, TimeUnit.MILLISECONDS)) {
@@ -33,5 +33,9 @@ public class Board {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public int getSize() {
+        return this.board.length;
     }
 }
