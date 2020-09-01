@@ -34,7 +34,6 @@ public class StartUI {
             for (int i = 0; i < 100000; i++) {
                 menu.show();
             }
-//
             menu.select(input.ask("Select: ", menu.ranges()));
         }
         while (this.work);

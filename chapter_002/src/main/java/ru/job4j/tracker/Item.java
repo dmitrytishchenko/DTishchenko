@@ -3,7 +3,6 @@ package ru.job4j.tracker;
 import java.util.Objects;
 
 public class Item {
-
     private String id;
     private String name;
     private String desc;
@@ -21,6 +20,7 @@ public class Item {
         this.name = name;
         this.desc = desc;
     }
+
     public Item() {
     }
 
@@ -33,22 +33,30 @@ public class Item {
     public String getName() {
         return this.name;
     }
+
     public String getDesc() {
         return this.desc;
     }
+
     public Long getCreate() {
         return this.create;
     }
+
     public String getComments() {
         return this.comments;
     }
+
     public String getId() {
         return this.id;
     }
 
-  public void setId(String id) {
-      this.id = id;
-  }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
