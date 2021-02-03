@@ -14,9 +14,6 @@ public class ValidateService implements Validate {
     }
 
     public void add(User user) {
-        if (logic.findById(user.getId()) != null) {
-            throw new NullPointerException("The User is exists");
-        }
         this.logic.add(user);
     }
 

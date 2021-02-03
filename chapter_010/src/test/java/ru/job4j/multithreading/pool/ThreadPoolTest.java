@@ -2,7 +2,10 @@ package ru.job4j.multithreading.pool;
 
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ThreadPoolTest {
@@ -10,12 +13,12 @@ public class ThreadPoolTest {
     public void testThreadPool() {
         int size = Runtime.getRuntime().availableProcessors();
         ThreadPool pool = new ThreadPool(size);
-        int[] index = {0};
-        pool.work(() -> index[0]++);
-        pool.work(() -> index[0]++);
-        pool.work(() -> index[0]++);
-        pool.work(() -> index[0]++);
+        AtomicInteger count = new AtomicInteger();
+        pool.work(()-> count.getAndIncrement());
+        pool.work(()-> count.getAndIncrement());
+        pool.work(()-> count.getAndIncrement());
+        pool.work(()-> count.getAndIncrement());
         pool.shutdown();
-        assertThat(index[0], is(4));
+        assertEquals(count.get(), 4);
     }
 }

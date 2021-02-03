@@ -1,6 +1,5 @@
 package ru.job4j.search.sortdepartment;
 
-import javax.print.attribute.SetOfIntegerSyntax;
 import java.util.*;
 
 public class SortDepartment {

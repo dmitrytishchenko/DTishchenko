@@ -42,6 +42,6 @@ public class MergerTest {
         map.put(user4, list4);
         map.put(user5, list5);
         Map<User, List<String>> expected = merger.start(map);
-        assertThat(expected.size(), is(3));
+        assertThat(expected.size(), is(4));
     }
 }

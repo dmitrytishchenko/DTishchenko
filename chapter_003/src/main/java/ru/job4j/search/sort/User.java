@@ -1,5 +1,7 @@
 package ru.job4j.search.sort;
 
+import java.util.Objects;
+
 public class User implements Comparable<User> {
     private String name;
     private int age;
@@ -44,7 +46,7 @@ public class User implements Comparable<User> {
         if (age != user.age) {
             return false;
         }
-        return name != null ? name.equals(user.name) : user.name == null;
+        return Objects.equals(name, user.name);
     }
 
     @Override

@@ -3,6 +3,7 @@ package ru.job4j.io.networke;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +54,14 @@ public class ServerTest {
     }
 
     @Test
-    public void downloadFile() {
+    public void downloadFile() throws IOException {
         String root = System.getProperty("java.io.tmpdir");
         File file1 = new File(root + File.separator + "File1.txt");
         File file2 = new File(root + File.separator + "File2.txt");
+        file1.createNewFile();
+        file2.createNewFile();
         Socket socket = mock(Socket.class);
         new Server(socket, root).downloadFile2(file1.getPath(), file2.getPath());
         assertThat(file1.length(), is(file2.length()));
     }
-
 }

@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Файловая система представляет собой древовидную структуру. В модуле "Коллекции Про" рассматривался алгоритм обхода дерева.
  * Этот алгоритм обхода в ширину.
@@ -31,11 +32,14 @@ import static org.junit.Assert.assertTrue;
  * Здесь нельзя использовать FileVisitor. Это задание на работу с деревом каталогов.
  */
 public class SearchTest {
+    @Before
+    public void cleanTmp() {
+        deleteAllFilesFolder(System.getProperty("java.io.tmpdir"));
+    }
     @Test
     public void whenFoldersContainsFiles() {
 
         String parent = System.getProperty("java.io.tmpdir") + File.separator;
-        System.out.println(parent);
 
         File dir1 = new File(parent + "dir1");
         File dir2 = new File(parent + "dir1" + File.separator + "dir2");
@@ -75,6 +79,7 @@ public class SearchTest {
         result.sort(File::compareTo);
         expected.sort(File::compareTo);
         assertThat(result, is(expected));
+//        assertTrue(expected.contains(result));
     }
 
     @Test
@@ -119,5 +124,13 @@ public class SearchTest {
         Search search = new Search();
         List<File> expected = search.files2(parent, exts, result);
         assertThat(result, is(expected));
+    }
+
+    public void deleteAllFilesFolder(String path) {
+        for (File myFile : new File(path).listFiles()) {
+            if (myFile.isFile()) {
+                myFile.delete();
+            }
+        }
     }
 }
